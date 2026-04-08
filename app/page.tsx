@@ -167,7 +167,7 @@ export default function Home() {
           </div>
           <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 300, fontSize: 'clamp(16px,3vw,22px)', color: '#B0B0C0', letterSpacing: 3, marginTop: 12 }}>ATHLETE PERFORMANCE PLATFORM</div>
           <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(36px,7vw,72px)', color: '#F2F2F5', lineHeight: 1, marginTop: 40 }}>
-            EVERY ATHLETE. <span style={{ color: '#F26419' }}>EVERY MORNING.</span>
+            BETTER DATA. <span style={{ color: '#F26419' }}>BETTER PERFORMANCE.</span>
           </div>
           <div style={{ fontSize: 'clamp(15px,2.5vw,18px)', color: '#888898', lineHeight: 1.75, maxWidth: 600, margin: '24px auto 0' }}>
             HRV. Sleep. Resting heart rate. One readiness score for every athlete on your roster — delivered to every coach on your staff before the day begins.
