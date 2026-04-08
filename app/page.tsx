@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
+import Logo, { ChevronMark } from '@/components/Logo'
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false)
@@ -64,8 +65,8 @@ export default function Home() {
               </div>
             ) : (
               <>
-                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 32, letterSpacing: 2, marginBottom: 4 }}>
-                  <span style={{ color: '#F26419' }}>4</span><span style={{ color: '#F2F2F5' }}>WARD›</span>
+                <div style={{ marginBottom: 4 }}>
+                  <Logo size={32} />
                 </div>
                 <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 20, color: '#F2F2F5', marginBottom: 8 }}>Join the Waitlist</div>
                 <div style={{ fontSize: 14, color: '#888898', marginBottom: 28, lineHeight: 1.6 }}>
@@ -139,7 +140,7 @@ export default function Home() {
         backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.05)'
       }}>
         <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 28, letterSpacing: 1 }}>
-          <span style={{ color: '#F26419' }}>4</span><span style={{ color: '#F2F2F5' }}>WARD</span><span style={{ color: '#F26419' }}>›</span>
+          <Logo size={28} />
         </div>
         <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>
           <Link href="/science" style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: 2, color: '#888898', textDecoration: 'none' }}>THE SCIENCE</Link>
@@ -162,8 +163,10 @@ export default function Home() {
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(242,100,25,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(242,100,25,0.04) 1px,transparent 1px)', backgroundSize: '60px 60px' }} />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 900 }}>
           <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 6, color: '#F26419', marginBottom: 24 }}>BUILT FOR HIGH SCHOOL COACHES · ANY SPORT</div>
-          <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(80px,18vw,180px)', lineHeight: 0.9, letterSpacing: 4 }}>
-            <span style={{ color: '#F26419' }}>4</span><span style={{ color: '#F2F2F5' }}>WARD</span><span style={{ color: '#F26419' }}>›</span>
+          <div className="hero-logo-wrap">
+            <span className="hero-logo-text" style={{ color: '#F26419' }}>4</span>
+            <span className="hero-logo-text" style={{ color: '#F2F2F5' }}>WARD</span>
+            <ChevronMark size="1em" style={{ marginLeft: '0.04em', verticalAlign: 'middle', marginBottom: '0.05em' }} />
           </div>
           <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 300, fontSize: 'clamp(16px,3vw,22px)', color: '#B0B0C0', letterSpacing: 3, marginTop: 12 }}>ATHLETE PERFORMANCE PLATFORM</div>
           <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(36px,7vw,72px)', color: '#F2F2F5', lineHeight: 1, marginTop: 40 }}>
@@ -342,7 +345,7 @@ export default function Home() {
               <div key={i} style={{ position: 'absolute', width: size, height: size, borderRadius: '50%', border: '1px solid rgba(242,100,25,0.2)', animation: `ringPulse 3s ease-in-out ${i * 0.5}s infinite` }} />
             ))}
             <div style={{ width: 80, height: 80, borderRadius: '50%', background: 'radial-gradient(circle at 40% 40%,#222226,#0D0D0F)', border: '2px solid rgba(242,100,25,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 40px rgba(242,100,25,0.2)', position: 'relative', zIndex: 1 }}>
-              <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 18 }}><span style={{ color: '#F26419' }}>4</span><span style={{ color: '#F2F2F5' }}>W›</span></span>
+              <Logo size={16} />
             </div>
           </div>
           <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(32px,6vw,52px)', color: '#F2F2F5', marginBottom: 8 }}>THE <span style={{ color: '#F26419' }}>4WARD BAND</span></div>
@@ -381,6 +384,8 @@ export default function Home() {
       <style>{`
         @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         @keyframes ringPulse { 0%,100% { opacity:0.3; transform:scale(1); } 50% { opacity:0.6; transform:scale(1.05); } }
+        .hero-logo-wrap { display:inline-flex; align-items:center; line-height:0.9; letter-spacing:4px; font-family:'Bebas Neue',sans-serif; font-size:clamp(80px,18vw,180px); }
+        .hero-logo-text { line-height:0.9; }
       `}</style>
     </>
   )

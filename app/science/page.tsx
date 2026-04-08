@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Logo from '@/components/Logo'
 
 export default function SciencePage() {
   const [activeStudy, setActiveStudy] = useState<number | null>(null)
@@ -38,7 +39,7 @@ export default function SciencePage() {
       {/* NAV */}
       <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 32px', background: 'rgba(8,8,9,0.92)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
         <a href="/" style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 28, letterSpacing: 1, textDecoration: 'none' }}>
-          <span style={{ color: '#F26419' }}>4</span><span style={{ color: '#F2F2F5' }}>WARD</span><span style={{ color: '#F26419' }}>›</span>
+          <Logo size={28} />
         </a>
         <div style={{ display: 'flex', gap: 28, alignItems: 'center' }}>
           <a href="/" style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: 2, color: '#888898', textDecoration: 'none' }}>HOME</a>
@@ -555,7 +556,7 @@ export default function SciencePage() {
             </div>
             <div style={{ textAlign: 'center' }}>
               <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 80, color: '#F26419', lineHeight: 0.9 }}>4</div>
-              <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 20, color: '#F2F2F5' }}>WARD›</div>
+              <Logo size={20} />
               <div style={{ width: 40, height: 1, background: '#F26419', margin: '12px auto' }} />
               <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 11, letterSpacing: 3, color: '#F26419' }}>UNIFIED</div>
             </div>
