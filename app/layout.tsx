@@ -3,10 +3,10 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: '4WARD — Athlete Performance Platform',
-  description: 'HRV-based athlete recovery monitoring for high school coaches. Any sport. Bands included.',
+  description: 'HRV-based athlete readiness monitoring for high school coaches. Any sport. Bands included.',
   openGraph: {
     title: '4WARD — Athlete Performance Platform',
-    description: 'The same data college programs pay $15,000 a year for. Built for high school coaches at $2,499/year. Bands included.',
+    description: 'One readiness score. Every athlete. Every morning.',
     type: 'website',
   },
 }
@@ -14,7 +14,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+      </head>
+      <body style={{ margin: 0, background: '#080809', color: '#F2F2F5' }}>{children}</body>
     </html>
   )
 }

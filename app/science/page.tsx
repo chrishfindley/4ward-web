@@ -53,17 +53,17 @@ export default function SciencePage() {
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(242,100,25,0.14) 0%, transparent 70%)' }} />
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(242,100,25,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(242,100,25,0.04) 1px,transparent 1px)', backgroundSize: '60px 60px' }} />
         <div style={{ position: 'relative', maxWidth: 920 }}>
-          <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 7, color: '#F26419', marginBottom: 28, opacity: 0, animation: 'fadeUp 0.7s ease 0.2s forwards' }}>EVIDENCE-BASED ATHLETE PERFORMANCE</div>
-          <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(60px,13vw,130px)', lineHeight: 0.88, marginBottom: 32, letterSpacing: 2, opacity: 0, animation: 'fadeUp 0.7s ease 0.4s forwards' }}>
+          <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 7, color: '#F26419', marginBottom: 28 }}>EVIDENCE-BASED ATHLETE PERFORMANCE</div>
+          <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(60px,13vw,130px)', lineHeight: 0.88, marginBottom: 32, letterSpacing: 2 }}>
             <span style={{ color: '#F2F2F5' }}>BUILT ON</span><br />
             <span style={{ color: '#F26419' }}>SCIENCE.</span><br />
             <span style={{ color: '#F2F2F5' }}>DELIVERED</span><br />
             <span style={{ color: '#F2F2F5' }}>FOR <span style={{ color: '#F26419' }}>COACHES.</span></span>
           </h1>
-          <p style={{ fontSize: 'clamp(16px,2.5vw,19px)', color: '#888898', lineHeight: 1.8, maxWidth: 660, margin: '0 auto 48px', opacity: 0, animation: 'fadeUp 0.7s ease 0.6s forwards' }}>
+          <p style={{ fontSize: 'clamp(16px,2.5vw,19px)', color: '#888898', lineHeight: 1.8, maxWidth: 660, margin: '0 auto 48px' }}>
             4Ward synthesizes three decades of peer-reviewed sports science into a single morning readiness score — giving every coach on your staff a shared, objective foundation for training decisions that protect athletes and elevate performance.
           </p>
-          <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap', opacity: 0, animation: 'fadeUp 0.7s ease 0.8s forwards' }}>
+          <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href="#value" style={{ padding: '16px 36px', background: 'linear-gradient(135deg,#F26419,#C44E0F)', borderRadius: 6, fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900, fontSize: 16, letterSpacing: 2, color: 'white', textDecoration: 'none', boxShadow: '0 0 40px rgba(242,100,25,0.35)' }}>WHAT 4WARD DELIVERS</a>
             <a href="#formula" style={{ padding: '16px 36px', border: '1px solid rgba(242,100,25,0.4)', borderRadius: 6, fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 16, letterSpacing: 2, color: '#F26419', textDecoration: 'none' }}>SEE THE FORMULA</a>
           </div>
@@ -624,13 +624,12 @@ export default function SciencePage() {
             The first 10 programs to join receive founding pricing — $1,499 per year, locked for the life of your subscription. Bands included. Setup in under 30 minutes. Built for high school athletics.
           </p>
           <a href="/" style={{ display: 'inline-block', padding: '18px 52px', background: 'linear-gradient(135deg,#F26419,#C44E0F)', borderRadius: 6, fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900, fontSize: 18, letterSpacing: 2, color: 'white', textDecoration: 'none', boxShadow: '0 0 60px rgba(242,100,25,0.35)' }}>JOIN THE WAITLIST →</a>
-          <div style={{ marginTop: 56, fontFamily: "'Barlow Condensed', sans-serif", fontSize: 11, letterSpacing: 2, color: '#1A1A1E' }}>BUILT BY A STRENGTH COACH · FOR STRENGTH COACHES · FORT WORTH, TEXAS</div>
+          <div style={{ marginTop: 56, fontFamily: "'Barlow Condensed', sans-serif", fontSize: 11, letterSpacing: 2, color: '#1A1A1E' }}>BUILT BY A STRENGTH COACH · FOR STRENGTH COACHES</div>
         </div>
       </section>
 
       <style>{`
         @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500;600&display=swap');
       `}</style>
     </div>
   )

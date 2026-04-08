@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import Link from 'next/link'
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false)
@@ -37,60 +38,75 @@ export default function Home() {
 
   return (
     <>
+      {/* MODAL */}
       {modalOpen && (
-        <div className="modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) closeModal() }}>
-          <div className="modal-box">
-            <button className="modal-close" onClick={closeModal}>×</button>
+        <div onClick={(e) => { if (e.target === e.currentTarget) closeModal() }} style={{
+          position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.88)', zIndex: 1000,
+          display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20,
+          backdropFilter: 'blur(6px)'
+        }}>
+          <div style={{
+            background: '#111114', border: '1px solid #F26419', borderRadius: 16,
+            padding: 40, maxWidth: 480, width: '100%', position: 'relative'
+          }}>
+            <button onClick={closeModal} style={{
+              position: 'absolute', top: 16, right: 20, background: 'none', border: 'none',
+              color: '#888898', fontSize: 28, cursor: 'pointer', lineHeight: 1
+            }}>×</button>
+
             {success ? (
-              <div className="form-success">
-                <div className="form-success-icon">🏈</div>
-                <div className="form-success-title">YOU'RE IN.</div>
-                <div className="form-success-sub">
-                  We'll be in touch before launch. You're one of the first coaches to know about 4Ward.
-                  <br /><br />
-                  — Chris
+              <div style={{ textAlign: 'center', padding: '20px 0' }}>
+                <div style={{ fontSize: 52, marginBottom: 20 }}>🏈</div>
+                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 36, color: '#2ECC8A', marginBottom: 12 }}>YOU'RE IN.</div>
+                <div style={{ fontSize: 15, color: '#888898', lineHeight: 1.7 }}>
+                  We'll be in touch before launch. You're among the first coaches to join 4Ward.<br /><br />— Chris
                 </div>
               </div>
             ) : (
               <>
-                <div className="modal-logo"><span>4</span>WARD›</div>
-                <div className="modal-title">Join the Waitlist</div>
-                <div className="modal-sub">
-                  Launching summer 2026. First 10 programs get founding pricing — $1,499/year locked forever. Tell us about your program.
+                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 32, letterSpacing: 2, marginBottom: 4 }}>
+                  <span style={{ color: '#F26419' }}>4</span><span style={{ color: '#F2F2F5' }}>WARD›</span>
                 </div>
-                <form className="modal-form" onSubmit={handleSubmit}>
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label className="form-label">FIRST NAME</label>
-                      <input className="form-input" placeholder="Chris" required value={form.first_name}
-                        onChange={e => setForm({...form, first_name: e.target.value})} />
-                    </div>
-                    <div className="form-group">
-                      <label className="form-label">LAST NAME</label>
-                      <input className="form-input" placeholder="Smith" required value={form.last_name}
-                        onChange={e => setForm({...form, last_name: e.target.value})} />
-                    </div>
+                <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 20, color: '#F2F2F5', marginBottom: 8 }}>Join the Waitlist</div>
+                <div style={{ fontSize: 14, color: '#888898', marginBottom: 28, lineHeight: 1.6 }}>
+                  Launching summer 2026. First 10 programs receive founding pricing — $1,499/year, locked for life.
+                </div>
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                    {[
+                      { label: 'FIRST NAME', key: 'first_name', placeholder: 'Chris' },
+                      { label: 'LAST NAME', key: 'last_name', placeholder: 'Smith' },
+                    ].map(f => (
+                      <div key={f.key}>
+                        <label style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 2, color: '#888898', display: 'block', marginBottom: 6 }}>{f.label}</label>
+                        <input required placeholder={f.placeholder} value={(form as any)[f.key]}
+                          onChange={e => setForm({ ...form, [f.key]: e.target.value })}
+                          style={{ width: '100%', padding: '12px 14px', background: '#0C0C0E', border: '1px solid #242428', borderRadius: 6, color: '#F2F2F5', fontFamily: "'Barlow', sans-serif", fontSize: 15, outline: 'none', boxSizing: 'border-box' }} />
+                      </div>
+                    ))}
                   </div>
-                  <div className="form-group">
-                    <label className="form-label">EMAIL</label>
-                    <input className="form-input" type="email" placeholder="coach@school.edu" required value={form.email}
-                      onChange={e => setForm({...form, email: e.target.value})} />
-                  </div>
-                  <div className="form-group">
-                    <label className="form-label">SCHOOL NAME</label>
-                    <input className="form-input" placeholder="Keller High School" required value={form.school_name}
-                      onChange={e => setForm({...form, school_name: e.target.value})} />
-                  </div>
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label className="form-label">SPORT(S)</label>
-                      <input className="form-input" placeholder="Football, Basketball..." value={form.sports}
-                        onChange={e => setForm({...form, sports: e.target.value})} />
+                  {[
+                    { label: 'EMAIL', key: 'email', placeholder: 'coach@school.edu', type: 'email' },
+                    { label: 'SCHOOL NAME', key: 'school_name', placeholder: 'Keller High School' },
+                  ].map(f => (
+                    <div key={f.key}>
+                      <label style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 2, color: '#888898', display: 'block', marginBottom: 6 }}>{f.label}</label>
+                      <input required type={f.type || 'text'} placeholder={f.placeholder} value={(form as any)[f.key]}
+                        onChange={e => setForm({ ...form, [f.key]: e.target.value })}
+                        style={{ width: '100%', padding: '12px 14px', background: '#0C0C0E', border: '1px solid #242428', borderRadius: 6, color: '#F2F2F5', fontFamily: "'Barlow', sans-serif", fontSize: 15, outline: 'none', boxSizing: 'border-box' }} />
                     </div>
-                    <div className="form-group">
-                      <label className="form-label">YOUR ROLE</label>
-                      <select className="form-select" value={form.role}
-                        onChange={e => setForm({...form, role: e.target.value})}>
+                  ))}
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                    <div>
+                      <label style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 2, color: '#888898', display: 'block', marginBottom: 6 }}>SPORT(S)</label>
+                      <input placeholder="Football, Basketball..." value={form.sports}
+                        onChange={e => setForm({ ...form, sports: e.target.value })}
+                        style={{ width: '100%', padding: '12px 14px', background: '#0C0C0E', border: '1px solid #242428', borderRadius: 6, color: '#F2F2F5', fontFamily: "'Barlow', sans-serif", fontSize: 15, outline: 'none', boxSizing: 'border-box' }} />
+                    </div>
+                    <div>
+                      <label style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 2, color: '#888898', display: 'block', marginBottom: 6 }}>YOUR ROLE</label>
+                      <select value={form.role} onChange={e => setForm({ ...form, role: e.target.value })}
+                        style={{ width: '100%', padding: '12px 14px', background: '#0C0C0E', border: '1px solid #242428', borderRadius: 6, color: '#F2F2F5', fontFamily: "'Barlow', sans-serif", fontSize: 15, outline: 'none', appearance: 'none', boxSizing: 'border-box' }}>
                         <option value="coach">Head Coach</option>
                         <option value="sc">S&C Coach</option>
                         <option value="assistant">Assistant Coach</option>
@@ -99,8 +115,13 @@ export default function Home() {
                       </select>
                     </div>
                   </div>
-                  {error && <div className="form-error">{error}</div>}
-                  <button className="form-submit" type="submit" disabled={loading}>
+                  {error && <div style={{ fontSize: 13, color: '#E85555', padding: 10, background: 'rgba(232,85,85,0.1)', borderRadius: 6, textAlign: 'center' }}>{error}</div>}
+                  <button type="submit" disabled={loading} style={{
+                    padding: 16, background: 'linear-gradient(135deg,#F26419,#C44E0F)', color: 'white',
+                    border: 'none', borderRadius: 6, fontFamily: "'Barlow Condensed', sans-serif",
+                    fontWeight: 900, fontSize: 17, letterSpacing: 1.5, cursor: loading ? 'not-allowed' : 'pointer',
+                    opacity: loading ? 0.7 : 1, marginTop: 4
+                  }}>
                     {loading ? 'SUBMITTING...' : 'JOIN THE WAITLIST →'}
                   </button>
                 </form>
@@ -110,385 +131,257 @@ export default function Home() {
         </div>
       )}
 
-      <div dangerouslySetInnerHTML={{ __html: marketingHTML(openModal) }} />
+      {/* NAV */}
+      <nav style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '16px 32px', background: 'rgba(8,8,9,0.92)',
+        backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.05)'
+      }}>
+        <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 28, letterSpacing: 1 }}>
+          <span style={{ color: '#F26419' }}>4</span><span style={{ color: '#F2F2F5' }}>WARD</span><span style={{ color: '#F26419' }}>›</span>
+        </div>
+        <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>
+          <Link href="/science" style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: 2, color: '#888898', textDecoration: 'none' }}>THE SCIENCE</Link>
+          <button onClick={openModal} style={{
+            padding: '9px 22px', borderRadius: 5, border: 'none', cursor: 'pointer',
+            background: 'linear-gradient(135deg,#F26419,#C44E0F)', color: 'white',
+            fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900, fontSize: 13, letterSpacing: 2,
+            boxShadow: '0 0 20px rgba(242,100,25,0.3)'
+          }}>JOIN WAITLIST</button>
+        </div>
+      </nav>
 
-      <script dangerouslySetInnerHTML={{ __html: `
-        document.addEventListener('click', function(e) {
-          if (e.target.matches('.open-waitlist') || e.target.closest('.open-waitlist')) {
-            window.__openWaitlist && window.__openWaitlist();
-          }
-        });
-      `}} />
+      {/* HERO */}
+      <section style={{
+        minHeight: '100vh', display: 'flex', flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center',
+        position: 'relative', overflow: 'hidden', padding: '100px 20px 60px', textAlign: 'center'
+      }}>
+        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 80% 60% at 50% 0%,rgba(242,100,25,0.18) 0%,transparent 70%)' }} />
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(242,100,25,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(242,100,25,0.04) 1px,transparent 1px)', backgroundSize: '60px 60px' }} />
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: 900 }}>
+          <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 6, color: '#F26419', marginBottom: 24 }}>BUILT FOR HIGH SCHOOL COACHES · ANY SPORT</div>
+          <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(80px,18vw,180px)', lineHeight: 0.9, letterSpacing: 4 }}>
+            <span style={{ color: '#F26419' }}>4</span><span style={{ color: '#F2F2F5' }}>WARD</span><span style={{ color: '#F26419' }}>›</span>
+          </div>
+          <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 300, fontSize: 'clamp(16px,3vw,22px)', color: '#B0B0C0', letterSpacing: 3, marginTop: 12 }}>ATHLETE PERFORMANCE PLATFORM</div>
+          <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(36px,7vw,72px)', color: '#F2F2F5', lineHeight: 1, marginTop: 40 }}>
+            EVERY ATHLETE. <span style={{ color: '#F26419' }}>EVERY MORNING.</span>
+          </div>
+          <div style={{ fontSize: 'clamp(15px,2.5vw,18px)', color: '#888898', lineHeight: 1.75, maxWidth: 600, margin: '24px auto 0' }}>
+            HRV. Sleep. Resting heart rate. One readiness score for every athlete on your roster — delivered to every coach on your staff before the day begins.
+          </div>
+          <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap', marginTop: 40 }}>
+            <button onClick={openModal} style={{
+              padding: '16px 40px', borderRadius: 6, border: 'none', cursor: 'pointer',
+              background: 'linear-gradient(135deg,#F26419,#C44E0F)', color: 'white',
+              fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900, fontSize: 16, letterSpacing: 2,
+              boxShadow: '0 0 40px rgba(242,100,25,0.4)'
+            }}>JOIN THE WAITLIST</button>
+            <Link href="/science" style={{
+              padding: '16px 40px', borderRadius: 6, border: '1px solid rgba(242,100,25,0.4)',
+              background: 'transparent', color: '#F26419',
+              fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 16, letterSpacing: 2, textDecoration: 'none', display: 'inline-flex', alignItems: 'center'
+            }}>SEE THE SCIENCE</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* TICKER */}
+      <div style={{ overflow: 'hidden', borderTop: '1px solid #1A1A1E', borderBottom: '1px solid #1A1A1E', padding: '14px 0', background: '#0D0D0F' }}>
+        <div style={{ display: 'flex', animation: 'ticker 30s linear infinite', width: 'max-content' }}>
+          {[...Array(2)].map((_, rep) => (
+            ['HRV MONITORING', 'SLEEP TRACKING', 'AI WEEKLY REPORTS', 'COACH DASHBOARD', 'ATHLETE ACCOUNTABILITY', 'FROM $2,499/YR — BANDS INCLUDED', 'BUILT FOR HIGH SCHOOL', 'ANY SPORT · ANY PROGRAM', 'FOUNDING PRICING AVAILABLE', 'LAUNCHING SUMMER 2026'].map((item, i) => (
+              <div key={`${rep}-${i}`} style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: 2, color: '#888898', padding: '0 32px', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: 12 }}>
+                <div style={{ width: 4, height: 4, borderRadius: '50%', background: '#F26419', flexShrink: 0 }} />
+                {item}
+              </div>
+            ))
+          ))}
+        </div>
+      </div>
+
+      {/* STATS */}
+      <section style={{ padding: '80px 20px', maxWidth: 1100, margin: '0 auto' }}>
+        <div style={{ marginBottom: 48 }}>
+          <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 5, color: '#F26419', marginBottom: 12 }}>THE RESEARCH</div>
+          <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px,6vw,72px)', lineHeight: 1, color: '#F2F2F5', marginBottom: 8 }}>
+            THE SCIENCE IS <span style={{ color: '#F26419' }}>REAL.</span>
+          </div>
+          <div style={{ fontSize: 15, color: '#888898', maxWidth: 500 }}>Every data point sourced from peer-reviewed research. Transparent by design.</div>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(280px,1fr))', gap: 16 }}>
+          {[
+            { stat: '1.7×', desc: 'Athletes averaging 8+ hours of sleep experience 1.7× fewer injuries than peers averaging less.', source: 'Milewski et al. — Clinical Journal of Sports Medicine, 2014', color: '#2ECC8A' },
+            { stat: '5%', desc: 'Sprint speed improved 5% through sleep optimization alone — with no changes to the training program.', source: 'Mah et al. — Stanford Sleep Lab, 2011', color: '#F5B820' },
+            { stat: '82%', desc: 'Individualized HRV-guided training produced 82% fewer overtraining incidents vs. fixed-load protocols.', source: 'Flatt & Nakamura — IJSPP, 2018', color: '#7C6FE0' },
+            { stat: '78%', desc: 'Daily HRV monitoring predicts athlete readiness with 78% accuracy — outperforming subjective wellness scores.', source: 'Buchheit — European Journal of Applied Physiology, 2014', color: '#F26419' },
+            { stat: '9h', desc: 'The AAP recommends 8–10 hours of sleep for adolescent athletes. 4Ward makes sleep a measurable coaching variable.', source: 'American Academy of Pediatrics, 2016', color: '#818CF8' },
+            { stat: '12%', desc: 'HRV-guided periodization delivers 12% greater performance gains vs. traditional fixed-load programming.', source: 'Flatt & Nakamura — IJSPP, 2018', color: '#2ECC8A' },
+          ].map((item, i) => (
+            <div key={i} style={{ background: '#0D0D0F', border: '1px solid #1A1A1E', borderRadius: 14, padding: 24, position: 'relative', overflow: 'hidden' }}>
+              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg,${item.color},transparent)` }} />
+              <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 56, color: item.color, lineHeight: 1, marginBottom: 10 }}>{item.stat}</div>
+              <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 600, fontSize: 15, color: '#F2F2F5', lineHeight: 1.5, marginBottom: 12 }}>{item.desc}</div>
+              <div style={{ fontSize: 10, color: '#444450', letterSpacing: 0.5 }}>{item.source}</div>
+            </div>
+          ))}
+        </div>
+        <div style={{ marginTop: 32, textAlign: 'center' }}>
+          <Link href="/science" style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: 2, color: '#F26419', textDecoration: 'none', borderBottom: '1px solid rgba(242,100,25,0.3)', paddingBottom: 2 }}>VIEW THE FULL RESEARCH BREAKDOWN →</Link>
+        </div>
+      </section>
+
+      {/* FORMULA */}
+      <section style={{ background: '#0D0D0F', borderTop: '1px solid #1A1A1E', borderBottom: '1px solid #1A1A1E', padding: '80px 20px' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <div style={{ marginBottom: 48 }}>
+            <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 5, color: '#F26419', marginBottom: 12 }}>THE FORMULA · TRANSPARENT BY DESIGN</div>
+            <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px,6vw,72px)', lineHeight: 1, color: '#F2F2F5', marginBottom: 8 }}>
+              THE <span style={{ color: '#F26419' }}>4WARD</span> RECOVERY INDEX
+            </div>
+            <div style={{ fontSize: 15, color: '#888898', maxWidth: 500 }}>Three validated inputs. One readiness score. Recalculated every morning before your athletes walk in.</div>
+          </div>
+          <div style={{ background: 'linear-gradient(135deg,#0D0D0F,#13131A)', border: '1px solid #242428', borderRadius: 20, padding: 40, position: 'relative', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', top: -100, right: -100, width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle,rgba(242,100,25,0.1),transparent)' }} />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 32 }}>
+              {[
+                { weight: '×0.45', name: 'HRV SCORE', detail: 'Today vs. 7-day personal baseline · Flatt & Nakamura, 2018', barW: '80%', barC: '#7C6FE0', val: 89 },
+                { weight: '×0.40', name: 'SLEEP SCORE', detail: 'Duration + consistency · Mah et al. / AAP', barW: '60%', barC: '#818CF8', val: 60 },
+                { weight: '×0.15', name: 'RESTING HR SCORE', detail: 'Today vs. 7-day personal baseline · Foster et al., 1996', barW: '90%', barC: '#2ECC8A', val: 92 },
+              ].map((row, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                  <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 20, color: '#F26419', width: 52, textAlign: 'right', flexShrink: 0 }}>{row.weight}</div>
+                  <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid #242428', borderRadius: 8, padding: '10px 16px', flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 15, color: '#F2F2F5', letterSpacing: 1 }}>{row.name}</div>
+                      <div style={{ fontSize: 11, color: '#888898', marginTop: 2 }}>{row.detail}</div>
+                      <div style={{ height: 3, background: '#1A1A1E', borderRadius: 2, marginTop: 8 }}>
+                        <div style={{ height: '100%', width: row.barW, background: row.barC, borderRadius: 2 }} />
+                      </div>
+                    </div>
+                    <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 32, color: row.barC, flexShrink: 0 }}>{row.val}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={{ paddingTop: 24, borderTop: '1px solid #1A1A1E', display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
+              <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 16, color: '#888898', letterSpacing: 2 }}>FINAL SCORE →</div>
+              <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 60, color: '#F5B820', lineHeight: 1 }}>78</div>
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                {[
+                  { label: '85–100 OPTIMAL', bg: 'rgba(46,204,138,0.12)', color: '#2ECC8A' },
+                  { label: '70–84 MODERATE', bg: 'rgba(245,184,32,0.12)', color: '#F5B820' },
+                  { label: '50–69 ELEVATED LOAD', bg: 'rgba(251,146,60,0.12)', color: '#FB923C' },
+                  { label: '0–49 RECOVERY DAY', bg: 'rgba(124,111,224,0.12)', color: '#7C6FE0' },
+                ].map((z, i) => (
+                  <div key={i} style={{ padding: '6px 14px', borderRadius: 20, background: z.bg, fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 1, color: z.color }}>{z.label}</div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* COMPARISON */}
+      <section style={{ padding: '80px 20px', maxWidth: 1100, margin: '0 auto' }}>
+        <div style={{ marginBottom: 48 }}>
+          <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 5, color: '#F26419', marginBottom: 12 }}>POSITIONING</div>
+          <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(40px,6vw,72px)', lineHeight: 1, color: '#F2F2F5', marginBottom: 8 }}>
+            BUILT FOR <span style={{ color: '#F26419' }}>YOUR PROGRAM.</span>
+          </div>
+          <div style={{ fontSize: 15, color: '#888898', maxWidth: 500 }}>The same data elite programs pay $15,000+ a year for. Built for high school athletics.</div>
+        </div>
+        <div style={{ background: 'linear-gradient(135deg,#0A0A0E,#0E0E14)', borderRadius: 24, padding: '48px 40px', border: '1px solid #1A1A1E', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1, background: 'linear-gradient(90deg,transparent,#F26419,transparent)' }} />
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: 32, alignItems: 'center', marginBottom: 40 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 22, color: '#888898', marginBottom: 8, paddingBottom: 12, borderBottom: '2px solid #1A1A1E' }}>ENTERPRISE PLATFORMS</div>
+              {['$15,000–$50,000/year', 'Designed for college and pro programs', 'Requires dedicated IT support', 'No high school pricing tier', 'Hardware sold separately'].map((item, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10, fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 600, fontSize: 15, color: '#444450' }}>
+                  <span>—</span> {item}
+                </div>
+              ))}
+            </div>
+            <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 40, color: '#F26419', textAlign: 'center', opacity: 0.5 }}>VS</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 22, color: '#F26419', marginBottom: 8, paddingBottom: 12, borderBottom: '2px solid rgba(242,100,25,0.3)' }}>4WARD</div>
+              {['From $2,499/year — bands included', 'Built specifically for high school', 'Setup in under 30 minutes', 'Any sport. Any program.', 'Athletes keep their bands.'].map((item, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10, fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 600, fontSize: 15, color: '#F2F2F5' }}>
+                  <span style={{ color: '#2ECC8A' }}>✓</span> {item}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div style={{ textAlign: 'center', padding: 28, background: 'rgba(242,100,25,0.07)', borderRadius: 16, border: '1px solid rgba(242,100,25,0.18)' }}>
+            <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 4, color: '#F26419', marginBottom: 16 }}>THE VALUE COMPARISON</div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 24, flexWrap: 'wrap' }}>
+              {[
+                { amount: '$50,000', period: 'Enterprise / year', color: '#444450', strike: true },
+                { amount: '→', period: '', color: '#888898', plain: true },
+                { amount: '$2,499', period: '4Ward / year — bands included', color: '#F26419' },
+                { amount: '=', period: '', color: '#888898', plain: true },
+                { amount: '$83', period: 'per athlete / year', color: '#2ECC8A' },
+              ].map((item, i) => (
+                <div key={i} style={{ textAlign: 'center' }}>
+                  <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: item.plain ? 32 : 48, color: item.color, lineHeight: 1, textDecoration: item.strike ? 'line-through' : 'none', opacity: item.strike ? 0.4 : 1 }}>{item.amount}</div>
+                  {item.period && <div style={{ fontSize: 12, color: '#888898', marginTop: 4 }}>{item.period}</div>}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* BAND */}
+      <section style={{ background: '#0D0D0F', borderTop: '1px solid #1A1A1E', padding: '80px 20px', textAlign: 'center' }}>
+        <div style={{ maxWidth: 700, margin: '0 auto' }}>
+          <div style={{ width: 160, height: 160, margin: '0 auto 32px', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            {[160, 120, 80].map((size, i) => (
+              <div key={i} style={{ position: 'absolute', width: size, height: size, borderRadius: '50%', border: '1px solid rgba(242,100,25,0.2)', animation: `ringPulse 3s ease-in-out ${i * 0.5}s infinite` }} />
+            ))}
+            <div style={{ width: 80, height: 80, borderRadius: '50%', background: 'radial-gradient(circle at 40% 40%,#222226,#0D0D0F)', border: '2px solid rgba(242,100,25,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 40px rgba(242,100,25,0.2)', position: 'relative', zIndex: 1 }}>
+              <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 18 }}><span style={{ color: '#F26419' }}>4</span><span style={{ color: '#F2F2F5' }}>W›</span></span>
+            </div>
+          </div>
+          <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(32px,6vw,52px)', color: '#F2F2F5', marginBottom: 8 }}>THE <span style={{ color: '#F26419' }}>4WARD BAND</span></div>
+          <div style={{ fontSize: 15, color: '#888898', lineHeight: 1.75, marginBottom: 28, maxWidth: 480, margin: '0 auto 28px' }}>24-hour HRV and sleep monitoring. Worn daily. Athletes keep it when they graduate. One program price — bands included for your entire roster.</div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 10 }}>
+            {['24HR HRV', 'SLEEP STAGES', 'SpO2', 'BLE 5.2', 'LONG BATTERY LIFE', 'FIND MY BAND', 'WHITE LABEL READY', 'ATHLETES KEEP IT'].map((spec, i) => (
+              <div key={i} style={{ padding: '8px 16px', background: '#1A1A1E', border: '1px solid #242428', borderRadius: 20, fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 12, color: '#B0B0C0', letterSpacing: 1 }}>{spec}</div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER CTA */}
+      <section style={{ background: 'linear-gradient(135deg,rgba(242,100,25,0.1),rgba(242,100,25,0.04))', borderTop: '1px solid rgba(242,100,25,0.2)', padding: '80px 20px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 600, height: 600, borderRadius: '50%', background: 'radial-gradient(circle,rgba(242,100,25,0.07),transparent)', pointerEvents: 'none' }} />
+        <div style={{ position: 'relative', maxWidth: 700, margin: '0 auto' }}>
+          <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(48px,10vw,100px)', lineHeight: 0.9, color: '#F2F2F5', marginBottom: 20 }}>
+            MOVE<br /><span style={{ color: '#F26419' }}>FORWARD.</span>
+          </div>
+          <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 300, fontSize: 18, color: '#888898', letterSpacing: 4, marginBottom: 40 }}>LAUNCHING SUMMER 2026 · ANY SPORT · ANY PROGRAM</div>
+          <button onClick={openModal} style={{
+            padding: '18px 52px', border: 'none', borderRadius: 6, cursor: 'pointer',
+            background: 'linear-gradient(135deg,#F26419,#C44E0F)', color: 'white',
+            fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900, fontSize: 18, letterSpacing: 2,
+            boxShadow: '0 0 60px rgba(242,100,25,0.4)'
+          }}>JOIN THE WAITLIST</button>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 20, marginTop: 32, flexWrap: 'wrap' }}>
+            {['@4WardPerformance', 'TikTok · Instagram · X'].map((h, i) => (
+              <div key={i} style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 14, color: '#F26419', letterSpacing: 1, padding: '8px 20px', border: '1px solid rgba(242,100,25,0.3)', borderRadius: 4 }}>{h}</div>
+            ))}
+          </div>
+          <div style={{ marginTop: 48, fontFamily: "'Barlow Condensed', sans-serif", fontSize: 11, color: 'rgba(255,255,255,0.1)', letterSpacing: 2 }}>BUILT BY A STRENGTH COACH · FOR STRENGTH COACHES</div>
+        </div>
+      </section>
+
+      <style>{`
+        @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @keyframes ringPulse { 0%,100% { opacity:0.3; transform:scale(1); } 50% { opacity:0.6; transform:scale(1.05); } }
+      `}</style>
     </>
   )
 }
-
-function marketingHTML(openModal: () => void) {
-  if (typeof window !== 'undefined') {
-    (window as any).__openWaitlist = openModal
-  }
-  return MARKETING_HTML
-}
-
-const MARKETING_HTML = `
-<style>
-:root{--o:#F26419;--od:#C44E0F;--o2:#FF7A30;--bk:#080809;--dk:#0D0D0F;--sf:#141416;--cd:#1A1A1E;--br:#242428;--wh:#F2F2F5;--gr:#888898;--gl:#B0B0C0;--gn:#2ECC8A;--rd:#E85555;--yl:#F5B820;--pu:#7C6FE0;--bl:#2563EB}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:rgba(8,8,9,0.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.05)}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px}
-.nav-logo .four{color:var(--o)}.nav-logo .ward{color:var(--wh)}.nav-logo .chev{color:var(--o)}
-.nav-cta{padding:9px 22px;border-radius:5px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--o),var(--od));color:white;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:13px;letter-spacing:2px;box-shadow:0 0 20px rgba(242,100,25,0.3)}
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:40px 20px}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(242,100,25,0.18) 0%,transparent 70%),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(242,100,25,0.08) 0%,transparent 60%)}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(242,100,25,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(242,100,25,0.04) 1px,transparent 1px);background-size:60px 60px}
-.hero-content{position:relative;z-index:2;text-align:center;max-width:900px}
-.hero-eyebrow{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:6px;color:var(--o);margin-bottom:24px;opacity:0;animation:fadeUp .6s ease .2s forwards}
-.hero-logo{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,18vw,180px);line-height:.9;letter-spacing:4px;opacity:0;animation:fadeUp .7s ease .3s forwards}
-.hero-logo .four{color:var(--o)}.hero-logo .ward{color:var(--wh)}.hero-logo .chev{color:var(--o);display:inline-block;transform:scaleX(0.6);margin-left:-8px}
-.hero-sub{font-family:'Barlow Condensed',sans-serif;font-weight:300;font-size:clamp(16px,3vw,22px);color:var(--gl);letter-spacing:3px;margin-top:12px;opacity:0;animation:fadeUp .7s ease .5s forwards}
-.hero-tagline{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,7vw,72px);color:var(--wh);line-height:1;margin-top:40px;opacity:0;animation:fadeUp .7s ease .7s forwards}
-.hero-tagline em{color:var(--o);font-style:normal}
-.hero-desc{font-size:clamp(14px,2.5vw,17px);color:var(--gr);line-height:1.7;max-width:600px;margin:24px auto 0;opacity:0;animation:fadeUp .7s ease .9s forwards}
-.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:40px;opacity:0;animation:fadeUp .7s ease 1.1s forwards}
-.btn-fire{padding:16px 40px;border-radius:6px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--o),var(--od));color:white;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:16px;letter-spacing:2px;box-shadow:0 0 40px rgba(242,100,25,0.4),0 4px 20px rgba(0,0,0,0.4);transition:all .25s}
-.btn-fire:hover{transform:translateY(-2px);box-shadow:0 0 60px rgba(242,100,25,0.6),0 8px 30px rgba(0,0,0,0.4)}
-.btn-ghost-fire{padding:16px 40px;border-radius:6px;border:1px solid rgba(242,100,25,0.4);cursor:pointer;background:transparent;color:var(--o);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:2px;transition:all .25s}
-.btn-ghost-fire:hover{background:rgba(242,100,25,0.1);border-color:var(--o)}
-.section{padding:80px 20px;max-width:1100px;margin:0 auto}
-.section-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:5px;color:var(--o);margin-bottom:12px}
-.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,72px);line-height:1;color:var(--wh);margin-bottom:8px}
-.section-title span{color:var(--o)}
-.section-sub{font-size:15px;color:var(--gr);margin-bottom:48px;max-width:500px}
-.posts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
-.post-card{border-radius:16px;overflow:hidden;position:relative;cursor:pointer;transition:transform .3s ease,box-shadow .3s ease;aspect-ratio:1;display:flex;flex-direction:column;justify-content:flex-end}
-.post-card:hover{transform:translateY(-6px) scale(1.01)}
-.post-1{background:#06060A;box-shadow:0 8px 40px rgba(0,0,0,0.6)}.post-1:hover{box-shadow:0 20px 60px rgba(242,100,25,0.25)}
-.post-1-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px}
-.post-1-num{font-family:'Bebas Neue',sans-serif;font-size:130px;line-height:.85;color:white;letter-spacing:-4px;position:relative}
-.post-1-num::after{content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:60%;height:3px;background:var(--o)}
-.post-1-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:3px;color:var(--gr);margin-top:20px;text-align:center}
-.post-1-label strong{color:var(--o)}
-.post-1-source{font-size:10px;color:rgba(255,255,255,0.3);margin-top:16px;letter-spacing:1px}
-.post-1-logo{position:absolute;top:20px;right:20px;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px}
-.post-2{background:linear-gradient(145deg,#0A0A12,#12121E);border:1px solid var(--br);box-shadow:0 8px 40px rgba(0,0,0,0.5)}
-.post-2:hover{box-shadow:0 20px 60px rgba(124,111,224,0.2);border-color:rgba(124,111,224,0.3)}
-.post-2-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:28px}
-.post-2-q{font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:1.05;color:var(--wh)}
-.post-2-q em{color:var(--o);font-style:normal}
-.post-2-icon{font-size:64px;text-align:center;margin:10px 0}
-.post-2-answer{background:rgba(242,100,25,0.1);border-left:3px solid var(--o);border-radius:4px;padding:12px 14px;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;color:var(--gl);line-height:1.5}
-.post-3{background:#050508;box-shadow:0 8px 40px rgba(0,0,0,0.6);border:1px solid var(--br)}
-.post-3:hover{box-shadow:0 20px 60px rgba(46,204,138,0.15);border-color:rgba(46,204,138,0.2)}
-.post-3-content{position:absolute;inset:0;padding:28px;display:flex;flex-direction:column;justify-content:space-between}
-.post-3-header{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:4px;color:var(--gn)}
-.post-3-title{font-family:'Bebas Neue',sans-serif;font-size:34px;line-height:1.05;color:var(--wh);margin-top:4px}
-.post-3-rules{display:flex;flex-direction:column;gap:10px;flex:1;justify-content:center}
-.post-3-rule{display:flex;align-items:flex-start;gap:12px}
-.rule-num{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--o);line-height:1;flex-shrink:0;width:28px}
-.rule-text{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:14px;color:var(--gl);line-height:1.4;padding-top:4px}
-.rule-text strong{color:var(--wh)}
-.post-4{background:#040406;box-shadow:0 8px 40px rgba(242,100,25,0.15);border:1px solid rgba(242,100,25,0.15)}
-.post-4:hover{box-shadow:0 20px 60px rgba(242,100,25,0.3);border-color:rgba(242,100,25,0.3)}
-.post-4-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;text-align:center}
-.post-4-glow{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(242,100,25,0.12),transparent)}
-.post-4-eyebrow{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:5px;color:var(--o);margin-bottom:20px;position:relative}
-.post-4-logo{font-family:'Bebas Neue',sans-serif;font-size:72px;line-height:.9;letter-spacing:2px;position:relative}
-.post-4-logo .four{color:var(--o)}.post-4-logo .ward{color:var(--wh)}
-.post-4-question{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;color:var(--gl);letter-spacing:1px;margin-top:20px;position:relative}
-.post-4-sub{font-size:12px;color:var(--gr);margin-top:8px;position:relative}
-.science-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:32px}
-.sci-card{background:var(--cd);border:1px solid var(--br);border-radius:14px;padding:24px;position:relative;overflow:hidden;transition:all .3s}
-.sci-card:hover{transform:translateY(-4px);border-color:var(--o)}
-.sci-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--o),transparent)}
-.sci-stat{font-family:'Bebas Neue',sans-serif;font-size:56px;color:var(--o);line-height:1;margin-bottom:8px}
-.sci-stat-unit{font-size:22px;color:var(--gr)}
-.sci-desc{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;color:var(--wh);line-height:1.5;margin-bottom:12px}
-.sci-source{font-size:10px;color:var(--gr);letter-spacing:0.5px;border-top:1px solid var(--br);padding-top:10px;margin-top:10px}
-.sci-source strong{color:var(--o)}
-.formula-card{background:linear-gradient(135deg,#0D0D0F,#13131A);border:1px solid var(--br);border-radius:20px;padding:40px;position:relative;overflow:hidden;margin-top:32px}
-.formula-card::before{content:'';position:absolute;top:-100px;right:-100px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(242,100,25,0.12),transparent)}
-.formula-title{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--wh);margin-bottom:8px}
-.formula-title span{color:var(--o)}
-.formula-sub{font-size:13px;color:var(--gr);margin-bottom:32px;max-width:500px}
-.formula-eq{display:flex;flex-direction:column;gap:12px}
-.formula-row{display:flex;align-items:center;gap:16px}
-.formula-weight{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--o);width:50px;text-align:right;flex-shrink:0}
-.formula-metric{background:rgba(255,255,255,0.04);border:1px solid var(--br);border-radius:8px;padding:10px 16px;flex:1;display:flex;align-items:center;justify-content:space-between}
-.formula-metric-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;color:var(--wh);letter-spacing:1px}
-.formula-metric-detail{font-size:11px;color:var(--gr)}
-.formula-bar{height:3px;border-radius:2px;margin-top:8px}
-.formula-result{margin-top:24px;padding-top:24px;border-top:1px solid var(--br);display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.formula-result-label{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--gr);letter-spacing:2px}
-.score-zones{display:flex;gap:8px;flex-wrap:wrap}
-.zone-chip{padding:6px 14px;border-radius:20px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:1px}
-.acr-card{background:var(--cd);border:1px solid var(--br);border-radius:20px;padding:36px;margin-top:20px;position:relative;overflow:hidden}
-.acr-title{font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--wh);margin-bottom:4px}
-.acr-title span{color:var(--o)}
-.acr-sub{font-size:13px;color:var(--gr);margin-bottom:32px}
-.acr-bar-wrap{position:relative;height:40px;border-radius:8px;overflow:hidden;margin-bottom:8px}
-.acr-bar-fill{position:absolute;inset:0;background:linear-gradient(90deg,var(--pu) 0%,var(--gn) 30%,var(--gn) 55%,var(--yl) 72%,var(--rd) 100%)}
-.acr-labels{display:flex;justify-content:space-between;margin-top:6px}
-.acr-label{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:11px;color:var(--gr)}
-.acr-zones-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:24px}
-.acr-zone{background:rgba(255,255,255,0.03);border:1px solid var(--br);border-radius:10px;padding:14px 12px;text-align:center}
-.acr-zone-val{font-family:'Bebas Neue',sans-serif;font-size:18px;margin-bottom:4px}
-.acr-zone-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:1px;color:var(--gr)}
-.compare-section{background:linear-gradient(135deg,#0A0A0E,#0E0E14);border-radius:24px;padding:48px 40px;border:1px solid var(--br);margin-top:20px;position:relative;overflow:hidden}
-.compare-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--o),transparent)}
-.compare-title{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--wh);text-align:center;margin-bottom:8px}
-.compare-title span{color:var(--o)}
-.compare-sub{font-size:14px;color:var(--gr);text-align:center;margin-bottom:40px}
-.compare-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center}
-.compare-col{display:flex;flex-direction:column;gap:10px}
-.compare-header{font-family:'Bebas Neue',sans-serif;font-size:24px;margin-bottom:8px;padding-bottom:12px;border-bottom:2px solid}
-.compare-item{display:flex;align-items:center;gap:8px;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:14px;color:var(--gl)}
-.compare-icon{font-size:16px;flex-shrink:0}
-.vs-badge{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--o);text-align:center;opacity:0.6}
-.price-callout{text-align:center;margin-top:40px;padding:28px;background:rgba(242,100,25,0.08);border-radius:16px;border:1px solid rgba(242,100,25,0.2)}
-.price-callout-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:4px;color:var(--o);margin-bottom:12px}
-.price-nums{display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap}
-.price-item{text-align:center}
-.price-amount{font-family:'Bebas Neue',sans-serif;font-size:52px;line-height:1}
-.price-period{font-size:12px;color:var(--gr);margin-top:2px}
-.price-divider{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--br)}
-.band-section{text-align:center;padding:60px 20px;position:relative}
-.band-visual{width:200px;height:200px;margin:0 auto 32px;position:relative;display:flex;align-items:center;justify-content:center}
-.band-ring{position:absolute;border-radius:50%;border:1px solid rgba(242,100,25,0.2);animation:ringPulse 3s ease-in-out infinite}
-.band-center{width:100px;height:100px;border-radius:50%;background:radial-gradient(circle at 40% 40%,#222226,#0D0D0F);border:2px solid rgba(242,100,25,0.5);display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px rgba(242,100,25,0.25),inset 0 0 20px rgba(242,100,25,0.05);position:relative;z-index:1}
-.band-logo-inner{font-family:'Bebas Neue',sans-serif;font-size:20px}
-.band-logo-inner .four{color:var(--o)}.band-logo-inner .ward{color:var(--wh)}
-.band-specs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px}
-.band-spec{padding:8px 16px;background:var(--cd);border:1px solid var(--br);border-radius:20px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;color:var(--gl);letter-spacing:1px}
-.footer-cta{background:linear-gradient(135deg,rgba(242,100,25,0.1),rgba(242,100,25,0.05));border-top:1px solid rgba(242,100,25,0.2);padding:80px 20px;text-align:center;position:relative;overflow:hidden}
-.footer-cta::before{content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(242,100,25,0.08),transparent)}
-.footer-big{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,10vw,100px);line-height:.9;color:var(--wh);position:relative}
-.footer-big span{color:var(--o)}
-.footer-sub{font-family:'Barlow Condensed',sans-serif;font-weight:300;font-size:18px;color:var(--gr);letter-spacing:4px;margin-top:16px;position:relative}
-.footer-handles{display:flex;justify-content:center;gap:20px;margin-top:32px;flex-wrap:wrap;position:relative}
-.handle{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;color:var(--o);letter-spacing:1px;padding:8px 20px;border:1px solid rgba(242,100,25,0.3);border-radius:4px}
-.ticker-wrap{overflow:hidden;border-top:1px solid var(--br);border-bottom:1px solid var(--br);padding:14px 0;background:var(--dk)}
-.ticker-track{display:flex;gap:0;animation:ticker 30s linear infinite;width:max-content}
-.ticker-item{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:2px;color:var(--gr);padding:0 32px;white-space:nowrap;display:flex;align-items:center;gap:12px}
-.ticker-dot{width:4px;height:4px;border-radius:50%;background:var(--o);flex-shrink:0}
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.divider{height:1px;background:linear-gradient(90deg,transparent,var(--br),transparent);margin:20px 0}
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-@keyframes ringPulse{0%,100%{opacity:0.3;transform:scale(1)}50%{opacity:0.6;transform:scale(1.05)}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@media(max-width:600px){.compare-grid{grid-template-columns:1fr}.vs-badge{display:none}.acr-zones-row{grid-template-columns:repeat(2,1fr)}.posts-grid{grid-template-columns:1fr}.post-card{aspect-ratio:1}.formula-card{padding:24px}.compare-section{padding:32px 20px}}
-</style>
-
-<nav>
-  <div class="nav-logo"><span class="four">4</span><span class="ward">WARD</span><span class="chev">›</span></div>
-  <button class="nav-cta open-waitlist">JOIN WAITLIST</button>
-</nav>
-
-<div class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">BUILT BY A COACH · FOR COACHES · ANY SPORT</div>
-    <div class="hero-logo"><span class="four">4</span><span class="ward">WARD</span><span class="chev">›</span></div>
-    <div class="hero-sub">ATHLETE PERFORMANCE PLATFORM</div>
-    <div class="hero-tagline">Stop <em>guessing.</em><br/>Start <em>knowing.</em></div>
-    <div class="hero-desc">The first wearable recovery platform built specifically for high school coaches. HRV. Sleep. Training load. One score. Every athlete. Every morning. Any sport.</div>
-    <div class="hero-ctas">
-      <button class="btn-fire open-waitlist">JOIN THE WAITLIST</button>
-      <button class="btn-ghost-fire">SEE THE SCIENCE</button>
-    </div>
-  </div>
-</div>
-
-<div class="ticker-wrap"><div class="ticker-track" id="ticker"></div></div>
-
-<div class="section">
-  <div class="reveal">
-    <div class="section-label">SOCIAL MEDIA KIT — DAY 1</div>
-    <div class="section-title">FOUR POSTS.<br/><span>ONE DAY.</span></div>
-    <div class="section-sub">Every post ready to publish. Science-backed. Coach talking to coaches.</div>
-  </div>
-  <div class="posts-grid reveal">
-    <div class="post-card post-1">
-      <div class="post-1-content">
-        <div style="position:absolute;top:20px;left:20px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:3px;color:var(--o);">7AM · SCIENCE STAT</div>
-        <div class="post-1-logo"><span style="color:var(--o);">4</span><span style="color:rgba(255,255,255,0.3);">WARD›</span></div>
-        <div class="post-1-num">6.8</div>
-        <div class="post-1-label">Average hours of sleep for a<br/><strong>high school athlete</strong><br/>Recommended: 9 hours</div>
-        <div class="post-1-source">SOURCE: AMERICAN ACADEMY OF PEDIATRICS, 2016</div>
-      </div>
-    </div>
-    <div class="post-card post-2">
-      <div class="post-2-content">
-        <div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:3px;color:var(--pu);margin-bottom:8px;">12PM · PAIN POINT</div>
-          <div class="post-2-q">Do you know how your athletes <em>slept</em> last night?</div>
-        </div>
-        <div class="post-2-icon">😴</div>
-        <div class="post-2-answer">"The lift is just the stimulus. Sleep is where the adaptation actually happens. We've been ignoring half the equation."</div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;">
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;"><span style="color:var(--o);">4</span><span style="color:rgba(255,255,255,0.5);">WARD›</span></div>
-          <div style="font-size:10px;color:var(--gr);">📱 TALKING HEAD · 60s</div>
-        </div>
-      </div>
-    </div>
-    <div class="post-card post-3">
-      <div class="post-3-content">
-        <div>
-          <div class="post-3-header">4PM · COACHING TIP</div>
-          <div class="post-3-title">Your athlete slept 5 hours.<br/>Here's what to do.</div>
-        </div>
-        <div class="post-3-rules">
-          <div class="post-3-rule"><div class="rule-num">1</div><div class="rule-text"><strong>Reduce intensity 20–30%.</strong> The nervous system isn't recovered.</div></div>
-          <div class="post-3-rule"><div class="rule-num">2</div><div class="rule-text"><strong>Cut volume, keep quality.</strong> One heavy set beats three bad ones.</div></div>
-          <div class="post-3-rule"><div class="rule-num">3</div><div class="rule-text"><strong>No max effort today.</strong> Protect the athlete.</div></div>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <div style="font-size:10px;color:var(--gn);font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:2px;">SAVE THIS</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;"><span style="color:var(--o);">4</span><span style="color:rgba(255,255,255,0.4);">WARD›</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="post-card post-4">
-      <div class="post-4-glow"></div>
-      <div class="post-4-content">
-        <div class="post-4-eyebrow">8PM · PRODUCT TEASE</div>
-        <div class="post-4-logo"><div class="four">4</div><div class="ward">WARD</div></div>
-        <div class="post-4-question">What if you knew exactly which athletes needed to pull back — before they walked in?</div>
-        <div class="post-4-sub">We're building it. Coming summer 2026.</div>
-        <div style="margin-top:20px;width:40px;height:2px;background:var(--o);border-radius:1px;"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<div class="section">
-  <div class="reveal">
-    <div class="section-label">THE RESEARCH · PEER-REVIEWED</div>
-    <div class="section-title">THE SCIENCE<br/><span>IS REAL.</span></div>
-    <div class="section-sub">Every post cites actual research. That's what separates 4Ward from every other wearable brand online.</div>
-  </div>
-  <div class="science-grid">
-    <div class="sci-card reveal"><div class="sci-stat">1.7<span class="sci-stat-unit">×</span></div><div class="sci-desc">Athletes sleeping under 8 hours are 1.7x more likely to be injured.</div><div class="sci-source"><strong>SOURCE:</strong> Milewski et al. Clinical Journal of Sports Medicine, 2014</div></div>
-    <div class="sci-card reveal"><div class="sci-stat">5<span class="sci-stat-unit">%</span></div><div class="sci-desc">Basketball players who extended sleep to 10 hours improved sprint speed 5% with no other training changes.</div><div class="sci-source"><strong>SOURCE:</strong> Mah et al. Stanford Sleep Lab, 2011</div></div>
-    <div class="sci-card reveal"><div class="sci-stat">1.3</div><div class="sci-desc">Acute:Chronic Workload Ratio above 1.3 significantly elevates injury risk. Above 1.5 is the danger zone.</div><div class="sci-source"><strong>SOURCE:</strong> Gabbett. British Journal of Sports Medicine, 2016</div></div>
-    <div class="sci-card reveal"><div class="sci-stat">HRV</div><div class="sci-desc">Individualized HRV tracking compared to personal baseline is the strongest non-lab readiness marker available.</div><div class="sci-source"><strong>SOURCE:</strong> Flatt & Nakamura. IJSPP, 2018</div></div>
-    <div class="sci-card reveal"><div class="sci-stat">9h</div><div class="sci-desc">The AAP recommends 8–10 hours of sleep for teenagers. The average high school athlete gets 6.8 hours.</div><div class="sci-source"><strong>SOURCE:</strong> American Academy of Pediatrics, 2016</div></div>
-    <div class="sci-card reveal"><div class="sci-stat">CMJ</div><div class="sci-desc">Countermovement jump height correlates strongly with neuromuscular readiness. Video-based measurement accurate to ±1–2cm.</div><div class="sci-source"><strong>SOURCE:</strong> Balsalobre-Fernandez et al. 2015</div></div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<div class="section">
-  <div class="reveal">
-    <div class="section-label">THE FORMULA · TRANSPARENT BY DESIGN</div>
-    <div class="section-title">THE <span>4WARD</span><br/>RECOVERY INDEX</div>
-    <div class="section-sub">Not a black box. A formula you can explain to any coach, parent, or athletic director.</div>
-  </div>
-  <div class="formula-card reveal">
-    <div class="formula-title">4WRI <span>v1</span></div>
-    <div class="formula-sub">Three peer-reviewed inputs. One readiness score. Recalculated every morning before your athletes walk in.</div>
-    <div class="formula-eq">
-      <div class="formula-row"><div class="formula-weight">×0.45</div><div class="formula-metric"><div><div class="formula-metric-name">HRV SCORE</div><div class="formula-metric-detail">Today vs 7-day personal baseline · Flatt & Nakamura</div><div class="formula-bar" style="background:var(--pu);width:80%;"></div></div><div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--pu);">89</div></div></div>
-      <div class="formula-row"><div class="formula-weight">×0.40</div><div class="formula-metric"><div><div class="formula-metric-name">SLEEP SCORE</div><div class="formula-metric-detail">Duration + consistency penalty · Mah Stanford / AAP</div><div class="formula-bar" style="background:#818CF8;width:60%;"></div></div><div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#818CF8;">60</div></div></div>
-      <div class="formula-row"><div class="formula-weight">×0.15</div><div class="formula-metric"><div><div class="formula-metric-name">RHR SCORE</div><div class="formula-metric-detail">Today vs 7-day personal baseline · Foster et al.</div><div class="formula-bar" style="background:var(--gn);width:90%;"></div></div><div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--gn);">92</div></div></div>
-    </div>
-    <div class="formula-result">
-      <div class="formula-result-label">FINAL SCORE →</div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--yl);line-height:1;">78</div>
-      <div class="score-zones">
-        <div class="zone-chip" style="background:rgba(52,211,153,0.15);color:var(--gn);">85–100 OPTIMAL</div>
-        <div class="zone-chip" style="background:rgba(251,191,36,0.15);color:var(--yl);">70–84 MODERATE</div>
-        <div class="zone-chip" style="background:rgba(251,146,60,0.15);color:#FB923C;">50–69 ELEVATED</div>
-        <div class="zone-chip" style="background:rgba(248,113,113,0.15);color:var(--rd);">&lt;50 HIGH RISK</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<div class="section">
-  <div class="reveal">
-    <div class="section-label">POSITIONING · MARKET GAP</div>
-    <div class="section-title">BUILT FOR <span>YOU.</span><br/>NOT THEM.</div>
-  </div>
-  <div class="compare-section reveal">
-    <div class="compare-title">4WARD <span>VS</span> THE FIELD</div>
-    <div class="compare-sub">The same data elite programs pay $15,000+ a year for. Built for your budget.</div>
-    <div class="compare-grid">
-      <div class="compare-col">
-        <div class="compare-header" style="color:var(--rd);border-color:rgba(232,85,85,0.3);">CATAPULT / TEAMWORKS</div>
-        <div class="compare-item"><span class="compare-icon">❌</span> $15,000–50,000/year</div>
-        <div class="compare-item"><span class="compare-icon">❌</span> Built for college/pro programs</div>
-        <div class="compare-item"><span class="compare-icon">❌</span> Requires IT support to deploy</div>
-        <div class="compare-item"><span class="compare-icon">❌</span> No high school pricing tier</div>
-        <div class="compare-item"><span class="compare-icon">❌</span> Hardware sold separately</div>
-      </div>
-      <div class="vs-badge">VS</div>
-      <div class="compare-col">
-        <div class="compare-header" style="color:var(--o);border-color:rgba(242,100,25,0.4);">4WARD</div>
-        <div class="compare-item"><span class="compare-icon">✅</span> From $2,499/year — bands included</div>
-        <div class="compare-item"><span class="compare-icon">✅</span> Built specifically for high school</div>
-        <div class="compare-item"><span class="compare-icon">✅</span> Set up in under 30 minutes</div>
-        <div class="compare-item"><span class="compare-icon">✅</span> Any sport. Any program.</div>
-        <div class="compare-item"><span class="compare-icon">✅</span> Athletes keep their bands forever</div>
-      </div>
-    </div>
-    <div class="price-callout">
-      <div class="price-callout-label">THE PRICE COMPARISON</div>
-      <div class="price-nums">
-        <div class="price-item"><div class="price-amount" style="color:var(--rd);text-decoration:line-through;opacity:0.5;">$50,000</div><div class="price-period">Catapult / year</div></div>
-        <div class="price-divider">→</div>
-        <div class="price-item"><div class="price-amount" style="color:var(--o);">$2,499</div><div class="price-period">4Ward / year (bands included)</div></div>
-        <div class="price-divider">=</div>
-        <div class="price-item"><div class="price-amount" style="color:var(--gn);">$208</div><div class="price-period">per athlete / year</div></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<div class="band-section reveal">
-  <div class="section-label">THE HARDWARE</div>
-  <div class="band-visual">
-    <div class="band-ring" style="width:200px;height:200px;animation-delay:0s;"></div>
-    <div class="band-ring" style="width:160px;height:160px;animation-delay:.5s;"></div>
-    <div class="band-ring" style="width:120px;height:120px;animation-delay:1s;"></div>
-    <div class="band-center" style="animation:float 4s ease-in-out infinite;"><div class="band-logo-inner"><span class="four">4</span><span class="ward">W›</span></div></div>
-  </div>
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,6vw,56px);color:var(--wh);margin-bottom:8px;">THE <span style="color:var(--o);">4WARD BAND</span></div>
-  <div style="font-size:14px;color:var(--gr);max-width:500px;margin:0 auto 24px;line-height:1.7;">Worn 24/7. Built for athletes. Silicone band, 24hr HRV + sleep monitoring. Athletes keep it when they graduate. One price — bands included.</div>
-  <div class="band-specs">
-    <div class="band-spec">24HR HRV</div><div class="band-spec">SLEEP STAGES</div><div class="band-spec">SPO2</div><div class="band-spec">BLE 5.2</div><div class="band-spec">LONG BATTERY</div><div class="band-spec">FIND MY BAND</div><div class="band-spec">WHITE LABEL</div><div class="band-spec">ATHLETES KEEP IT</div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<div class="footer-cta">
-  <div class="footer-big">MOVE<br/><span>FORWARD.</span></div>
-  <div class="footer-sub">LAUNCHING SUMMER 2026 · ANY SPORT · ANY PROGRAM</div>
-  <div style="margin-top:32px;position:relative;">
-    <button class="btn-fire open-waitlist" style="font-size:18px;padding:18px 48px;">JOIN THE WAITLIST</button>
-  </div>
-  <div class="footer-handles">
-    <div class="handle">@4WardPerformance</div>
-    <div class="handle">TikTok · Instagram · X</div>
-  </div>
-  <div style="margin-top:40px;font-family:'Barlow Condensed',sans-serif;font-size:11px;color:rgba(255,255,255,0.15);letter-spacing:2px;">BUILT BY A STRENGTH COACH · FOR STRENGTH COACHES · FORT WORTH, TEXAS</div>
-</div>
-
-<script>
-const items=["HRV MONITORING","SLEEP TRACKING","AI WEEKLY REPORTS","COACH DASHBOARD","ATHLETE ACCOUNTABILITY","FROM $2,499/YR — BANDS INCLUDED","BUILT FOR HIGH SCHOOL","ANY SPORT · ANY PROGRAM","MOVE FORWARD","FIND MY BAND","FORT WORTH, TEXAS"];
-const track=document.getElementById('ticker');
-if(track){const doubled=[...items,...items].map(t=>'<div class="ticker-item"><div class="ticker-dot"></div>'+t+'</div>').join('');track.innerHTML=doubled;}
-const reveals=document.querySelectorAll('.reveal');
-const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
-reveals.forEach(r=>observer.observe(r));
-</script>
-`
