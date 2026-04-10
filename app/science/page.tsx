@@ -16,6 +16,9 @@ export default function SciencePage() {
           position: 'fixed', inset: 0, background: 'rgba(8,8,9,0.98)', zIndex: 99,
           display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 40
         }}>
+          <Link href="/story" onClick={() => setMenuOpen(false)} style={{
+            fontFamily: "'Bebas Neue', sans-serif", fontSize: 36, color: '#555560', textDecoration: 'none', letterSpacing: 3
+          }}>OUR STORY</Link>
           <Link href="/" onClick={() => setMenuOpen(false)} style={{
             fontFamily: "'Bebas Neue', sans-serif", fontSize: 36, color: '#555560', textDecoration: 'none', letterSpacing: 3
           }}>HOME</Link>
@@ -36,6 +39,7 @@ export default function SciencePage() {
       }}>
         <Link href="/" style={{ textDecoration: 'none' }}><Logo size={26} /></Link>
         <div className="nav-desktop">
+          <Link href="/story" style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 3, color: '#555560', textDecoration: 'none', marginRight: 32 }}>OUR STORY</Link>
           <Link href="/" style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 3, color: '#555560', textDecoration: 'none', marginRight: 32 }}>HOME</Link>
           <Link href="/" style={{ padding: '9px 24px', borderRadius: 4, border: '1px solid #F26419', fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900, fontSize: 12, letterSpacing: 3, color: '#F26419', textDecoration: 'none' }}>FOUNDING TEAMS</Link>
         </div>
