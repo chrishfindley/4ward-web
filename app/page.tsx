@@ -196,18 +196,18 @@ export default function Home() {
           <div className="hero-logo-wrap">
             <span className="hero-logo-text" style={{ color: '#F26419' }}>4</span>
             <span className="hero-logo-text" style={{ color: '#F2F2F5' }}>WARD</span>
-            <ChevronMark size="0.64em" style={{ marginLeft: '-0.02em', verticalAlign: 'middle', marginBottom: '-0.02em' }} />
+            <ChevronMark size="0.64em" style={{ marginLeft: '0em', verticalAlign: 'middle', marginBottom: '0em' }} />
           </div>
 
-          {/* Tagline */}
-          <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(22px,4.5vw,48px)', color: '#F2F2F5', lineHeight: 1.1, marginTop: 36 }}>
-            RESEARCH-PROVEN DATA.{' '}
-            <span style={{ color: '#F26419' }}>ACTIONABLE INSIGHTS.</span>{' '}
-            ONE PLATFORM.
+          {/* Tagline — bigger, one line at a time */}
+          <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(28px,5.5vw,58px)', color: '#F2F2F5', lineHeight: 1.05, marginTop: 36 }}>
+            <div>RESEARCH-PROVEN DATA.</div>
+            <div style={{ color: '#F26419' }}>ACTIONABLE INSIGHTS.</div>
+            <div>ONE PLATFORM.</div>
           </div>
 
-          {/* Body */}
-          <div style={{ fontSize: 'clamp(14px,2vw,17px)', color: '#555560', lineHeight: 1.85, maxWidth: 580, margin: '28px auto 0' }}>
+          {/* Body — slightly bigger, slightly lighter grey that's still readable */}
+          <div style={{ fontSize: 'clamp(15px,2vw,18px)', color: '#888898', fontWeight: 500, lineHeight: 1.85, maxWidth: 580, margin: '28px auto 0' }}>
             4Ward uses a research-proven approach to determine recovery and readiness, gives coaches insights into their athletes' readiness level, and provides the platform to put the data to use.
           </div>
 
@@ -235,7 +235,7 @@ export default function Home() {
           <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(36px,6vw,68px)', color: '#F2F2F5', lineHeight: 0.95, marginBottom: 12 }}>
             ONE SCORE.<br /><span style={{ color: '#F26419' }}>EVERY MORNING.</span>
           </div>
-          <div style={{ fontSize: 'clamp(14px,2vw,16px)', color: '#555560', lineHeight: 1.8, maxWidth: 540, margin: '0 auto 48px' }}>
+          <div style={{ fontSize: 'clamp(14px,2vw,16px)', color: '#888898', fontWeight: 500, lineHeight: 1.8, maxWidth: 540, margin: '0 auto 48px' }}>
             Every morning, each athlete receives a readiness score built from three research-validated inputs. Coaches see every athlete's status the moment they open the app.
           </div>
 
@@ -312,7 +312,7 @@ export default function Home() {
           <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(36px,6vw,68px)', color: '#F2F2F5', lineHeight: 0.95, marginBottom: 16, textAlign: 'center' }}>
             PUSH THE PROGRAM.<br /><span style={{ color: '#F26419' }}>TRACK EVERY REP.</span>
           </div>
-          <div style={{ fontSize: 'clamp(14px,2vw,16px)', color: '#555560', lineHeight: 1.85, maxWidth: 620, margin: '0 auto 56px', textAlign: 'center' }}>
+          <div style={{ fontSize: 'clamp(14px,2vw,16px)', color: '#888898', fontWeight: 500, lineHeight: 1.85, maxWidth: 620, margin: '0 auto 56px', textAlign: 'center' }}>
             Coaches build or select programs inside 4Ward — with exact weights, sets, reps, and rest periods — then push them directly to every athlete's app with one tap. Adjustments based on readiness scores can be applied automatically or manually, individually or across the entire roster.
           </div>
 
@@ -396,7 +396,7 @@ export default function Home() {
             ].map((f, i) => (
               <div key={i} style={{ padding: 'clamp(20px,3vw,24px)', background: '#0D0D0F', borderLeft: '2px solid #F26419' }}>
                 <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 3, color: '#F26419', marginBottom: 8 }}>{f.title}</div>
-                <div style={{ fontSize: 'clamp(13px,1.8vw,14px)', color: '#555560', lineHeight: 1.75 }}>{f.body}</div>
+                <div style={{ fontSize: 'clamp(13px,1.8vw,14px)', color: '#888898', fontWeight: 500, lineHeight: 1.75 }}>{f.body}</div>
               </div>
             ))}
           </div>
@@ -406,11 +406,10 @@ export default function Home() {
       {/* FOUNDING TEAMS CTA */}
       <section style={{ borderTop: '1px solid #111114', padding: 'clamp(72px,12vw,120px) clamp(16px,4vw,20px)', textAlign: 'center' }}>
         <div style={{ maxWidth: 640, margin: '0 auto' }}>
-          <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 7, color: '#F26419', marginBottom: 28 }}>NOW ACCEPTING APPLICATIONS</div>
           <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(48px,10vw,96px)', lineHeight: 0.88, color: '#F2F2F5', marginBottom: 28 }}>
             BECOME A<br /><span style={{ color: '#F26419' }}>FOUNDING TEAM.</span>
           </div>
-          <div style={{ fontSize: 'clamp(14px,2vw,16px)', color: '#555560', lineHeight: 1.85, marginBottom: 48, maxWidth: 480, margin: '0 auto 48px' }}>
+          <div style={{ fontSize: 'clamp(14px,2vw,16px)', color: '#888898', fontWeight: 500, lineHeight: 1.85, marginBottom: 48, maxWidth: 480, margin: '0 auto 48px' }}>
             We are selecting a limited number of programs to partner with before launch. Founding teams will shape the product, validate the platform, and lock in founding pricing — permanently.
           </div>
           <button onClick={openModal} style={{
