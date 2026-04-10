@@ -7,18 +7,17 @@ interface LogoProps {
   markOnly?: boolean
 }
 
-// Locked chevron values: tipX=12 tipY=71 midX=52 stroke=16 viewBox 0 0 60 80
 export function ChevronMark({ size = 28, color = '#F26419', style }: { size?: number | string, color?: string, style?: React.CSSProperties }) {
   return (
     <svg
-      viewBox="0 0 60 80"
+      viewBox="0 0 80 80"
       height={size}
       width={size}
       style={{ display: 'inline-block', verticalAlign: 'middle', ...style }}
       aria-hidden="true"
     >
       <polyline
-        points="12,4 52,40 12,71"
+        points="8,7 51,40 8,73"
         fill="none"
         stroke={color}
         strokeWidth="16"
@@ -31,16 +30,12 @@ export function ChevronMark({ size = 28, color = '#F26419', style }: { size?: nu
 
 export default function Logo({ size = 28, style, textOnly = false, markOnly = false }: LogoProps) {
   const numSize = typeof size === 'string' ? parseInt(size) : size
-
   if (markOnly) return <ChevronMark size={size} />
-
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center', lineHeight: 1, ...style }}>
       <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: numSize, letterSpacing: Math.round(numSize * 0.04), color: '#F26419', lineHeight: 1 }}>4</span>
       <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: numSize, letterSpacing: Math.round(numSize * 0.04), color: '#F2F2F5', lineHeight: 1 }}>WARD</span>
-      {!textOnly && (
-        <ChevronMark size={numSize * 0.64} style={{ marginLeft: 0 }} />
-      )}
+      {!textOnly && <ChevronMark size={numSize * 0.65} style={{ marginLeft: 0, marginBottom: 2 }} />}
     </span>
   )
 }
