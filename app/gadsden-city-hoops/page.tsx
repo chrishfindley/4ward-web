@@ -58,7 +58,7 @@ export default function GadsdenCityHoopsPage() {
         header, nav { display: none !important; }
 
         /* ── TOKENS ── */
-        .gc-root { --c: #9B1B2A; --cl: #C42535; --cd: #6B0F1A; --s: #A8A9AD; --sd: #606265; --sl: #D4D5D8; --blk: #080809; --n: #111214; --su: #181A1C; --su2: #1E2022; --w: #F5F5F2; --ln: #1A1A1E; }
+        .gc-root { --c: #9B1B2A; --cl: #9B1B2A; --cd: #6B0F1A; --s: #A8A9AD; --sd: #606265; --sl: #D4D5D8; --blk: #080809; --n: #111214; --su: #181A1C; --su2: #1E2022; --w: #F5F5F2; --ln: #1A1A1E; }
 
         /* ── TOP BAR ── */
         .gc-bar {
@@ -71,9 +71,9 @@ export default function GadsdenCityHoopsPage() {
         .gc-bar-left { display: flex; align-items: center; gap: 16px; }
         .gc-divider { width: 1px; height: 28px; background: #1A1A1E; }
         .gc-school-name { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 4px; color: #606265; }
-        .gc-school-team { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px; color: #C42535; line-height: 1; }
-        .gc-founding { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: 4px; color: #C42535; display: flex; align-items: center; gap: 8px; }
-        .gc-dot { width: 6px; height: 6px; background: #C42535; border-radius: 50%; animation: gc-blink 2s infinite; }
+        .gc-school-team { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px; color: #9B1B2A; line-height: 1; }
+        .gc-founding { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: 4px; color: #9B1B2A; display: flex; align-items: center; gap: 8px; }
+        .gc-dot { width: 6px; height: 6px; background: #9B1B2A; border-radius: 50%; animation: gc-blink 2s infinite; }
         @keyframes gc-blink { 0%,100%{opacity:1}50%{opacity:.3} }
 
         /* ── HERO ── */
@@ -107,7 +107,7 @@ export default function GadsdenCityHoopsPage() {
         .gc-hero-content { position: relative; z-index: 2; max-width: 820px; }
         .gc-eyebrow {
           font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-          font-size: 11px; letter-spacing: 6px; color: #C42535;
+          font-size: 11px; letter-spacing: 6px; color: #9B1B2A;
           text-transform: uppercase; margin-bottom: 20px;
         }
         .gc-h1 {
@@ -117,7 +117,7 @@ export default function GadsdenCityHoopsPage() {
           margin-bottom: clamp(20px,3vw,32px);
         }
         .gc-h1 .s { color: #A8A9AD; }
-        .gc-h1 .r { color: #C42535; }
+        .gc-h1 .r { color: #9B1B2A; }
         .gc-hero-body {
           font-size: clamp(15px,2vw,19px);
           color: rgba(245,245,242,0.65);
@@ -129,7 +129,7 @@ export default function GadsdenCityHoopsPage() {
         .gc-kpis { display: flex; flex-wrap: wrap; gap: clamp(24px,4vw,56px); }
         .gc-kpi-num {
           font-family: 'Bebas Neue', sans-serif;
-          font-size: clamp(40px,6vw,60px); color: #C42535; line-height: 1; margin-bottom: 4px;
+          font-size: clamp(40px,6vw,60px); color: #9B1B2A; line-height: 1; margin-bottom: 4px;
         }
         .gc-kpi-lbl {
           font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
@@ -147,7 +147,7 @@ export default function GadsdenCityHoopsPage() {
         .gc-sec.cardinal { background: #6B0F1A; }
         .gc-lbl {
           font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-          font-size: 10px; letter-spacing: 6px; color: #C42535;
+          font-size: 10px; letter-spacing: 6px; color: #9B1B2A;
           text-transform: uppercase; margin-bottom: 14px;
         }
         .gc-lbl.silver { color: rgba(245,245,242,0.4); }
@@ -157,7 +157,7 @@ export default function GadsdenCityHoopsPage() {
           margin-bottom: 20px;
         }
         .gc-h2 .s { color: #A8A9AD; }
-        .gc-h2 .r { color: #C42535; }
+        .gc-h2 .r { color: #9B1B2A; }
         .gc-h2 .w { color: #F5F5F2; }
         .gc-body {
           font-size: clamp(14px,1.8vw,16px); color: #888;
@@ -177,7 +177,7 @@ export default function GadsdenCityHoopsPage() {
         .gc-stat-num {
           font-family: 'Bebas Neue', sans-serif;
           font-size: clamp(64px,9vw,96px); line-height: 0.82; margin-bottom: 12px;
-          color: #C42535;
+          color: #9B1B2A;
         }
         .gc-stat:nth-child(2) .gc-stat-num { color: #D4D5D8; }
         .gc-stat-hed {
@@ -206,7 +206,7 @@ export default function GadsdenCityHoopsPage() {
           font-size: 10px; letter-spacing: 4px; color: #606265;
           text-transform: uppercase; margin-bottom: 14px;
         }
-        .gc-panel-lbl.red { color: #C42535; }
+        .gc-panel-lbl.red { color: #9B1B2A; }
         .gc-panel-title {
           font-family: 'Bebas Neue', sans-serif;
           font-size: clamp(18px,3vw,26px); letter-spacing: 1px;
@@ -237,7 +237,7 @@ export default function GadsdenCityHoopsPage() {
         .gc-action.mod { border-left-color: #606265; background: rgba(96,98,101,0.08); }
         .gc-action-who {
           font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-          font-size: 11px; letter-spacing: 2px; color: #C42535; margin-bottom: 3px;
+          font-size: 11px; letter-spacing: 2px; color: #9B1B2A; margin-bottom: 3px;
         }
         .gc-action-who.s { color: #A8A9AD; }
         .gc-action-what { font-size: 12px; color: #A8A9AD; line-height: 1.55; }
@@ -247,7 +247,7 @@ export default function GadsdenCityHoopsPage() {
         }
         .gc-callout-lbl {
           font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-          font-size: 10px; letter-spacing: 4px; color: #C42535; margin-bottom: 6px;
+          font-size: 10px; letter-spacing: 4px; color: #9B1B2A; margin-bottom: 6px;
         }
         .gc-callout-txt { font-size: 14px; color: #A8A9AD; line-height: 1.7; }
         .gc-callout-txt strong { color: #F5F5F2; }
@@ -315,7 +315,7 @@ export default function GadsdenCityHoopsPage() {
         }
         .gc-formula-lbl {
           font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-          font-size: 10px; letter-spacing: 5px; color: #C42535;
+          font-size: 10px; letter-spacing: 5px; color: #9B1B2A;
           text-transform: uppercase; margin-bottom: 20px;
         }
         .gc-formula-eq {
@@ -323,7 +323,7 @@ export default function GadsdenCityHoopsPage() {
           font-size: clamp(18px,3vw,28px); color: #F5F5F2; letter-spacing: 2px;
           line-height: 1.4; margin-bottom: 20px; word-break: break-word;
         }
-        .gc-formula-eq .r { color: #C42535; }
+        .gc-formula-eq .r { color: #9B1B2A; }
         .gc-formula-eq .s { color: #A8A9AD; }
         .gc-formula-inputs {
           display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -333,9 +333,9 @@ export default function GadsdenCityHoopsPage() {
           padding: 14px 16px; background: #1A1A1C;
         }
         .gc-fi-pct {
-          font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: #C42535; line-height: 1;
+          font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: #9B1B2A; line-height: 1;
         }
-        .gc-fi:nth-child(2) .gc-fi-pct { color: #C42535; }
+        .gc-fi:nth-child(2) .gc-fi-pct { color: #9B1B2A; }
         .gc-fi:nth-child(3) .gc-fi-pct { color: #A8A9AD; }
         .gc-fi:nth-child(4) .gc-fi-pct { color: #A8A9AD; }
         .gc-fi-name {
@@ -387,7 +387,7 @@ export default function GadsdenCityHoopsPage() {
         .gc-cta-body { font-size: clamp(14px,1.8vw,17px); color: #666; line-height: 1.85; margin-bottom: 36px; max-width: 600px; margin-left: auto; margin-right: auto; }
         .gc-cta-who { font-family: 'Bebas Neue', sans-serif; font-size: clamp(18px,3vw,26px); color: #F5F5F2; letter-spacing: 2px; }
         .gc-cta-detail { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 2px; color: #606265; margin-top: 4px; }
-        .gc-cta-site { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 2px; color: #C42535; margin-top: 2px; }
+        .gc-cta-site { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 2px; color: #9B1B2A; margin-top: 2px; }
 
         /* ── FOOTER ── */
         .gc-footer {
@@ -409,10 +409,11 @@ export default function GadsdenCityHoopsPage() {
         {/* TOP BAR */}
         <div className="gc-bar">
           <div className="gc-bar-left">
-            <svg width="80" height="24" viewBox="0 0 88 28" fill="none">
-              <text x="0" y="22" fontFamily="'Bebas Neue', sans-serif" fontSize="26" letterSpacing="2" fill="white">
-                <tspan fill="#F26419">4</tspan>WARD
+            <svg width="96" height="26" viewBox="0 0 108 28" fill="none">
+              <text x="0" y="23" fontFamily="'Bebas Neue', sans-serif" fontSize="26" letterSpacing="2">
+                <tspan fill="#9B1B2A">4</tspan><tspan fill="#F5F5F2">WARD</tspan>
               </text>
+              <polyline points="94,6 102,14 94,22" stroke="#9B1B2A" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
             </svg>
             <div className="gc-divider"/>
             <div>
@@ -420,9 +421,9 @@ export default function GadsdenCityHoopsPage() {
               <div className="gc-school-team">TITANS</div>
             </div>
           </div>
-          <div className="gc-founding">
-            <div className="gc-dot"/>
-            PROPOSED FOUNDING PARTNER · PROGRAM #1
+          <div style={{display:"flex",flexDirection:"column",alignItems:"flex-end",gap:"2px"}}>
+            <div style={{fontFamily:"'Barlow Condensed',sans-serif",fontWeight:700,fontSize:"13px",letterSpacing:"3px",color:"#F5F5F2",textTransform:"uppercase"}}>PROPOSED FOUNDING PARTNER</div>
+            <div style={{fontFamily:"'Barlow Condensed',sans-serif",fontWeight:600,fontSize:"11px",letterSpacing:"3px",color:"#606265",textTransform:"uppercase"}}>ATHLETE PERFORMANCE PLATFORM</div>
           </div>
         </div>
 
@@ -432,56 +433,51 @@ export default function GadsdenCityHoopsPage() {
           <div className="gc-hero-wm" aria-hidden>TITANS</div>
           <div className="gc-hero-stripe"/>
           <div className="gc-hero-content">
-            <div className="gc-eyebrow">Athlete Performance Platform · Basketball</div>
+            <div className="gc-eyebrow" style={{color:"#606265"}}>Basketball · Gadsden City Titans</div>
             <div className="gc-h1">
-              23 WINS.<br/>
-              <span className="s">ONE BLIND</span><br/>
-              <span className="r">SPOT.</span>
+              <span style={{color:"#F5F5F2"}}>PREVENT</span> <span style={{color:"#F5F5F2"}}>INJURIES.</span><br/>
+              <span style={{color:"#A8A9AD"}}>MAXIMIZE</span> <span style={{color:"#A8A9AD"}}>PERFORMANCE.</span><br/>
+              <span style={{color:"#9B1B2A"}}>WIN GAMES.</span>
             </div>
             <div className="gc-hero-body">
-              Titan Basketball went 23-2 this season. The data to protect that roster — sleep, recovery, autonomic readiness — exists. <strong>Every morning before practice, 4Ward shows you exactly which athletes can be pushed and which ones need to be managed.</strong> Not a gut call. A score backed by peer-reviewed research.
+              Titan Basketball went 29-3 this season. The science of recovery monitoring — HRV, sleep quality, resting heart rate — identifies which athletes are physiologically ready to train and which require load management, before the first drill begins.
             </div>
             <div className="gc-kpis">
               <div>
-                <div className="gc-kpi-num">23-2</div>
+                <div className="gc-kpi-num" style={{color:"#A8A9AD"}}>29-3</div>
                 <div className="gc-kpi-lbl">Titan Boys Basketball 2025-26</div>
-              </div>
-              <div>
-                <div className="gc-kpi-num">6A</div>
-                <div className="gc-kpi-lbl">AHSAA — Highest Level</div>
-              </div>
-              <div>
-                <div className="gc-kpi-num">#1</div>
-                <div className="gc-kpi-lbl">First Program in Alabama on 4Ward</div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* SCIENCE */}
         <div className="gc-sec dark">
           <div className="gc-sec-inner">
-            <div className="gc-lbl">Peer-Reviewed Evidence</div>
-            <div className="gc-h2">THE SCIENCE<br/><span className="s">YOUR PROGRAM</span><br/><span className="r">IS MISSING.</span></div>
-            <div className="gc-body">This research has been published for over a decade. It applies directly to high school basketball programs. No one built the tools to act on it — until now.</div>
+            <div className="gc-lbl" style={{color:"#A8A9AD"}}>Research-Backed Approach</div>
+            <div className="gc-h2">
+              <span style={{color:"#F5F5F2"}}>DATA</span><br/>
+              <span style={{color:"#A8A9AD"}}>THAT DRIVES</span><br/>
+              <span style={{color:"#9B1B2A"}}>WINNING.</span>
+            </div>
+            <div className="gc-body">The preponderance of peer-reviewed evidence demonstrates that recovery-based readiness monitoring — specifically HRV, sleep quality, and resting heart rate — is significantly more predictive of athlete performance capacity and injury risk than traditional external load metrics alone. The research is not emerging. It is established.</div>
             <div className="gc-stats">
               <div className="gc-stat">
-                <div className="gc-stat-num">1.7×</div>
-                <div className="gc-stat-hed">MORE LIKELY TO GET HURT.</div>
-                <div className="gc-stat-body">Athletes sleeping under 8 hours are 1.7 times more likely to sustain a sports injury — controlling for sport, grade level, and training volume. When poor sleep combines with a spike in training load, that hazard ratio climbs to 2.25×. Your athletes don&apos;t tell you they slept 4 hours the night before a hard practice. The band does.</div>
+                <div className="gc-stat-num" style={{color:"#A8A9AD"}}>1.7×</div>
+                <div className="gc-stat-hed">ELEVATED INJURY INCIDENCE WITH SLEEP DEFICIT.</div>
+                <div className="gc-stat-body">A prospective cohort study of 112 adolescent athletes found that those averaging fewer than 8 hours of sleep per night were 1.70 times more likely to sustain a sports injury (OR = 1.7, 95% CI: 1.0–3.0, p = 0.04), independent of sport type, grade level, and weekly training volume. A subsequent meta-analysis of 496 elite adolescent athletes confirmed that when insufficient sleep coincided with an acute training load increase, injury hazard ratio reached 2.25 (95% CI: 1.46–3.45). Sleep is the most actionable, most consistently undermonitored variable in high school athletics.</div>
                 <div className="gc-stat-cite">Milewski et al. — J. Pediatric Orthopaedics, 2014 · Von Rosen et al. — Scand. J. Med. Sci. Sports, 2017</div>
               </div>
               <div className="gc-stat">
-                <div className="gc-stat-num">25%</div>
-                <div className="gc-stat-hed">FEWER HARD SESSIONS. BETTER OUTCOMES.</div>
-                <div className="gc-stat-body">Athletes in HRV-guided training programs performed 25% fewer high-intensity sessions than teams on fixed programs — and outperformed them. Negative responders (athletes who got worse): 11% in data-guided groups vs. 50% in fixed programs. Less hard work on the wrong days means more adaptation from the right ones.</div>
-                <div className="gc-stat-cite">Vesterinen et al. — Med. Sci. Sports Exerc., 2016 · Manresa-Rocamora et al. — IJERPH, 2021</div>
+                <div className="gc-stat-num" style={{color:"#D4D5D8"}}>82%</div>
+                <div className="gc-stat-hed">REDUCTION IN OVERTRAINING INCIDENTS.</div>
+                <div className="gc-stat-body">In a controlled study of collegiate athletes, HRV-guided training produced 82% fewer overtraining incidents compared to predetermined fixed-load programming over the same training period — while simultaneously producing greater gains in conditioning performance. A 2021 meta-analysis of eight randomized controlled trials confirmed that HRV-guided periodization yields superior autonomic adaptations (SMD = 0.50, 95% CI: 0.09–0.91) and a trend toward greater aerobic performance improvement. Athletes in data-guided programs performed 25% fewer high-intensity sessions; negative responders were 11% vs. 50% in fixed-load programs.</div>
+                <div className="gc-stat-cite">Flatt &amp; Nakamura — IJSPP, 2018 · Manresa-Rocamora et al. — IJERPH, 2021 · Vesterinen et al. — MSSE, 2016</div>
               </div>
               <div className="gc-stat">
-                <div className="gc-stat-num">5%</div>
-                <div className="gc-stat-hed">FASTER SPRINTS. NOTHING ELSE CHANGED.</div>
-                <div className="gc-stat-body">Stanford varsity basketball players who extended sleep by two hours improved sprint speed by 5%, free throw percentage by 9%, and three-point shooting by 9.2% — with zero changes to training. Sleep is not passive recovery. It is the adaptation. 4Ward makes it measurable and coachable for the first time at the high school level.</div>
-                <div className="gc-stat-cite">Mah et al. — Sleep Journal, 2011 · Stanford Sleep Lab</div>
+                <div className="gc-stat-num" style={{color:"#A8A9AD"}}>5%</div>
+                <div className="gc-stat-hed">PERFORMANCE IMPROVEMENT WITH SLEEP EXTENSION ALONE.</div>
+                <div className="gc-stat-body">In a controlled sleep extension study of Stanford varsity basketball players, extending sleep to a minimum of 10 hours per night produced statistically significant improvements in sprint speed (5%), free throw accuracy (9%), and three-point shooting percentage (9.2%) — with no modifications to training protocol. A 2022 systematic review and meta-analysis confirmed that sleep restriction significantly impairs anaerobic power, speed-endurance, sport-specific skill, and reaction time across athlete populations. Optimizing recovery produces measurable performance gains without adding a single additional training minute.</div>
+                <div className="gc-stat-cite">Mah et al. — Sleep Journal, 2011 · Craven et al. — Sports Medicine, 2022</div>
               </div>
             </div>
           </div>
@@ -688,7 +684,7 @@ export default function GadsdenCityHoopsPage() {
         <div className="gc-cta">
           <div className="gc-lbl" style={{justifyContent:"center",display:"flex"}}>The Offer</div>
           <div className="gc-cta-hed">
-            <span style={{color:"#C42535"}}>FIRST</span> IN<br/>
+            <span style={{color:"#9B1B2A"}}>FIRST</span> IN<br/>
             <span style={{color:"#A8A9AD"}}>ALABAMA.</span>
           </div>
           <div className="gc-cta-body">I&apos;m a high school strength coach who built this because nothing else did what we actually need. Ten minutes, live demo, no deck. I&apos;ll show you the platform on a real roster and tell you straight if it&apos;s not a fit.</div>
