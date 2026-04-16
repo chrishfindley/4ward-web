@@ -446,7 +446,7 @@ export default function GadsdenCityHoopsPage() {
               <span style={{color:"#7B1020"}}>WIN GAMES.</span>
             </div>
             <div className="gc-hero-body">
-              Titan Basketball went 29-3 this season. The science of recovery monitoring — HRV, sleep quality, resting heart rate — identifies which athletes are physiologically ready to train and which require load management, before the first drill begins.
+              Titan Basketball went 29-3 this season. The factors that decide whether an athlete can absorb today's practice — sleep, recovery, autonomic state — happen before they walk in the gym. Coaches can't control what happens at 11pm on a school night. But they can know, every morning, exactly which athletes arrived ready to be pushed and which ones need to be managed. That's what 4Ward delivers.
             </div>
             <div className="gc-kpis">
               <div>
@@ -459,31 +459,31 @@ export default function GadsdenCityHoopsPage() {
 
         <div className="gc-sec dark">
           <div className="gc-sec-inner">
-            <div className="gc-lbl" style={{color:"#A8A9AD"}}>Research-Backed Approach</div>
+            <div className="gc-lbl" style={{color:"#A8A9AD"}}>Published in Sports Medicine · MSSE · British Journal of Sports Medicine</div>
             <div className="gc-h2">
               <span style={{color:"#F5F5F2"}}>DATA</span><br/>
               <span style={{color:"#A8A9AD"}}>THAT DRIVES</span><br/>
               <span style={{color:"#7B1020"}}>WINNING.</span>
             </div>
-            <div className="gc-body">The preponderance of peer-reviewed evidence demonstrates that recovery-based readiness monitoring — specifically HRV, sleep quality, and resting heart rate — is significantly more predictive of athlete performance capacity and injury risk than traditional external load metrics alone. The research is not emerging. It is established.</div>
+            <div className="gc-body">A systematic review in the British Journal of Sports Medicine found that subjective and internal load markers — HRV, sleep, wellness — outperform objective external measures like GPS distance and accelerometer load for predicting how an athlete responds to training. 204 GPS-based injury prediction models have been published in the literature. Zero have been externally validated. The internal-load approach isn't new science — it's settled science. It just hasn't been packaged for high school programs until now.</div>
             <div className="gc-stats">
               <div className="gc-stat">
-                <div className="gc-stat-num" style={{color:"#A8A9AD"}}>1.7×</div>
-                <div className="gc-stat-hed">ELEVATED INJURY INCIDENCE WITH SLEEP DEFICIT.</div>
-                <div className="gc-stat-body">A prospective cohort study of 112 adolescent athletes found that those averaging fewer than 8 hours of sleep per night were 1.70 times more likely to sustain a sports injury (OR = 1.7, 95% CI: 1.0–3.0, p = 0.04), independent of sport type, grade level, and weekly training volume. A subsequent meta-analysis of 496 elite adolescent athletes confirmed that when insufficient sleep coincided with an acute training load increase, injury hazard ratio reached 2.25 (95% CI: 1.46–3.45). Sleep is the most actionable, most consistently undermonitored variable in high school athletics.</div>
-                <div className="gc-stat-cite">Milewski et al. — J. Pediatric Orthopaedics, 2014 · Von Rosen et al. — Scand. J. Med. Sci. Sports, 2017</div>
+                <div className="gc-stat-num" style={{color:"#D4D5D8"}}>+9.2%</div>
+                <div className="gc-stat-hed">THREE-POINT SHOOTING. NOTHING ELSE CHANGED.</div>
+                <div className="gc-stat-body">Stanford varsity basketball players who extended sleep to 10 hours per night for 5–7 weeks improved three-point shooting by 9.2% and free throw accuracy by 9.0%, with sprint speed faster by 5%. Reaction time improved. Fatigue ratings dropped. No training changes were made. A 2022 meta-analysis in Sports Medicine confirmed that sleep restriction impairs sport-specific skill, anaerobic power, and reaction time across athlete populations. Coaches can&apos;t make players sleep more. But knowing which players didn&apos;t sleep tells you who can execute today and who can&apos;t.</div>
+                <div className="gc-stat-cite">Mah et al. — SLEEP, 2011 (Stanford Sleep Disorders Clinic) · Craven et al. — Sports Medicine, 2022</div>
               </div>
               <div className="gc-stat">
-                <div className="gc-stat-num" style={{color:"#D4D5D8"}}>82%</div>
-                <div className="gc-stat-hed">REDUCTION IN OVERTRAINING INCIDENTS.</div>
-                <div className="gc-stat-body">In a controlled study of collegiate athletes, HRV-guided training produced 82% fewer overtraining incidents compared to predetermined fixed-load programming over the same training period — while simultaneously producing greater gains in conditioning performance. A 2021 meta-analysis of eight randomized controlled trials confirmed that HRV-guided periodization yields superior autonomic adaptations (SMD = 0.50, 95% CI: 0.09–0.91) and a trend toward greater aerobic performance improvement. Athletes in data-guided programs performed 25% fewer high-intensity sessions; negative responders were 11% vs. 50% in fixed-load programs.</div>
-                <div className="gc-stat-cite">Flatt &amp; Nakamura — IJSPP, 2018 · Manresa-Rocamora et al. — IJERPH, 2021 · Vesterinen et al. — MSSE, 2016</div>
+                <div className="gc-stat-num" style={{color:"#A8A9AD"}}>2.25×</div>
+                <div className="gc-stat-hed">INJURY RISK WHEN SLEEP AND LOAD DIVERGE.</div>
+                <div className="gc-stat-body">A 340-athlete prospective study of adolescent athletes found that when training load increased AND sleep declined — a combination coaches routinely miss — injury hazard ratio reached 2.25 (95% CI: 1.46–3.45). A separate study of 112 adolescent athletes found those averaging under 8 hours of sleep were 1.7× more likely to sustain a sports injury, independent of grade level and gender. These are the weeks you already know are risky — tournaments, finals, travel. The data tells you exactly which athletes are carrying the most load into them.</div>
+                <div className="gc-stat-cite">Von Rosen et al. — Scand. J. Med. Sci. Sports, 2017 · Milewski et al. — J. Pediatric Orthopaedics, 2014</div>
               </div>
               <div className="gc-stat">
-                <div className="gc-stat-num" style={{color:"#A8A9AD"}}>5%</div>
-                <div className="gc-stat-hed">PERFORMANCE IMPROVEMENT WITH SLEEP EXTENSION ALONE.</div>
-                <div className="gc-stat-body">In a controlled sleep extension study of Stanford varsity basketball players, extending sleep to a minimum of 10 hours per night produced statistically significant improvements in sprint speed (5%), free throw accuracy (9%), and three-point shooting percentage (9.2%) — with no modifications to training protocol. A 2022 systematic review and meta-analysis confirmed that sleep restriction significantly impairs anaerobic power, speed-endurance, sport-specific skill, and reaction time across athlete populations. Optimizing recovery produces measurable performance gains without adding a single additional training minute.</div>
-                <div className="gc-stat-cite">Mah et al. — Sleep Journal, 2011 · Craven et al. — Sports Medicine, 2022</div>
+                <div className="gc-stat-num" style={{color:"#D4D5D8"}}>2.6×</div>
+                <div className="gc-stat-hed">HRV CATCHES WHAT GPS DOESN&apos;T.</div>
+                <div className="gc-stat-body">A study of 37 competitive athletes found that high training load combined with suppressed HRV produced a relative injury risk of 2.61 — a signal invisible to external load monitors alone. A 2021 meta-analysis of 8 randomized controlled trials (n=199) confirmed HRV-guided training produces superior autonomic adaptation (SMD = 0.50, 95% CI: 0.09–0.91) and reduced negative responders compared to fixed programming (11% vs. 50%). GPS tells you what an athlete did. HRV tells you whether their body could absorb it. One of those predicts performance and injury. The other is just meters run.</div>
+                <div className="gc-stat-cite">Williams et al. — J. Sports Sci. Med., 2017 · Manresa-Rocamora et al. — IJERPH, 2021 · Vesterinen et al. — MSSE, 2016</div>
               </div>
             </div>
           </div>
@@ -494,7 +494,7 @@ export default function GadsdenCityHoopsPage() {
           <div className="gc-sec-inner">
             <div className="gc-lbl">The Platform in Action</div>
             <div className="gc-h2">THE SIGNAL<br/><span className="s">IS ALREADY THERE.</span></div>
-            <div className="gc-body">High-stakes stretches — tournament weeks, back-to-back travel, rivalry games — create physiological stress your athletes carry into practice whether you can see it or not. HRV drops. Sleep fragments. Resting heart rate climbs. 4Ward shows you who is carrying that load before the first drill.</div>
+            <div className="gc-body">Tournament weeks. Finals. Back-to-back travel. Rivalry games. The stress accumulates before practice starts — HRV drops, sleep fragments, resting heart rate climbs. You can&apos;t prevent the stress. But 4Ward identifies exactly which athletes carried it in, so you can adjust practice load, scale back contact, or protect a player who shows up green-lit on paper but red-lit in the data.</div>
             <div className="gc-signal-grid" style={{marginTop: "clamp(28px,4vw,44px)"}}>
               <div className="gc-panel light">
                 <div className="gc-panel-lbl">What the data shows</div>
@@ -548,7 +548,7 @@ export default function GadsdenCityHoopsPage() {
             </div>
             <div className="gc-callout">
               <div className="gc-callout-lbl">What this changes</div>
-              <div className="gc-callout-txt">You still practice. The work still gets done. But <strong>you are not hammering athletes who cannot absorb it</strong> — and you are not guessing which ones those are. The adjustment takes 30 seconds. The difference it makes could be a season.</div>
+              <div className="gc-callout-txt">You still practice. The work still gets done. But <strong>you stop hammering the athletes who can&apos;t absorb it today</strong> — and you stop guessing which ones those are. The adjustment takes 30 seconds per player. The difference across a season is measured in games won and injuries avoided.</div>
             </div>
           </div>
         </div>
@@ -627,7 +627,7 @@ export default function GadsdenCityHoopsPage() {
                 <div className="gc-fi">
                   <div className="gc-fi-pct">35%</div>
                   <div className="gc-fi-name">Heart Rate Variability</div>
-                  <div className="gc-fi-desc">Autonomic nervous system recovery — the most sensitive daily readiness marker in the literature</div>
+                  <div className="gc-fi-desc">Your body's readiness to absorb training — the single most sensitive daily recovery marker in the research</div>
                 </div>
                 <div className="gc-fi">
                   <div className="gc-fi-pct">30%</div>
