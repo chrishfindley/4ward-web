@@ -47,15 +47,21 @@ export default function GadsdenCityHoopsPage() {
         .gc-root *,
         .gc-root *::before,
         .gc-root *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* ── LAYOUT FIX — override Next.js container constraints ── */
+        body, html { overflow-x: hidden !important; overflow-y: auto !important; height: auto !important; }
+        main, body > div, #__next, [data-nextjs-scroll-focus-boundary] {
+          overflow: visible !important; height: auto !important; min-height: 0 !important;
+        }
+        header, nav { display: none !important; }
+
         .gc-root {
           background: #080809;
           color: #F5F5F2;
           font-family: 'Barlow', sans-serif;
-          min-height: 100vh;
+          width: 100%;
           overflow-x: hidden;
         }
-        /* nav override — hide site nav on this page */
-        header, nav { display: none !important; }
 
         /* ── TOKENS ── */
         .gc-root { --c: #7B1020; --cl: #7B1020; --cd: #4A0A12; --s: #A8A9AD; --sd: #606265; --sl: #D4D5D8; --blk: #080809; --n: #111214; --su: #181A1C; --su2: #1E2022; --w: #F5F5F2; --ln: #1A1A1E; }
@@ -70,7 +76,7 @@ export default function GadsdenCityHoopsPage() {
         }
         .gc-bar-left { display: flex; align-items: center; gap: 16px; }
         .gc-divider { width: 1px; height: 28px; background: #1A1A1E; }
-        .gc-school-name { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 4px; color: #888898; }
+        .gc-school-name { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 4px; color: #A0A0A8; }
         .gc-school-team { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 3px; color: #7B1020; line-height: 1; }
         .gc-founding { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: 4px; color: #7B1020; display: flex; align-items: center; gap: 8px; }
         .gc-dot { width: 6px; height: 6px; background: #7B1020; border-radius: 50%; animation: gc-blink 2s infinite; }
@@ -78,7 +84,7 @@ export default function GadsdenCityHoopsPage() {
 
         /* ── HERO ── */
         .gc-hero {
-          min-height: 92vh;
+          min-height: 85vh;
           display: flex; flex-direction: column; justify-content: center;
           padding: clamp(60px,10vw,120px) clamp(20px,6vw,80px) clamp(60px,8vw,100px);
           position: relative; overflow: hidden;
@@ -120,7 +126,7 @@ export default function GadsdenCityHoopsPage() {
         .gc-h1 .r { color: #7B1020; }
         .gc-hero-body {
           font-size: clamp(15px,2vw,19px);
-          color: rgba(245,245,242,0.80);
+          color: rgba(245,245,242,0.88);
           line-height: 1.8; font-weight: 500;
           max-width: 620px;
           margin-bottom: clamp(36px,5vw,56px);
@@ -133,7 +139,7 @@ export default function GadsdenCityHoopsPage() {
         }
         .gc-kpi-lbl {
           font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-          font-size: 10px; letter-spacing: 2px; color: #888898;
+          font-size: 10px; letter-spacing: 2px; color: #A0A0A8;
           text-transform: uppercase; max-width: 120px; line-height: 1.4;
         }
 
@@ -160,7 +166,7 @@ export default function GadsdenCityHoopsPage() {
         .gc-h2 .r { color: #7B1020; }
         .gc-h2 .w { color: #F5F5F2; }
         .gc-body {
-          font-size: clamp(14px,1.8vw,16px); color: #aaaaaa;
+          font-size: clamp(14px,1.8vw,16px); color: #C0C0C4;
           line-height: 1.85; font-weight: 500; max-width: 660px;
         }
 
@@ -184,10 +190,10 @@ export default function GadsdenCityHoopsPage() {
           font-family: 'Bebas Neue', sans-serif; font-size: clamp(17px,2.2vw,22px);
           letter-spacing: 1px; color: #F5F5F2; margin-bottom: 10px;
         }
-        .gc-stat-body { font-size: 13px; color: #999999; line-height: 1.75; margin-bottom: 10px; }
+        .gc-stat-body { font-size: 14px; color: #C0C0C4; line-height: 1.75; margin-bottom: 10px; }
         .gc-stat-cite {
           font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-          font-size: 10px; letter-spacing: 1px; color: #555555; text-transform: uppercase;
+          font-size: 10px; letter-spacing: 1px; color: #A0A0A8; text-transform: uppercase;
         }
 
         /* ── SIGNAL SECTION ── */
@@ -203,7 +209,7 @@ export default function GadsdenCityHoopsPage() {
         .gc-panel.hot { border-top: 2px solid #7B1020; }
         .gc-panel-lbl {
           font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-          font-size: 10px; letter-spacing: 4px; color: #888898;
+          font-size: 10px; letter-spacing: 4px; color: #A0A0A8;
           text-transform: uppercase; margin-bottom: 14px;
         }
         .gc-panel-lbl.red { color: #7B1020; }
@@ -234,7 +240,7 @@ export default function GadsdenCityHoopsPage() {
           padding: 10px 14px; border-left: 2px solid #7B1020;
           background: rgba(155,27,42,0.1);
         }
-        .gc-action.mod { border-left-color: #888898; background: rgba(96,98,101,0.08); }
+        .gc-action.mod { border-left-color: #A0A0A8; background: rgba(96,98,101,0.08); }
         .gc-action-who {
           font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
           font-size: 11px; letter-spacing: 2px; color: #7B1020; margin-bottom: 3px;
@@ -292,7 +298,7 @@ export default function GadsdenCityHoopsPage() {
         }
         .gc-ainp { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 2px; }
         .gc-inp {
-          font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 1px; color: #888888;
+          font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 1px; color: #A0A0A8;
         }
         .gc-ast {
           font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
@@ -340,10 +346,10 @@ export default function GadsdenCityHoopsPage() {
         .gc-fi:nth-child(4) .gc-fi-pct { color: #A8A9AD; }
         .gc-fi-name {
           font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-          font-size: 11px; letter-spacing: 2px; color: #888898;
+          font-size: 11px; letter-spacing: 2px; color: #A0A0A8;
           text-transform: uppercase; margin-top: 2px;
         }
-        .gc-fi-desc { font-size: 11px; color: #888888; margin-top: 4px; line-height: 1.5; }
+        .gc-fi-desc { font-size: 11px; color: #A0A0A8; margin-top: 4px; line-height: 1.5; }
 
         /* ── PROGRAMS TABLE ── */
         .gc-programs { margin-top: clamp(24px,4vw,40px); position: relative; z-index: 2; }
@@ -384,9 +390,9 @@ export default function GadsdenCityHoopsPage() {
           font-family: 'Bebas Neue', sans-serif;
           font-size: clamp(52px,10vw,108px); line-height: 0.88; margin-bottom: 24px;
         }
-        .gc-cta-body { font-size: clamp(14px,1.8vw,17px); color: #999999; line-height: 1.85; margin-bottom: 36px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .gc-cta-body { font-size: clamp(14px,1.8vw,17px); color: #B8B8BC; line-height: 1.85; margin-bottom: 36px; max-width: 600px; margin-left: auto; margin-right: auto; }
         .gc-cta-who { font-family: 'Bebas Neue', sans-serif; font-size: clamp(18px,3vw,26px); color: #F5F5F2; letter-spacing: 2px; }
-        .gc-cta-detail { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 2px; color: #888898; margin-top: 4px; }
+        .gc-cta-detail { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 2px; color: #A0A0A8; margin-top: 4px; }
         .gc-cta-site { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 2px; color: #7B1020; margin-top: 2px; }
 
         /* ── FOOTER ── */
@@ -650,7 +656,7 @@ export default function GadsdenCityHoopsPage() {
             <div>
               <div className="gc-lbl silver">Built for Gadsden City</div>
               <div className="gc-h2" style={{color:"#F5F5F2"}}>30+ PROGRAMS.<br/>ONE FOUNDING PARTNER.</div>
-              <div className="gc-body" style={{color:"rgba(245,245,242,0.80)"}}>Gadsden City competes at the 6A level across more than 30 boys&apos; and girls&apos; programs. As a Founding Partner, every sport locks in founding pricing permanently. Bands included. No per-athlete fees. Rate never changes.</div>
+              <div className="gc-body" style={{color:"rgba(245,245,242,0.88)"}}>Gadsden City competes at the 6A level across more than 30 boys&apos; and girls&apos; programs. As a Founding Partner, every sport locks in founding pricing permanently. Bands included. No per-athlete fees. Rate never changes.</div>
             </div>
             <div>
               <div className="gc-programs">
