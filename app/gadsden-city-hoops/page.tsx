@@ -405,6 +405,28 @@ export default function GadsdenCityHoopsPage() {
         .gc-fb .r { color: #7B1020; }
         .gc-ft { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: 3px; color: #1e1e1e; text-transform: uppercase; }
 
+        
+        .gc-compare { margin: 64px 0; }
+        .gc-compare-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 44px; line-height: 1.0; letter-spacing: -0.5px; text-transform: uppercase; color: #F5F5F2; margin-bottom: 40px; }
+        .gc-compare-table { width: 100%; border-collapse: collapse; background: #0E0F11; border: 1px solid #2A2C30; }
+        .gc-compare-table th, .gc-compare-table td { padding: 16px 18px; text-align: left; border-bottom: 1px solid #222428; font-family: 'Barlow', sans-serif; }
+        .gc-compare-table thead th { background: #141619; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: #C0C0C4; }
+        .gc-compare-table thead th:first-child { color: #F5F5F2; }
+        .gc-compare-table thead th.gc-us { color: #F5F5F2; background: #1C0A0E; border-bottom: 2px solid #7B1020; }
+        .gc-compare-table tbody td { font-size: 14px; color: #D4D5D8; }
+        .gc-compare-table tbody td:first-child { color: #F5F5F2; font-weight: 600; }
+        .gc-compare-table tbody td.gc-us { background: rgba(123,16,32,0.08); color: #F5F5F2; font-weight: 600; }
+        .gc-compare-check { color: #A8A9AD; font-size: 18px; font-weight: 700; }
+        .gc-compare-check.gc-us { color: #F5F5F2; }
+        .gc-compare-x { color: #606265; font-size: 18px; }
+        .gc-compare-partial { color: #888; font-size: 13px; font-style: italic; }
+        @media(max-width:600px) {
+          .gc-compare-title { font-size: 32px !important; }
+          .gc-compare-table th, .gc-compare-table td { padding: 10px 8px !important; font-size: 12px !important; }
+          .gc-compare-table thead th { font-size: 11px !important; letter-spacing: 1px !important; }
+          .gc-compare-table tbody td { font-size: 12px !important; }
+          .gc-compare-check, .gc-compare-x { font-size: 15px !important; }
+        }
         @media(max-width:600px) {
           .gc-ti { flex-direction: column; gap: 24px; }
           .gc-hero-body { font-size: 16px !important; line-height: 1.75 !important; }
@@ -699,7 +721,84 @@ export default function GadsdenCityHoopsPage() {
           </div>
         </div>
 
-        {/* CTA */}
+                  <div className="gc-compare">
+            <div className="gc-lbl" style={{color:"#A8A9AD"}}>The Field</div>
+            <div className="gc-compare-title">HOW 4WARD<br/>COMPARES.</div>
+            <table className="gc-compare-table">
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th className="gc-us">4WARD</th>
+                  <th>WHOOP</th>
+                  <th>Catapult</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Internal recovery monitoring (HRV, sleep, RHR)</td>
+                  <td className="gc-us"><span className="gc-compare-check gc-us">✓</span></td>
+                  <td><span className="gc-compare-check">✓</span></td>
+                  <td><span className="gc-compare-x">✗</span></td>
+                </tr>
+                <tr>
+                  <td>Peer-reviewed science methodology</td>
+                  <td className="gc-us"><span className="gc-compare-check gc-us">✓</span></td>
+                  <td><span className="gc-compare-check">✓</span></td>
+                  <td><span className="gc-compare-partial">Contested</span></td>
+                </tr>
+                <tr>
+                  <td>Nocturnal HRV during deep sleep</td>
+                  <td className="gc-us"><span className="gc-compare-check gc-us">✓</span></td>
+                  <td><span className="gc-compare-check">✓</span></td>
+                  <td><span className="gc-compare-x">✗</span></td>
+                </tr>
+                <tr>
+                  <td>Daily readiness score per athlete</td>
+                  <td className="gc-us"><span className="gc-compare-check gc-us">✓</span></td>
+                  <td><span className="gc-compare-check">✓</span></td>
+                  <td><span className="gc-compare-x">✗</span></td>
+                </tr>
+                <tr>
+                  <td>Coach-facing team dashboard</td>
+                  <td className="gc-us"><span className="gc-compare-check gc-us">✓</span></td>
+                  <td><span className="gc-compare-x">✗</span></td>
+                  <td><span className="gc-compare-check">✓</span></td>
+                </tr>
+                <tr>
+                  <td>External load tracking (GPS, accel)</td>
+                  <td className="gc-us"><span className="gc-compare-check gc-us">✓</span></td>
+                  <td><span className="gc-compare-partial">Partial</span></td>
+                  <td><span className="gc-compare-check">✓</span></td>
+                </tr>
+                <tr>
+                  <td>Injury risk flagging</td>
+                  <td className="gc-us"><span className="gc-compare-check gc-us">✓</span></td>
+                  <td><span className="gc-compare-partial">Partial</span></td>
+                  <td><span className="gc-compare-check">✓</span></td>
+                </tr>
+                <tr>
+                  <td>Designed for high school budgets</td>
+                  <td className="gc-us"><span className="gc-compare-check gc-us">✓</span></td>
+                  <td><span className="gc-compare-x">✗</span></td>
+                  <td><span className="gc-compare-x">✗</span></td>
+                </tr>
+                <tr>
+                  <td>Hardware included, no per-athlete subscription</td>
+                  <td className="gc-us"><span className="gc-compare-check gc-us">✓</span></td>
+                  <td><span className="gc-compare-x">✗</span></td>
+                  <td><span className="gc-compare-x">✗</span></td>
+                </tr>
+                <tr>
+                  <td>No sports science staff required</td>
+                  <td className="gc-us"><span className="gc-compare-check gc-us">✓</span></td>
+                  <td><span className="gc-compare-partial">N/A</span></td>
+                  <td><span className="gc-compare-x">✗</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          {/* CTA */}
         <div className="gc-cta">
           <div className="gc-lbl" style={{justifyContent:"center",display:"flex"}}>Next Step</div>
           <div className="gc-cta-hed">
