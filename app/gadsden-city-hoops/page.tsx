@@ -407,6 +407,19 @@ export default function GadsdenCityHoopsPage() {
 
         @media(max-width:600px) {
           .gc-ti { flex-direction: column; gap: 24px; }
+          .gc-hero-body { font-size: 16px !important; line-height: 1.75 !important; }
+          .gc-body { font-size: 15px !important; line-height: 1.8 !important; }
+          .gc-stat-body { font-size: 14px !important; line-height: 1.75 !important; color: #D0D0D4 !important; }
+          .gc-stat-cite { font-size: 11px !important; letter-spacing: 1px !important; color: #A0A0A8 !important; }
+          .gc-panel-title { font-size: 20px !important; }
+          .gc-action-what { font-size: 13px !important; line-height: 1.65 !important; color: #C0C0C4 !important; }
+          .gc-callout-txt { font-size: 15px !important; line-height: 1.75 !important; }
+          .gc-fi-desc { font-size: 12px !important; line-height: 1.6 !important; color: #B0B0B4 !important; }
+          .gc-kpi-lbl { font-size: 11px !important; max-width: 160px !important; }
+          .gc-cta-body { font-size: 15px !important; line-height: 1.8 !important; color: #C0C0C4 !important; }
+          .gc-mtitle { font-size: 12px !important; }
+          .gc-athlete { padding: 10px 12px !important; }
+          .gc-aname { font-size: 13px !important; }
         }
       `}</style>
 
@@ -428,7 +441,7 @@ export default function GadsdenCityHoopsPage() {
             </div>
           </div>
           <div style={{display:"flex",flexDirection:"column",alignItems:"flex-end",gap:"2px"}}>
-            <div style={{fontFamily:"'Barlow Condensed',sans-serif",fontWeight:700,fontSize:"13px",letterSpacing:"3px",color:"#F5F5F2",textTransform:"uppercase"}}>PROPOSED FOUNDING PARTNER</div>
+            <div style={{fontFamily:"'Barlow Condensed',sans-serif",fontWeight:700,fontSize:"13px",letterSpacing:"3px",color:"#F5F5F2",textTransform:"uppercase"}}>BUILT FOR TITAN BASKETBALL</div>
             <div style={{fontFamily:"'Barlow Condensed',sans-serif",fontWeight:600,fontSize:"11px",letterSpacing:"3px",color:"#888898",textTransform:"uppercase"}}>ATHLETE PERFORMANCE PLATFORM</div>
           </div>
         </div>
@@ -465,7 +478,7 @@ export default function GadsdenCityHoopsPage() {
               <span style={{color:"#A8A9AD"}}>THAT DRIVES</span><br/>
               <span style={{color:"#7B1020"}}>WINNING.</span>
             </div>
-            <div className="gc-body">A systematic review in the British Journal of Sports Medicine found that subjective and internal load markers — HRV, sleep, wellness — outperform objective external measures like GPS distance and accelerometer load for predicting how an athlete responds to training. 204 GPS-based injury prediction models have been published in the literature. Zero have been externally validated. The internal-load approach isn't new science — it's settled science. It just hasn't been packaged for high school programs until now.</div>
+            <div className="gc-body">A 2016 systematic review in the British Journal of Sports Medicine found that internal-load markers — HRV, sleep, and subjective wellness — consistently outperform external-load measures like GPS distance for predicting how an athlete responds to training. This is the same science elite athletes rely on. 4Ward brings it to high school programs — at a price they can afford, with workflows coaches can actually use.</div>
             <div className="gc-stats">
               <div className="gc-stat">
                 <div className="gc-stat-num" style={{color:"#D4D5D8"}}>+9.2%</div>
@@ -476,8 +489,8 @@ export default function GadsdenCityHoopsPage() {
               <div className="gc-stat">
                 <div className="gc-stat-num" style={{color:"#A8A9AD"}}>2.25×</div>
                 <div className="gc-stat-hed">INJURY RISK WHEN SLEEP AND LOAD DIVERGE.</div>
-                <div className="gc-stat-body">A 340-athlete prospective study of adolescent athletes found that when training load increased AND sleep declined — a combination coaches routinely miss — injury hazard ratio reached 2.25 (95% CI: 1.46–3.45). A separate study of 112 adolescent athletes found those averaging under 8 hours of sleep were 1.7× more likely to sustain a sports injury, independent of grade level and gender. These are the weeks you already know are risky — tournaments, finals, travel. The data tells you exactly which athletes are carrying the most load into them.</div>
-                <div className="gc-stat-cite">Von Rosen et al. — Scand. J. Med. Sci. Sports, 2017 · Milewski et al. — J. Pediatric Orthopaedics, 2014</div>
+                <div className="gc-stat-body">A 20-week prospective study of 75 female youth soccer players found that subjective wellbeing and training load independently predicted both injury and illness risk. A separate study of 112 adolescent athletes found those averaging under 8 hours of sleep were 1.7× more likely to sustain a sports injury (OR 1.7, 95% CI: 1.0–3.0). Tournament weeks, finals, travel — these are the stretches you already know are risky. The data tells you which athletes are actually carrying the most load into them.</div>
+                <div className="gc-stat-cite">Watson et al. — Br. J. Sports Medicine, 2017 · Milewski et al. — J. Pediatric Orthopaedics, 2014</div>
               </div>
               <div className="gc-stat">
                 <div className="gc-stat-num" style={{color:"#D4D5D8"}}>2.6×</div>
@@ -627,7 +640,7 @@ export default function GadsdenCityHoopsPage() {
                 <div className="gc-fi">
                   <div className="gc-fi-pct">35%</div>
                   <div className="gc-fi-name">Heart Rate Variability</div>
-                  <div className="gc-fi-desc">Your body's readiness to absorb training — the single most sensitive daily recovery marker in the research</div>
+                  <div className="gc-fi-desc">Measured overnight during deep sleep — the cleanest physiological window into recovery used by the leading athlete recovery platforms</div>
                 </div>
                 <div className="gc-fi">
                   <div className="gc-fi-pct">30%</div>
@@ -688,10 +701,10 @@ export default function GadsdenCityHoopsPage() {
 
         {/* CTA */}
         <div className="gc-cta">
-          <div className="gc-lbl" style={{justifyContent:"center",display:"flex"}}>The Offer</div>
+          <div className="gc-lbl" style={{justifyContent:"center",display:"flex"}}>Next Step</div>
           <div className="gc-cta-hed">
-            <span style={{color:"#7B1020"}}>FIRST</span> IN<br/>
-            <span style={{color:"#A8A9AD"}}>ALABAMA.</span>
+            <span style={{color:"#F5F5F2"}}>SEE THE</span><br/>
+            <span style={{color:"#7B1020"}}>PLATFORM.</span>
           </div>
           <div className="gc-cta-body">I&apos;m a high school strength coach who built this because nothing else did what we actually need. Ten minutes, live demo, no deck. I&apos;ll show you the platform on a real roster and tell you straight if it&apos;s not a fit.</div>
           <div className="gc-cta-who">CHRIS FINDLEY · FOUNDER</div>
@@ -704,7 +717,7 @@ export default function GadsdenCityHoopsPage() {
         <div className="gc-footer">
           <div className="gc-fb"><span className="r">4</span>WARD × TITANS</div>
           <div className="gc-ft">© 2026 4Ward Athlete Performance</div>
-          <div className="gc-ft">4wardperformance.com/gadsden-city-hoops</div>
+          <div className="gc-ft">Built by a coach. Built for coaches.</div>
         </div>
 
       </div>
