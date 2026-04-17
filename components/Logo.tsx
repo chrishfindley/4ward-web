@@ -35,7 +35,7 @@ export default function Logo({ size = 28, style, textOnly = false, markOnly = fa
     <span style={{ display: 'inline-flex', alignItems: 'center', lineHeight: 1, ...style }}>
       <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: numSize, letterSpacing: Math.round(numSize * 0.04), color: '#7B1020', lineHeight: 1 }}>4</span>
       <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: numSize, letterSpacing: Math.round(numSize * 0.04), color: '#F2F2F5', lineHeight: 1 }}>WARD</span>
-      {!textOnly && <ChevronMark size={numSize * 0.65} style={{ marginLeft: 0, marginBottom: 2 }} />}
+      {!textOnly && <ChevronMark size={numSize * 0.65} style={{ marginLeft: 0, marginBottom: Math.max(2, numSize * 0.08) }} />}
     </span>
   )
 }

@@ -194,7 +194,7 @@ export default function Home() {
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 860, width: '100%' }}>
 
           {/* Eyebrow — slightly bigger */}
-          <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 'clamp(11px,2vw,13px)', letterSpacing: 'clamp(4px,1.5vw,7px)', color: '#7B1020', marginBottom: 32 }}>ATHLETE PERFORMANCE PLATFORM · LAUNCHING SUMMER 2026</div>
+          <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, fontSize: 'clamp(12px,2vw,14px)', letterSpacing: 'clamp(4px,1.5vw,7px)', color: '#A8253A', marginBottom: 32 }}>ATHLETE PERFORMANCE PLATFORM · LAUNCHING SUMMER 2026</div>
 
           {/* Hero logo with locked chevron values */}
           <div className="hero-logo-wrap">
