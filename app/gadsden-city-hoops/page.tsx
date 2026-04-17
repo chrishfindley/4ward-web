@@ -31,7 +31,7 @@ function FourWardMark({ size = 32 }: { size?: number }) {
   return (
     <svg width={size * 2.2} height={size} viewBox="0 0 88 32" fill="none" xmlns="http://www.w3.org/2000/svg">
       <text x="0" y="26" fontFamily="'Bebas Neue', sans-serif" fontSize="30" letterSpacing="2" fill="white">
-        <tspan fill="#F26419">4</tspan>WARD
+        <tspan fill="#7B1020">4</tspan>WARD
       </text>
       {/* chevron */}
       <polyline points="78,8 85,16 78,24" stroke="#A8A9AD" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
@@ -419,7 +419,7 @@ export default function GadsdenCityHoopsPage() {
         .gc-compare-check { color: #A8A9AD; font-size: 18px; font-weight: 700; }
         .gc-compare-check.gc-us { color: #F5F5F2; }
         .gc-compare-x { color: #606265; font-size: 18px; }
-        .gc-compare-partial { color: #888; font-size: 13px; font-style: italic; }
+        .gc-compare-partial { color: #A8A9AD; font-size: 13px; font-style: italic; }
         @media(max-width:600px) {
           .gc-compare-title { font-size: 32px !important; }
           .gc-compare-table th, .gc-compare-table td { padding: 10px 8px !important; font-size: 12px !important; }

@@ -14,8 +14,8 @@ export default function StoryPage() {
       }}>
         <Link href="/" style={{ textDecoration: 'none' }}><Logo size={26} /></Link>
         <div style={{ display: 'flex', gap: 32, alignItems: 'center' }}>
-          <Link href="/science" style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 3, color: '#555560', textDecoration: 'none' }}>SEE THE SCIENCE</Link>
-          <Link href="/" style={{ padding: '9px 24px', borderRadius: 4, border: '1px solid #F26419', fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900, fontSize: 12, letterSpacing: 3, color: '#F26419', textDecoration: 'none' }}>FOUNDING TEAMS</Link>
+          <Link href="/science" style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 3, color: '#A8A9AD', textDecoration: 'none' }}>SEE THE SCIENCE</Link>
+          <Link href="/" style={{ padding: '9px 24px', borderRadius: 4, border: '1px solid #7B1020', fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900, fontSize: 12, letterSpacing: 3, color: '#7B1020', textDecoration: 'none' }}>FOUNDING TEAMS</Link>
         </div>
       </nav>
 
@@ -28,9 +28,9 @@ export default function StoryPage() {
       }}>
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px)', backgroundSize: '80px 80px' }} />
         <div style={{ position: 'relative', maxWidth: 720, width: '100%' }}>
-          <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 7, color: '#F26419', marginBottom: 28 }}>OUR STORY</div>
+          <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 7, color: '#7B1020', marginBottom: 28 }}>OUR STORY</div>
           <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(48px,10vw,96px)', lineHeight: 0.9, color: '#F2F2F5' }}>
-            BUILT BY A COACH.<br /><span style={{ color: '#F26419' }}>BUILT FOR COACHES.</span>
+            BUILT BY A COACH.<br /><span style={{ color: '#7B1020' }}>BUILT FOR COACHES.</span>
           </div>
         </div>
       </section>
@@ -39,7 +39,7 @@ export default function StoryPage() {
       <section style={{ borderTop: '1px solid #111114', padding: 'clamp(72px,12vw,120px) clamp(16px,4vw,20px)' }}>
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
 
-          <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 6, color: '#F26419', marginBottom: 40 }}>THE MISSION</div>
+          <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 6, color: '#7B1020', marginBottom: 40 }}>THE MISSION</div>
 
           <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(26px,3.5vw,38px)', color: '#F2F2F5', lineHeight: 1.1, marginBottom: 40 }}>
             WHY RECOVERY DATA CHANGES EVERYTHING
@@ -68,8 +68,8 @@ export default function StoryPage() {
       {/* FOOTER */}
       <footer style={{ borderTop: '1px solid #111114', padding: 'clamp(24px,4vw,32px) clamp(16px,4vw,36px)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
         <Logo size={20} />
-        <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 11, letterSpacing: 3, color: '#2A2A30' }}>© 2026 4WARD ATHLETE PERFORMANCE</div>
-        <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 11, letterSpacing: 2, color: '#2A2A30' }}>@4WARDPERFORMANCE</div>
+        <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 11, letterSpacing: 3, color: '#888898' }}>© 2026 4WARD ATHLETE PERFORMANCE</div>
+        <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 11, letterSpacing: 2, color: '#888898' }}>@4WARDPERFORMANCE</div>
       </footer>
 
     </div>
