@@ -5,11 +5,11 @@ html { scroll-behavior: smooth; }
 body { background: #080809; color: #F2F2F5; font-family: 'Barlow', sans-serif; overflow-x: hidden; }
 
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
-.modal-box { background: #111114; border: 1px solid #F26419; border-radius: 16px; padding: 40px; max-width: 480px; width: 100%; position: relative; }
+.modal-box { background: #111114; border: 1px solid #7B1020; border-radius: 16px; padding: 40px; max-width: 480px; width: 100%; position: relative; }
 .modal-close { position: absolute; top: 16px; right: 20px; background: none; border: none; color: #888898; font-size: 24px; cursor: pointer; line-height: 1; }
 .modal-close:hover { color: #F2F2F5; }
 .modal-logo { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px; margin-bottom: 4px; }
-.modal-logo span { color: #F26419; }
+.modal-logo span { color: #7B1020; }
 .modal-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 22px; color: #F2F2F5; margin-bottom: 8px; }
 .modal-sub { font-size: 14px; color: #888898; margin-bottom: 28px; line-height: 1.6; }
 .modal-form { display: flex; flex-direction: column; gap: 14px; }
@@ -17,9 +17,9 @@ body { background: #080809; color: #F2F2F5; font-family: 'Barlow', sans-serif; o
 .form-group { display: flex; flex-direction: column; gap: 6px; }
 .form-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: 2px; color: #888898; }
 .form-input, .form-select { padding: 12px 14px; background: #0C0C0E; border: 1px solid #242428; border-radius: 6px; color: #F2F2F5; font-family: 'Barlow', sans-serif; font-size: 15px; outline: none; transition: border-color 0.2s; width: 100%; }
-.form-input:focus, .form-select:focus { border-color: #F26419; }
+.form-input:focus, .form-select:focus { border-color: #7B1020; }
 .form-input::placeholder { color: #444450; }
-.form-submit { padding: 16px; background: #F26419; color: white; border: none; border-radius: 6px; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 17px; letter-spacing: 1.5px; cursor: pointer; transition: background 0.2s; margin-top: 4px; width: 100%; }
+.form-submit { padding: 16px; background: #7B1020; color: white; border: none; border-radius: 6px; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 17px; letter-spacing: 1.5px; cursor: pointer; transition: background 0.2s; margin-top: 4px; width: 100%; }
 .form-submit:hover:not(:disabled) { background: #C44E0F; }
 .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
 .form-error { font-size: 13px; color: #E85555; text-align: center; padding: 8px; background: rgba(232,85,85,0.1); border-radius: 4px; border: 1px solid rgba(232,85,85,0.2); }

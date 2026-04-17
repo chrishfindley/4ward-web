@@ -7,7 +7,7 @@ interface LogoProps {
   markOnly?: boolean
 }
 
-export function ChevronMark({ size = 28, color = '#F26419', style }: { size?: number | string, color?: string, style?: React.CSSProperties }) {
+export function ChevronMark({ size = 28, color = '#7B1020', style }: { size?: number | string, color?: string, style?: React.CSSProperties }) {
   return (
     <svg
       viewBox="0 0 80 80"
@@ -33,7 +33,7 @@ export default function Logo({ size = 28, style, textOnly = false, markOnly = fa
   if (markOnly) return <ChevronMark size={size} />
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center', lineHeight: 1, ...style }}>
-      <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: numSize, letterSpacing: Math.round(numSize * 0.04), color: '#F26419', lineHeight: 1 }}>4</span>
+      <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: numSize, letterSpacing: Math.round(numSize * 0.04), color: '#7B1020', lineHeight: 1 }}>4</span>
       <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: numSize, letterSpacing: Math.round(numSize * 0.04), color: '#F2F2F5', lineHeight: 1 }}>WARD</span>
       {!textOnly && <ChevronMark size={numSize * 0.65} style={{ marginLeft: 0, marginBottom: 2 }} />}
     </span>
