@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>4WARD — Workout Mode</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --maroon: #7B1020;
+    --maroon-bright: #A8253A;
+    --silver: #A8A9AD;
+    --silver-light: #D4D5D8;
+    --silver-dark: #606265;
+    --bg: #080809;
+    --surface: #0D0D0F;
+    --surface2: #111114;
+    --border: #1C1C20;
+    --text: #F5F5F2;
+    --muted: #888898;
+    --dim: #2A2A30;
+    --green: #2ECC8A;
+    --warning: #FB923C;
+  }
+  html, body {
+    height: 100%;
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Barlow', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior: none;
+  }
+  .phone {
+    width: 390px;
+    height: 844px;
+    background: var(--bg);
+    border-radius: 44px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 0 1px #222, 0 40px 80px rgba(0,0,0,0.8);
+    display: flex;
+    flex-direction: column;
+  }
+  @media(max-width: 430px) {
+    html, body { background: var(--bg); }
+    .phone { width: 100vw; height: 100vh; border-radius: 0; box-shadow: none; }
+  }
+  .status-bar { display: flex; justify-content: space-between; align-items: center; padding: 14px 28px 0; flex-shrink: 0; }
+  .status-time { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 15px; color: var(--text); }
+  .status-icons { display: flex; gap: 6px; align-items: center; color: var(--text); }
+  .header { padding: 12px 24px 0; flex-shrink: 0; }
+  .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px; }
+  .workout-label { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 3px; color: var(--maroon-bright); text-transform: uppercase; }
+  .header-right { display: flex; align-items: center; gap: 14px; }
+  .cancel-btn { background: transparent; border: 1px solid var(--border); color: var(--silver); font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; padding: 5px 10px; border-radius: 3px; cursor: pointer; text-transform: uppercase; -webkit-tap-highlight-color: transparent; transition: color 0.15s, border-color 0.15s; }
+  .cancel-btn:active { color: var(--text); border-color: var(--silver-dark); }
+  .logo-mark { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--text); display: flex; align-items: center; gap: 0; line-height: 1; }
+  .logo-mark .four { color: var(--maroon); }
+  .logo-mark svg { margin-left: 1px; margin-bottom: 2px; }
+  .header-date { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--silver); margin-bottom: 12px; }
+  .header-divider { height: 1px; background: var(--border); }
+  .exercise-section { padding: 20px 24px 0; flex-shrink: 0; }
+  .exercise-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 3px; color: var(--silver); margin-bottom: 4px; }
+  .exercise-name { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--text); line-height: 1; letter-spacing: 1px; }
+  .set-badge { display: inline-block; margin-top: 8px; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 2px; color: var(--maroon-bright); background: rgba(168,37,58,0.1); border: 1px solid rgba(168,37,58,0.25); padding: 3px 10px; border-radius: 2px; }
+  .timer-section { padding: 14px 24px 0; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+  .timer-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 3px; color: var(--silver); }
+  .timer-display { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--maroon); line-height: 1; letter-spacing: 2px; transition: color 0.3s; }
+  .timer-display.idle { color: var(--dim); }
+  .timer-display.warning { color: var(--warning); }
+  .timer-display.go { color: var(--green); }
+  .timer-bar-track { height: 2px; background: var(--border); margin: 8px 24px 0; border-radius: 1px; flex-shrink: 0; }
+  .timer-bar-fill { height: 2px; background: var(--maroon); border-radius: 1px; width: 0%; transition: width 1s linear, background 0.3s; }
+  .prev-sets { padding: 14px 24px 0; flex-shrink: 0; }
+  .prev-sets-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 3px; color: var(--silver-dark); margin-bottom: 8px; }
+  .prev-sets-row { display: flex; gap: 6px; }
+  .prev-set-chip { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: var(--silver-dark); background: var(--surface2); border: 1px solid var(--border); padding: 5px 10px; border-radius: 2px; flex: 1; text-align: center; }
+  .prev-set-chip.active { color: var(--maroon-bright); border-color: rgba(168,37,58,0.35); background: rgba(168,37,58,0.06); }
+  .prev-set-chip.logged { color: var(--green); border-color: rgba(46,204,138,0.25); background: rgba(46,204,138,0.06); }
+  .pickers-section { flex: 1; padding: 20px 0 0; display: flex; flex-direction: column; gap: 20px; }
+  .picker-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 3px; color: var(--silver); margin-bottom: 10px; text-transform: uppercase; padding: 0 24px; }
+  .picker-track { position: relative; height: 72px; overflow: hidden; cursor: ew-resize; user-select: none; -webkit-user-select: none; touch-action: pan-y; }
+  .picker-track::before, .picker-track::after { content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none; }
+  .picker-track::before { left: 0; background: linear-gradient(to right, var(--bg) 0%, var(--bg) 20%, transparent 100%); }
+  .picker-track::after { right: 0; background: linear-gradient(to left, var(--bg) 0%, var(--bg) 20%, transparent 100%); }
+  .picker-items { position: absolute; top: 0; left: 50%; height: 100%; display: flex; align-items: center; transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1); will-change: transform; }
+  .picker-item { width: 120px; height: 100%; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 28px; line-height: 1; letter-spacing: 1px; color: var(--dim); flex-shrink: 0; transition: font-size 0.25s cubic-bezier(0.22, 1, 0.36, 1), color 0.25s, opacity 0.25s; opacity: 0; }
+  .picker-item.near { opacity: 1; color: var(--silver-dark); font-size: 32px; }
+  .picker-item.selected { opacity: 1; color: var(--text); font-size: 58px; }
+  .picker-select-line { position: absolute; left: 50%; top: 6px; bottom: 6px; width: 90px; transform: translateX(-50%); border-left: 1px solid var(--border); border-right: 1px solid var(--border); pointer-events: none; z-index: 1; }
+  .log-section { padding: 16px 24px 28px; flex-shrink: 0; }
+  .log-btn { width: 100%; height: 64px; background: var(--maroon); border: none; border-radius: 4px; font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 4px; color: white; cursor: pointer; position: relative; overflow: hidden; transition: transform 0.1s, background 0.15s; -webkit-tap-highlight-color: transparent; }
+  .log-btn:active { transform: scale(0.98); background: var(--maroon-bright); }
+  .log-btn-ripple { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.3); transform: scale(0); animation: ripple 0.5s linear; pointer-events: none; }
+  @keyframes ripple { to { transform: scale(4); opacity: 0; } }
+  .log-feedback { margin-top: 10px; text-align: center; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2px; color: var(--silver-dark); min-height: 18px; transition: color 0.3s; }
+  .log-feedback.active { color: var(--green); }
+  .modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 100; display: none; align-items: center; justify-content: center; padding: 32px; }
+  .modal-backdrop.active { display: flex; }
+  .modal-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 28px 24px; width: 100%; text-align: center; }
+  .modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+  .modal-body { font-family: 'Barlow', sans-serif; font-size: 14px; color: var(--silver); margin-bottom: 20px; line-height: 1.5; }
+  .modal-buttons { display: flex; gap: 10px; }
+  .modal-btn { flex: 1; height: 44px; border-radius: 4px; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 2px; cursor: pointer; text-transform: uppercase; }
+  .modal-btn.keep { background: transparent; border: 1px solid var(--border); color: var(--silver); }
+  .modal-btn.confirm { background: var(--maroon); border: none; color: white; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="status-bar">
+    <span class="status-time">9:41</span>
+    <div class="status-icons">
+      <svg width="17" height="12" fill="white" viewBox="0 0 17 12"><rect x="0" y="3" width="3" height="9" rx="1" opacity="0.4"/><rect x="4.5" y="2" width="3" height="10" rx="1" opacity="0.6"/><rect x="9" y="0" width="3" height="12" rx="1"/><rect x="14" y="1" width="2" height="10" rx="1" fill="none" stroke="white" stroke-width="1.2"/><rect x="16.2" y="3.5" width="0.8" height="5" rx="0.4"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.
+cd ~/4ward-web && mkdir -p public/prototype && cat > public/prototype/workout.html << 'WORKOUTEOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>4WARD — Workout Mode</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --maroon: #7B1020;
+    --maroon-bright: #A8253A;
+    --silver: #A8A9AD;
+    --silver-light: #D4D5D8;
+    --silver-dark: #606265;
+    --bg: #080809;
+    --surface: #0D0D0F;
+    --surface2: #111114;
+    --border: #1C1C20;
+    --text: #F5F5F2;
+    --muted: #888898;
+    --dim: #2A2A30;
+    --green: #2ECC8A;
+    --warning: #FB923C;
+  }
+  html, body {
+    height: 100%;
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Barlow', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior: none;
+  }
+  .phone {
+    width: 390px;
+    height: 844px;
+    background: var(--bg);
+    border-radius: 44px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 0 1px #222, 0 40px 80px rgba(0,0,0,0.8);
+    display: flex;
+    flex-direction: column;
+  }
+  @media(max-width: 430px) {
+    html, body { background: var(--bg); }
+    .phone { width: 100vw; height: 100vh; border-radius: 0; box-shadow: none; }
+  }
+  .status-bar { display: flex; justify-content: space-between; align-items: center; padding: 14px 28px 0; flex-shrink: 0; }
+  .status-time { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 15px; color: var(--text); }
+  .status-icons { display: flex; gap: 6px; align-items: center; color: var(--text); }
+  .header { padding: 12px 24px 0; flex-shrink: 0; }
+  .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px; }
+  .workout-label { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 3px; color: var(--maroon-bright); text-transform: uppercase; }
+  .header-right { display: flex; align-items: center; gap: 14px; }
+  .cancel-btn { background: transparent; border: 1px solid var(--border); color: var(--silver); font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; padding: 5px 10px; border-radius: 3px; cursor: pointer; text-transform: uppercase; -webkit-tap-highlight-color: transparent; transition: color 0.15s, border-color 0.15s; }
+  .cancel-btn:active { color: var(--text); border-color: var(--silver-dark); }
+  .logo-mark { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--text); display: flex; align-items: center; gap: 0; line-height: 1; }
+  .logo-mark .four { color: var(--maroon); }
+  .logo-mark svg { margin-left: 1px; margin-bottom: 2px; }
+  .header-date { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--silver); margin-bottom: 12px; }
+  .header-divider { height: 1px; background: var(--border); }
+  .exercise-section { padding: 20px 24px 0; flex-shrink: 0; }
+  .exercise-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 3px; color: var(--silver); margin-bottom: 4px; }
+  .exercise-name { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--text); line-height: 1; letter-spacing: 1px; }
+  .set-badge { display: inline-block; margin-top: 8px; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 2px; color: var(--maroon-bright); background: rgba(168,37,58,0.1); border: 1px solid rgba(168,37,58,0.25); padding: 3px 10px; border-radius: 2px; }
+  .timer-section { padding: 14px 24px 0; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+  .timer-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 3px; color: var(--silver); }
+  .timer-display { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--maroon); line-height: 1; letter-spacing: 2px; transition: color 0.3s; }
+  .timer-display.idle { color: var(--dim); }
+  .timer-display.warning { color: var(--warning); }
+  .timer-display.go { color: var(--green); }
+  .timer-bar-track { height: 2px; background: var(--border); margin: 8px 24px 0; border-radius: 1px; flex-shrink: 0; }
+  .timer-bar-fill { height: 2px; background: var(--maroon); border-radius: 1px; width: 0%; transition: width 1s linear, background 0.3s; }
+  .prev-sets { padding: 14px 24px 0; flex-shrink: 0; }
+  .prev-sets-label { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 3px; color: var(--silver-dark); margin-bottom: 8px; }
+  .prev-sets-row { display: flex; gap: 6px; }
+  .prev-set-chip { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: var(--silver-dark); background: var(--surface2); border: 1px solid var(--border); padding: 5px 10px; border-radius: 2px; flex: 1; text-align: center; }
+  .prev-set-chip.active { color: var(--maroon-bright); border-color: rgba(168,37,58,0.35); background: rgba(168,37,58,0.06); }
+  .prev-set-chip.logged { color: var(--green); border-color: rgba(46,204,138,0.25); background: rgba(46,204,138,0.06); }
+  .pickers-section { flex: 1; padding: 20px 0 0; display: flex; flex-direction: column; gap: 20px; }
+  .picker-label { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 3px; color: var(--silver); margin-bottom: 10px; text-transform: uppercase; padding: 0 24px; }
+  .picker-track { position: relative; height: 72px; overflow: hidden; cursor: ew-resize; user-select: none; -webkit-user-select: none; touch-action: pan-y; }
+  .picker-track::before, .picker-track::after { content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none; }
+  .picker-track::before { left: 0; background: linear-gradient(to right, var(--bg) 0%, var(--bg) 20%, transparent 100%); }
+  .picker-track::after { right: 0; background: linear-gradient(to left, var(--bg) 0%, var(--bg) 20%, transparent 100%); }
+  .picker-items { position: absolute; top: 0; left: 50%; height: 100%; display: flex; align-items: center; transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1); will-change: transform; }
+  .picker-item { width: 120px; height: 100%; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 28px; line-height: 1; letter-spacing: 1px; color: var(--dim); flex-shrink: 0; transition: font-size 0.25s cubic-bezier(0.22, 1, 0.36, 1), color 0.25s, opacity 0.25s; opacity: 0; }
+  .picker-item.near { opacity: 1; color: var(--silver-dark); font-size: 32px; }
+  .picker-item.selected { opacity: 1; color: var(--text); font-size: 58px; }
+  .picker-select-line { position: absolute; left: 50%; top: 6px; bottom: 6px; width: 90px; transform: translateX(-50%); border-left: 1px solid var(--border); border-right: 1px solid var(--border); pointer-events: none; z-index: 1; }
+  .log-section { padding: 16px 24px 28px; flex-shrink: 0; }
+  .log-btn { width: 100%; height: 64px; background: var(--maroon); border: none; border-radius: 4px; font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 4px; color: white; cursor: pointer; position: relative; overflow: hidden; transition: transform 0.1s, background 0.15s; -webkit-tap-highlight-color: transparent; }
+  .log-btn:active { transform: scale(0.98); background: var(--maroon-bright); }
+  .log-btn-ripple { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.3); transform: scale(0); animation: ripple 0.5s linear; pointer-events: none; }
+  @keyframes ripple { to { transform: scale(4); opacity: 0; } }
+  .log-feedback { margin-top: 10px; text-align: center; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2px; color: var(--silver-dark); min-height: 18px; transition: color 0.3s; }
+  .log-feedback.active { color: var(--green); }
+  .modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 100; display: none; align-items: center; justify-content: center; padding: 32px; }
+  .modal-backdrop.active { display: flex; }
+  .modal-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 28px 24px; width: 100%; text-align: center; }
+  .modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--text); letter-spacing: 1px; margin-bottom: 8px; }
+  .modal-body { font-family: 'Barlow', sans-serif; font-size: 14px; color: var(--silver); margin-bottom: 20px; line-height: 1.5; }
+  .modal-buttons { display: flex; gap: 10px; }
+  .modal-btn { flex: 1; height: 44px; border-radius: 4px; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 2px; cursor: pointer; text-transform: uppercase; }
+  .modal-btn.keep { background: transparent; border: 1px solid var(--border); color: var(--silver); }
+  .modal-btn.confirm { background: var(--maroon); border: none; color: white; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="status-bar">
+    <span class="status-time">9:41</span>
+    <div class="status-icons">
+      <svg width="17" height="12" fill="white" viewBox="0 0 17 12"><rect x="0" y="3" width="3" height="9" rx="1" opacity="0.4"/><rect x="4.5" y="2" width="3" height="10" rx="1" opacity="0.6"/><rect x="9" y="0" width="3" height="12" rx="1"/><rect x="14" y="1" width="2" height="10" rx="1" fill="none" stroke="white" stroke-width="1.2"/><rect x="16.2" y="3.5" width="0.8" height="5" rx="0.4"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="2.5" stroke="white" stroke-opacity="0.35"/><rect x="2" y="2" width="17" height="8" rx="1.5" fill="white"/><path d="M23 4v4a2 2 0 000-4z" fill="white" opacity="0.4"/></svg>
+    </div>
+  </div>
+  <div class="header">
+    <div class="header-top">
+      <span class="workout-label">Workout Mode</span>
+      <div class="header-right">
+        <button class="cancel-btn" onclick="askCancel()">CANCEL</button>
+        <div class="logo-mark">
+          <span class="four">4</span><span>WARD</span>
+          <svg viewBox="0 0 80 80" width="11" height="11" fill="none">
+            <polyline points="8,7 51,40 8,73" stroke="#7B1020" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="header-date">MONDAY · 4/20/26 · FULL WORKOUT</div>
+    <div class="header-divider"></div>
+  </div>
+  <div class="exercise-section">
+    <div class="exercise-label">Exercise</div>
+    <div class="exercise-name">Bench Press</div>
+    <span class="set-badge" id="set-badge">SET 1 OF 4</span>
+  </div>
+  <div class="timer-section">
+    <div class="timer-label">REST TIMER</div>
+    <div class="timer-display idle" id="timer-display">1:30</div>
+  </div>
+  <div class="timer-bar-track"><div class="timer-bar-fill" id="timer-bar"></div></div>
+  <div class="prev-sets">
+    <div class="prev-sets-label">SETS</div>
+    <div class="prev-sets-row" id="prev-sets-row"></div>
+  </div>
+  <div class="pickers-section">
+    <div><div class="picker-label">Weight (lbs)</div>
+      <div class="picker-track" id="weight-track">
+        <div class="picker-select-line"></div>
+        <div class="picker-items" id="weight-items"></div>
+      </div>
+    </div>
+    <div><div class="picker-label">Reps</div>
+      <div class="picker-track" id="reps-track">
+        <div class="picker-select-line"></div>
+        <div class="picker-items" id="reps-items"></div>
+      </div>
+    </div>
+  </div>
+  <div class="log-section">
+    <button class="log-btn" id="log-btn" onclick="logSet(event)">LOG SET</button>
+    <div class="log-feedback" id="log-feedback"></div>
+  </div>
+  <div class="modal-backdrop" id="cancel-modal">
+    <div class="modal-card">
+      <div class="modal-title">Cancel workout?</div>
+      <div class="modal-body">Your logged sets will be saved, but the workout will end. You can restart anytime.</div>
+      <div class="modal-buttons">
+        <button class="modal-btn keep" onclick="dismissCancel()">KEEP GOING</button>
+        <button class="modal-btn confirm" onclick="confirmCancel()">END WORKOUT</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+const weightValues = []; for (let w = 45; w <= 500; w += 5) weightValues.push(w);
+const repsValues = []; for (let r = 1; r <= 30; r++) repsValues.push(r);
+let weightIdx = weightValues.indexOf(225);
+let repsIdx = repsValues.indexOf(8);
+let currentSet = 1;
+const totalSets = 4;
+let loggedSets = [];
+let timerInterval = null;
+let timerSeconds = 0;
+let timerTotal = 90;
+const ITEM_WIDTH = 120;
+function buildPicker(trackId, itemsId, values, getIdx, setIdx) {
+  const track = document.getElementById(trackId);
+  const items = document.getElementById(itemsId);
+  function render() {
+    items.innerHTML = '';
+    const idx = getIdx();
+    for (let i = -2; i <= 2; i++) {
+      const vi = idx + i;
+      const el = document.createElement('div');
+      el.className = 'picker-item';
+      el.textContent = (vi >= 0 && vi < values.length) ? values[vi] : '';
+      const dist = Math.abs(i);
+      if (dist === 0) el.classList.add('selected');
+      else if (dist === 1) el.classList.add('near');
+      items.appendChild(el);
+    }
+    items.style.transform = `translateX(${-ITEM_WIDTH * 2.5}px)`;
+  }
+  render();
+  let startX = 0, startIdx = 0, dragging = false, lastX = 0, lastTime = 0, velocity = 0, draggedIdx = 0;
+  function onStart(x) { startX = x; startIdx = getIdx(); draggedIdx = startIdx; dragging = true; lastX = x; lastTime = performance.now(); velocity = 0; items.style.transition = 'none'; }
+  function onMove(x) {
+    if (!dragging) return;
+    const now = performance.now();
+    const dt = Math.max(1, now - lastTime);
+    velocity = (x - lastX) / dt; lastX = x; lastTime = now;
+    const delta = startX - x;
+    const stepFloat = delta / ITEM_WIDTH;
+    const newIdx = Math.max(0, Math.min(values.length - 1, startIdx + Math.round(stepFloat)));
+    const offset = -ITEM_WIDTH * 2.5 - (delta - Math.round(stepFloat) * ITEM_WIDTH);
+    items.style.transform = `translateX(${offset}px)`;
+    if (newIdx !== draggedIdx) { draggedIdx = newIdx; setIdx(newIdx); render(); items.style.transition = 'none'; triggerHaptic('tick'); }
+  }
+  function onEnd() {
+    if (!dragging) return;
+    dragging = false;
+    const momentum = Math.round(-velocity * 60);
+    if (Math.abs(momentum) > 0) {
+      const newIdx = Math.max(0, Math.min(values.length - 1, getIdx() + momentum));
+      setIdx(newIdx);
+    }
+    items.style.transition = 'transform 0.25s cubic-bezier(0.22, 1, 0.36, 1)';
+    render();
+  }
+  track.addEventListener('touchstart', e => { e.preventDefault(); onStart(e.touches[0].clientX); }, { passive: false });
+  track.addEventListener('touchmove', e => { e.preventDefault(); onMove(e.touches[0].clientX); }, { passive: false });
+  track.addEventListener('touchend', onEnd);
+  track.addEventListener('touchcancel', onEnd);
+  track.addEventListener('mousedown', e => { e.preventDefault(); onStart(e.clientX); });
+  document.addEventListener('mousemove', e => { if (dragging) onMove(e.clientX); });
+  document.addEventListener('mouseup', () => { if (dragging) onEnd(); });
+  track.addEventListener('wheel', e => {
+    e.preventDefault();
+    const step = (e.deltaY > 0 || e.deltaX > 0) ? 1 : -1;
+    const newIdx = Math.max(0, Math.min(values.length - 1, getIdx() + step));
+    if (newIdx !== getIdx()) { setIdx(newIdx); render(); triggerHaptic('tick'); }
+  }, { passive: false });
+}
+buildPicker('weight-track', 'weight-items', weightValues, () => weightIdx, (i) => { weightIdx = i; });
+buildPicker('reps-track', 'reps-items', repsValues, () => repsIdx, (i) => { repsIdx = i; });
+function startTimer(seconds) {
+  if (timerInterval) clearInterval(timerInterval);
+  timerSeconds = seconds; timerTotal = seconds;
+  const display = document.getElementById('timer-display');
+  const bar = document.getElementById('timer-bar');
+  display.classList.remove('idle', 'warning', 'go');
+  display.style.color = '';
+  bar.style.width = '100%';
+  bar.style.background = 'var(--maroon)';
+  timerInterval = setInterval(() => {
+    timerSeconds--;
+    const pct = Math.max(0, (timerSeconds / timerTotal) * 100);
+    const mins = Math.floor(timerSeconds / 60);
+    const secs = Math.max(0, timerSeconds % 60);
+    display.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+    bar.style.width = pct + '%';
+    if (timerSeconds <= 10 && timerSeconds > 0) { display.classList.add('warning'); bar.style.background = 'var(--warning)'; }
+    if (timerSeconds <= 0) {
+      clearInterval(timerInterval);
+      display.textContent = 'GO';
+      display.classList.remove('warning');
+      display.classList.add('go');
+      bar.style.width = '0%';
+      triggerHaptic('heavy');
+      setTimeout(() => { display.textContent = '1:30'; display.classList.remove('go'); display.classList.add('idle'); bar.style.background = 'var(--maroon)'; }, 2000);
+    }
+  }, 1000);
+}
+function logSet(e) {
+  if (currentSet > totalSets) return;
+  const btn = document.getElementById('log-btn');
+  const rect = btn.getBoundingClientRect();
+  const ripple = document.createElement('span');
+  ripple.className = 'log-btn-ripple';
+  const size = Math.max(rect.width, rect.height) * 2;
+  const x = e.clientX || (rect.left + rect.width / 2);
+  const y = e.clientY || (rect.top + rect.height / 2);
+  ripple.style.cssText = `width:${size}px;height:${size}px;left:${x - rect.left - size / 2}px;top:${y - rect.top - size / 2}px`;
+  btn.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 500);
+  triggerHaptic('heavy');
+  const w = weightValues[weightIdx];
+  const r = repsValues[repsIdx];
+  loggedSets.push({ weight: w, reps: r, set: currentSet });
+  updatePrevSets();
+  const feedback = document.getElementById('log-feedback');
+  feedback.textContent = `SET ${currentSet} LOGGED · ${w} LBS × ${r}`;
+  feedback.classList.add('active');
+  setTimeout(() => { feedback.textContent = ''; feedback.classList.remove('active'); }, 2500);
+  currentSet++;
+  if (currentSet <= totalSets) {
+    document.getElementById('set-badge').textContent = `SET ${currentSet} OF ${totalSets}`;
+    startTimer(90);
+  } else {
+    document.getElementById('set-badge').textContent = `EXERCISE COMPLETE`;
+    document.getElementById('log-btn').textContent = 'NEXT EXERCISE';
+    document.getElementById('log-btn').style.background = 'var(--green)';
+  }
+}
+function updatePrevSets() {
+  const row = document.getElementById('prev-sets-row');
+  row.innerHTML = '';
+  for (let i = 1; i <= totalSets; i++) {
+    const chip = document.createElement('div');
+    chip.className = 'prev-set-chip';
+    const logged = loggedSets.find(s => s.set === i);
+    if (logged) { chip.classList.add('logged'); chip.textContent = `${logged.weight}×${logged.reps}`; }
+    else if (i === currentSet) { chip.classList.add('active'); chip.textContent = `SET ${i}`; }
+    else { chip.textContent = `— —`; }
+    row.appendChild(chip);
+  }
+}
+function askCancel() { document.getElementById('cancel-modal').classList.add('active'); }
+function dismissCancel() { document.getElementById('cancel-modal').classList.remove('active'); }
+function confirmCancel() {
+  document.getElementById('cancel-modal').classList.remove('active');
+  if (timerInterval) clearInterval(timerInterval);
+  loggedSets = []; currentSet = 1;
+  document.getElementById('set-badge').textContent = `SET 1 OF ${totalSets}`;
+  document.getElementById('log-btn').textContent = 'LOG SET';
+  document.getElementById('log-btn').style.background = 'var(--maroon)';
+  const display = document.getElementById('timer-display');
+  display.textContent = '1:30'; display.classList.add('idle');
+  document.getElementById('timer-bar').style.width = '0%';
+  updatePrevSets();
+  const feedback = document.getElementById('log-feedback');
+  feedback.textContent = 'WORKOUT CANCELLED';
+  feedback.style.color = 'var(--silver)';
+  setTimeout(() => { feedback.textContent = ''; feedback.style.color = ''; }, 2000);
+  triggerHaptic('heavy');
+}
+function triggerHaptic(type) {
+  if (navigator.vibrate) {
+    if (type === 'tick') navigator.vibrate(8);
+    else if (type === 'heavy') navigator.vibrate([15, 8, 15]);
+  }
+}
+updatePrevSets();
+</script>
+</body>
+</html>
