@@ -68,7 +68,7 @@ export default function Home() {
             }}>×</button>
             {success ? (
               <div style={{ textAlign: 'center', padding: '24px 0' }}>
-                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 48, color: '#F26419', marginBottom: 12 }}>YOU'RE IN.</div>
+                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 48, color: '#7B1020', marginBottom: 12 }}>YOU'RE IN.</div>
                 <div style={{ fontSize: 15, color: '#888898', lineHeight: 1.8 }}>
                   We'll reach out before launch. You're among the first coaches to join 4Ward.<br /><br />— Chris
                 </div>
@@ -125,7 +125,7 @@ export default function Home() {
                   </div>
                   {error && <div style={{ fontSize: 13, color: '#E85555', padding: 10, background: 'rgba(232,85,85,0.08)', borderRadius: 6, textAlign: 'center' }}>{error}</div>}
                   <button type="submit" disabled={loading} style={{
-                    padding: '15px 0', background: loading ? '#1A1A1E' : '#F26419',
+                    padding: '15px 0', background: loading ? '#1A1A1E' : '#7B1020',
                     color: 'white', border: 'none', borderRadius: 6,
                     fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900,
                     fontSize: 16, letterSpacing: 2, cursor: loading ? 'not-allowed' : 'pointer', marginTop: 4
@@ -152,8 +152,8 @@ export default function Home() {
             fontFamily: "'Bebas Neue', sans-serif", fontSize: 36, color: '#555560', textDecoration: 'none', letterSpacing: 3
           }}>OUR STORY</Link>
           <button onClick={openModal} style={{
-            padding: '16px 48px', borderRadius: 4, border: '2px solid #F26419', cursor: 'pointer',
-            background: 'transparent', color: '#F26419',
+            padding: '16px 48px', borderRadius: 4, border: '2px solid #7B1020', cursor: 'pointer',
+            background: 'transparent', color: '#7B1020',
             fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900, fontSize: 16, letterSpacing: 3
           }}>FOUNDING TEAMS</button>
         </div>
@@ -171,8 +171,8 @@ export default function Home() {
           <Link href="/science" style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 3, color: '#555560', textDecoration: 'none', marginRight: 32 }}>SEE THE SCIENCE</Link>
           <Link href="/story" style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 3, color: '#555560', textDecoration: 'none', marginRight: 32 }}>OUR STORY</Link>
           <button onClick={openModal} style={{
-            padding: '9px 24px', borderRadius: 4, border: '1px solid #F26419', cursor: 'pointer',
-            background: 'transparent', color: '#F26419',
+            padding: '9px 24px', borderRadius: 4, border: '1px solid #7B1020', cursor: 'pointer',
+            background: 'transparent', color: '#7B1020',
             fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900, fontSize: 12, letterSpacing: 3
           }}>FOUNDING TEAMS</button>
         </div>
@@ -194,11 +194,11 @@ export default function Home() {
         <div style={{ position: 'relative', zIndex: 2, maxWidth: 860, width: '100%' }}>
 
           {/* Eyebrow — slightly bigger */}
-          <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 'clamp(11px,2vw,13px)', letterSpacing: 'clamp(4px,1.5vw,7px)', color: '#F26419', marginBottom: 32 }}>ATHLETE PERFORMANCE PLATFORM · LAUNCHING SUMMER 2026</div>
+          <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 'clamp(11px,2vw,13px)', letterSpacing: 'clamp(4px,1.5vw,7px)', color: '#7B1020', marginBottom: 32 }}>ATHLETE PERFORMANCE PLATFORM · LAUNCHING SUMMER 2026</div>
 
           {/* Hero logo with locked chevron values */}
           <div className="hero-logo-wrap">
-            <span className="hero-logo-text" style={{ color: '#F26419' }}>4</span>
+            <span className="hero-logo-text" style={{ color: '#7B1020' }}>4</span>
             <span className="hero-logo-text" style={{ color: '#F2F2F5' }}>WARD</span>
             <ChevronMark size="0.64em" style={{ marginLeft: '0em', verticalAlign: 'middle', marginBottom: '0em' }} />
           </div>
@@ -206,7 +206,7 @@ export default function Home() {
           {/* Tagline — bigger, one line at a time */}
           <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(28px,5.5vw,58px)', color: '#F2F2F5', lineHeight: 1.05, marginTop: 36 }}>
             <div>RESEARCH-PROVEN DATA.</div>
-            <div style={{ color: '#F26419' }}>ACTIONABLE INSIGHTS.</div>
+            <div style={{ color: '#7B1020' }}>ACTIONABLE INSIGHTS.</div>
             <div>ONE PLATFORM.</div>
           </div>
 
@@ -219,7 +219,7 @@ export default function Home() {
           <div style={{ marginTop: 48 }}>
             <Link href="/science" style={{
               padding: 'clamp(13px,2vw,15px) clamp(32px,5vw,48px)', borderRadius: 4,
-              background: '#F26419', color: 'white', border: 'none',
+              background: '#7B1020', color: 'white', border: 'none',
               fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900,
               fontSize: 'clamp(13px,2vw,14px)', letterSpacing: 3,
               textDecoration: 'none', display: 'inline-block'
@@ -235,9 +235,9 @@ export default function Home() {
       {/* 4WRI SCORE — DASHBOARD VIEW */}
       <section style={{ borderTop: '1px solid #111114', padding: 'clamp(60px,10vw,100px) clamp(16px,4vw,20px)', background: '#0D0D0F' }}>
         <div style={{ maxWidth: 860, margin: '0 auto', textAlign: 'center' }}>
-          <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 6, color: '#F26419', marginBottom: 20 }}>THE 4WRI FORMULA</div>
+          <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 6, color: '#7B1020', marginBottom: 20 }}>THE 4WRI FORMULA</div>
           <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(36px,6vw,68px)', color: '#F2F2F5', lineHeight: 0.95, marginBottom: 12 }}>
-            ONE SCORE.<br /><span style={{ color: '#F26419' }}>EVERY MORNING.</span>
+            ONE SCORE.<br /><span style={{ color: '#7B1020' }}>EVERY MORNING.</span>
           </div>
           <div style={{ fontSize: 'clamp(14px,2vw,16px)', color: '#888898', fontWeight: 500, lineHeight: 1.8, maxWidth: 540, margin: '0 auto 48px' }}>
             Every morning, each athlete receives a readiness score built from three research-validated inputs. Coaches see every athlete's status the moment they open the app.
@@ -288,7 +288,7 @@ export default function Home() {
                 { label: 'RHR', desc: 'Resting heart rate vs. personal baseline' },
               ].map((inp, i) => (
                 <div key={i} style={{ textAlign: 'center' }}>
-                  <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 2, color: '#F26419' }}>{inp.label}</div>
+                  <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 2, color: '#7B1020' }}>{inp.label}</div>
                   <div style={{ fontSize: 11, color: '#2A2A30', marginTop: 2, maxWidth: 140 }}>{inp.desc}</div>
                 </div>
               ))}
@@ -312,9 +312,9 @@ export default function Home() {
       {/* WORKOUT MODE */}
       <section style={{ borderTop: '1px solid #111114', padding: 'clamp(60px,10vw,100px) clamp(16px,4vw,20px)' }}>
         <div style={{ maxWidth: 960, margin: '0 auto' }}>
-          <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 6, color: '#F26419', marginBottom: 20, textAlign: 'center' }}>WORKOUT MODE</div>
+          <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 6, color: '#7B1020', marginBottom: 20, textAlign: 'center' }}>WORKOUT MODE</div>
           <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(36px,6vw,68px)', color: '#F2F2F5', lineHeight: 0.95, marginBottom: 16, textAlign: 'center' }}>
-            PUSH THE PROGRAM.<br /><span style={{ color: '#F26419' }}>TRACK EVERY REP.</span>
+            PUSH THE PROGRAM.<br /><span style={{ color: '#7B1020' }}>TRACK EVERY REP.</span>
           </div>
           <div style={{ fontSize: 'clamp(14px,2vw,16px)', color: '#888898', fontWeight: 500, lineHeight: 1.85, maxWidth: 620, margin: '0 auto 56px', textAlign: 'center' }}>
             Coaches build or select programs inside 4Ward — with exact weights, sets, reps, and rest periods — then push them directly to every athlete's app with one tap. Adjustments based on readiness scores can be applied automatically or manually, individually or across the entire roster.
@@ -327,7 +327,7 @@ export default function Home() {
             <div>
               <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 3, color: '#555560', marginBottom: 12, textAlign: 'center' }}>ATHLETE VIEW</div>
               <div style={{ background: '#0D0D0F', border: '1px solid #1A1A1E', borderRadius: 12, padding: 'clamp(20px,3vw,28px)' }}>
-                <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: 3, color: '#F26419', marginBottom: 4 }}>WORKOUT MODE</div>
+                <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: 3, color: '#7B1020', marginBottom: 4 }}>WORKOUT MODE</div>
                 <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 22, color: '#F2F2F5', marginBottom: 20 }}>TUESDAY LIFT</div>
                 {[
                   { exercise: 'Back Squat', sets: '4', reps: '5', weight: '285 lbs', rest: '3:00', done: true },
@@ -337,17 +337,17 @@ export default function Home() {
                   <div key={i} style={{
                     padding: '12px 14px', borderRadius: 6, marginBottom: 6,
                     background: ex.active ? '#0C0C0E' : '#080809',
-                    border: ex.active ? '1px solid #F26419' : '1px solid #111114',
+                    border: ex.active ? '1px solid #7B1020' : '1px solid #111114',
                     opacity: ex.done ? 0.4 : 1
                   }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <div>
-                        <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 14, color: ex.active ? '#F26419' : '#F2F2F5', letterSpacing: 1 }}>{ex.exercise}</div>
+                        <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 14, color: ex.active ? '#7B1020' : '#F2F2F5', letterSpacing: 1 }}>{ex.exercise}</div>
                         <div style={{ fontSize: 12, color: '#555560', marginTop: 2 }}>{ex.sets} sets × {ex.reps} reps · {ex.weight}</div>
                       </div>
                       <div style={{ textAlign: 'right' }}>
                         {ex.done && <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 11, letterSpacing: 1, color: '#2ECC8A' }}>DONE</div>}
-                        {ex.active && <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 11, letterSpacing: 1, color: '#F26419' }}>REST {ex.rest}</div>}
+                        {ex.active && <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 11, letterSpacing: 1, color: '#7B1020' }}>REST {ex.rest}</div>}
                         {!ex.done && !ex.active && <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 11, letterSpacing: 1, color: '#2A2A30' }}>UP NEXT</div>}
                       </div>
                     </div>
@@ -363,7 +363,7 @@ export default function Home() {
               <div style={{ background: '#0D0D0F', border: '1px solid #1A1A1E', borderRadius: 12, padding: 'clamp(20px,3vw,28px)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 20, flexWrap: 'wrap', gap: 8 }}>
                   <div>
-                    <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: 3, color: '#F26419', marginBottom: 2 }}>LIVE WORKOUT</div>
+                    <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 13, letterSpacing: 3, color: '#7B1020', marginBottom: 2 }}>LIVE WORKOUT</div>
                     <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 22, color: '#F2F2F5' }}>TUESDAY LIFT</div>
                   </div>
                   <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 11, letterSpacing: 2, color: '#2ECC8A', background: 'rgba(46,204,138,0.08)', border: '1px solid rgba(46,204,138,0.2)', borderRadius: 4, padding: '5px 10px' }}>16 / 18 ACTIVE</div>
@@ -380,7 +380,7 @@ export default function Home() {
                   <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: 2, color: '#F2F2F5', marginBottom: 10 }}>READINESS-BASED LOAD ADJUSTMENT</div>
                   <div style={{ fontSize: 13, color: '#555560', marginBottom: 12 }}>3 athletes flagged ELEVATED. Reduce their training load?</div>
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                    <button style={{ padding: '8px 16px', background: '#F26419', border: 'none', borderRadius: 4, fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900, fontSize: 12, letterSpacing: 2, color: 'white', cursor: 'pointer' }}>APPLY TO ALL 3 →</button>
+                    <button style={{ padding: '8px 16px', background: '#7B1020', border: 'none', borderRadius: 4, fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900, fontSize: 12, letterSpacing: 2, color: 'white', cursor: 'pointer' }}>APPLY TO ALL 3 →</button>
                     <button style={{ padding: '8px 16px', background: 'transparent', border: '1px solid #242428', borderRadius: 4, fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 2, color: '#555560', cursor: 'pointer' }}>REVIEW INDIVIDUALLY</button>
                   </div>
                 </div>
@@ -398,8 +398,8 @@ export default function Home() {
               { title: 'INDIVIDUAL & GROUP MODE', body: 'Athletes can work through their program independently, or a group can share one device during training blocks.' },
               { title: 'WEEKLY REPORTS', body: 'Every athlete gets a weekly summary of their readiness trends, training volume, and recovery data. Coaches see program-wide insights and individual progression.' },
             ].map((f, i) => (
-              <div key={i} style={{ padding: 'clamp(20px,3vw,24px)', background: '#0D0D0F', borderLeft: '2px solid #F26419' }}>
-                <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 3, color: '#F26419', marginBottom: 8 }}>{f.title}</div>
+              <div key={i} style={{ padding: 'clamp(20px,3vw,24px)', background: '#0D0D0F', borderLeft: '2px solid #7B1020' }}>
+                <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: 3, color: '#7B1020', marginBottom: 8 }}>{f.title}</div>
                 <div style={{ fontSize: 'clamp(13px,1.8vw,14px)', color: '#888898', fontWeight: 500, lineHeight: 1.75 }}>{f.body}</div>
               </div>
             ))}
@@ -411,13 +411,13 @@ export default function Home() {
       <section style={{ borderTop: '1px solid #111114', padding: 'clamp(72px,12vw,120px) clamp(16px,4vw,20px)', textAlign: 'center' }}>
         <div style={{ maxWidth: 640, margin: '0 auto' }}>
           <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 'clamp(48px,10vw,96px)', lineHeight: 0.88, color: '#F2F2F5', marginBottom: 28 }}>
-            BECOME A<br /><span style={{ color: '#F26419' }}>FOUNDING TEAM.</span>
+            BECOME A<br /><span style={{ color: '#7B1020' }}>FOUNDING TEAM.</span>
           </div>
           <div style={{ fontSize: 'clamp(14px,2vw,16px)', color: '#888898', fontWeight: 500, lineHeight: 1.85, marginBottom: 48, maxWidth: 480, margin: '0 auto 48px' }}>
             We are selecting a limited number of programs to partner with before launch. Founding teams will shape the product, validate the platform, and lock in founding pricing — permanently.
           </div>
           <button onClick={openModal} style={{
-            padding: 'clamp(14px,2vw,16px) clamp(32px,5vw,48px)', background: '#F26419', color: 'white',
+            padding: 'clamp(14px,2vw,16px) clamp(32px,5vw,48px)', background: '#7B1020', color: 'white',
             border: 'none', borderRadius: 4, cursor: 'pointer',
             fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 900,
             fontSize: 'clamp(13px,2vw,15px)', letterSpacing: 3,
@@ -546,7 +546,7 @@ export default function Home() {
         .nav-desktop { display:flex; align-items:center; }
         .nav-hamburger { display:none; background:none; border:none; cursor:pointer; padding:4px; flex-direction:column; gap:5px; align-items:center; justify-content:center; }
         .ham-line { display:block; width:22px; height:2px; background:#F2F2F5; transition:transform 0.25s, opacity 0.25s, background 0.25s; transform-origin:center; }
-        .ham-line.open { background:#F26419; }
+        .ham-line.open { background:#7B1020; }
         .ham-top.open { transform:rotate(45deg) translateY(7px); }
         .ham-mid.open { opacity:0; }
         .ham-bot.open { transform:rotate(-45deg) translateY(-7px); }
