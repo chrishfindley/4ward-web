@@ -15,7 +15,9 @@ export default function Story() {
     requestAnimationFrame(setNavHeight)
     window.addEventListener('resize', setNavHeight)
 
-    const navResizeObserver = nav ? new ResizeObserver(setNavHeight) : null
+    const navResizeObserver = nav && typeof ResizeObserver !== 'undefined'
+      ? new ResizeObserver(setNavHeight)
+      : null
     navResizeObserver?.observe(nav)
 
     const observer = new IntersectionObserver((entries) => {
