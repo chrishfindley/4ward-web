@@ -19,6 +19,7 @@
   --warning: #FB923C;
   --gold: #F5B820;
   --purple: #7C6FE0;
+  --nav-height: 84px;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -43,6 +44,7 @@ body {
 .reveal.delay-4 { transition-delay: 0.32s; }
 
 .section { padding: clamp(80px, 12vw, 160px) clamp(24px, 5vw, 48px); position: relative; }
+.hero-section { padding-top: calc(clamp(80px, 12vw, 160px) + var(--nav-height)); }
 .section-dark { background: var(--black); color: var(--text-light); }
 .section-charcoal { background: var(--charcoal); color: var(--text-light); }
 .section-light { background: var(--paper); color: var(--text-dark); }
@@ -119,6 +121,7 @@ body {
 .nav {
   position: fixed; top: 0; left: 0; right: 0;
   z-index: 100;
+  min-height: var(--nav-height);
   padding: 20px clamp(24px, 5vw, 48px);
   background: rgba(8, 8, 9, 0.8);
   backdrop-filter: blur(20px);
@@ -168,7 +171,38 @@ body {
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 4vw, 48px); }
 @media(max-width: 900px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
 
-.compare-wrap { overflow-x: auto; }
+.compare-wrap {
+  position: relative;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.compare-wrap::after {
+  content: '';
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 64px;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(20, 21, 24, 0) 0%, rgba(20, 21, 24, 0.86) 55%, rgba(20, 21, 24, 0.98) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+.compare-wrap::before {
+  content: 'Swipe →';
+  display: none;
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--silver-light);
+  pointer-events: none;
+  z-index: 3;
+}
 .compare { width: 100%; min-width: 700px; border-collapse: collapse; background: var(--charcoal); border: 1px solid var(--border-dark); border-radius: 8px; overflow: hidden; }
 .section-light .compare { background: white; border-color: var(--border-light); }
 .compare th, .compare td { padding: 18px 20px; text-align: left; border-bottom: 1px solid var(--border-dark); }
@@ -202,10 +236,13 @@ body {
 .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
 
 @media(max-width: 600px) {
+  :root { --nav-height: 96px; }
   .nav-links { gap: 16px; }
   .nav a { font-size: 11px; letter-spacing: 1.5px; }
   .section { padding: 70px 20px; }
   .athlete-row { grid-template-columns: 50px 1fr auto; padding: 12px 14px; gap: 12px; }
   .athlete-score { font-size: 30px; }
   .compare th, .compare td { padding: 12px 14px; font-size: 12px; }
+  .compare-wrap::after,
+  .compare-wrap::before { display: block; }
 }

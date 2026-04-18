@@ -6,9 +6,12 @@ export default function Home() {
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('visible')
+        e.target.classList.toggle('visible', e.isIntersecting)
       })
-    }, { threshold: 0.15 })
+    }, {
+      threshold: 0.05,
+      rootMargin: '0px 0px -8% 0px',
+    })
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
     return () => observer.disconnect()
   }, [])
@@ -26,7 +29,7 @@ export default function Home() {
         </div>
       </nav>
 
-      <section className="section section-dark" style={{paddingTop:'160px', textAlign:'center'}}>
+      <section className="section hero-section section-dark" style={{textAlign:'center'}}>
         <div className="section-narrow">
           <div className="eyebrow reveal" style={{color:'var(--maroon-bright)'}}>
             Athlete Performance Platform · Launching Summer 2026
