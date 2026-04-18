@@ -18,7 +18,9 @@ export default function Home() {
     const navResizeObserver = nav && typeof ResizeObserver !== 'undefined'
       ? new ResizeObserver(setNavHeight)
       : null
-    navResizeObserver?.observe(nav)
+    if (nav && navResizeObserver) {
+      navResizeObserver.observe(nav)
+    }
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
