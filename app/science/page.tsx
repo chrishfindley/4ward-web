@@ -1,42 +1,10 @@
 'use client'
 import { useEffect } from 'react'
 import Logo from '@/components/Logo'
+import { setupRevealAndNav } from '@/lib/revealAndNav'
 
 export default function Science() {
-  useEffect(() => {
-    const root = document.documentElement
-    const nav = document.querySelector('.nav') as HTMLElement | null
-    const setNavHeight = () => {
-      if (!nav) return
-      root.style.setProperty('--nav-height', `${Math.ceil(nav.getBoundingClientRect().height)}px`)
-    }
-
-    setNavHeight()
-    requestAnimationFrame(setNavHeight)
-    window.addEventListener('resize', setNavHeight)
-
-    const navResizeObserver = nav && typeof ResizeObserver !== 'undefined'
-      ? new ResizeObserver(setNavHeight)
-      : null
-    if (nav && navResizeObserver) {
-      navResizeObserver.observe(nav)
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        e.target.classList.toggle('visible', e.isIntersecting)
-      })
-    }, {
-      threshold: 0.05,
-      rootMargin: '0px 0px -8% 0px',
-    })
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
-    return () => {
-      observer.disconnect()
-      navResizeObserver?.disconnect()
-      window.removeEventListener('resize', setNavHeight)
-    }
-  }, [])
+  useEffect(() => setupRevealAndNav(), [])
 
   return (
     <>
