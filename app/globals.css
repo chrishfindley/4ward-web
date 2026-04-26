@@ -32,18 +32,56 @@ body {
   line-height: 1.6;
 }
 
-/* Always visible — scroll-reveal relied on JS + .visible; iPad/Safari could leave
-   opacity:0 forever. Motion is optional; content must never depend on IntersectionObserver. */
+/* Scroll reveal — opacity + translate only (no blur: it smears type and feels cheap) */
 .reveal {
-  opacity: 1;
-  transform: none;
-  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.reveal.visible { opacity: 1; transform: none; }
-.reveal.delay-1 { transition-delay: 0.08s; }
-.reveal.delay-2 { transition-delay: 0.16s; }
-.reveal.delay-3 { transition-delay: 0.24s; }
-.reveal.delay-4 { transition-delay: 0.32s; }
+.reveal.visible { opacity: 1; transform: translate3d(0, 0, 0); }
+.reveal.delay-1 { transition-delay: 0.05s; }
+.reveal.delay-2 { transition-delay: 0.10s; }
+.reveal.delay-3 { transition-delay: 0.15s; }
+.reveal.delay-4 { transition-delay: 0.20s; }
+
+/* Section-specific choreography */
+.hero-section .reveal {
+  transition-duration: 0.44s;
+}
+.hero-section .reveal.delay-1 { transition-delay: 0.04s; }
+.hero-section .reveal.delay-2 { transition-delay: 0.08s; }
+.hero-section .reveal.delay-3 { transition-delay: 0.12s; }
+.hero-section .reveal.delay-4 { transition-delay: 0.16s; }
+
+.section:not(.hero-section) .reveal {
+  transition-duration: 0.62s;
+}
+.section:not(.hero-section) .reveal.delay-1 { transition-delay: 0.06s; }
+.section:not(.hero-section) .reveal.delay-2 { transition-delay: 0.12s; }
+.section:not(.hero-section) .reveal.delay-3 { transition-delay: 0.18s; }
+.section:not(.hero-section) .reveal.delay-4 { transition-delay: 0.24s; }
+
+/* Tone-based nuance — distance only, still sharp */
+.section-light .reveal {
+  transform: translate3d(0, 12px, 0);
+  transition-duration: 0.52s;
+}
+
+.section-dark .reveal,
+.section-charcoal .reveal {
+  transform: translate3d(0, 18px, 0);
+  transition-duration: 0.68s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .section-light .reveal,
+  .section-dark .reveal,
+  .section-charcoal .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
 
 .section { padding: clamp(80px, 12vw, 160px) clamp(24px, 5vw, 48px); position: relative; }
 .hero-section {

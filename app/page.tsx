@@ -22,7 +22,7 @@ export default function Home() {
       <section className="section hero-section section-dark" style={{textAlign:'center'}}>
         <div className="section-narrow">
           <div className="eyebrow reveal" style={{color:'var(--maroon-bright)'}}>
-            Athlete Performance Platform · Launching Summer 2026
+            Athletic Performance Platform
           </div>
           <h1 className="display reveal delay-1" style={{marginBottom:32}}>
             Research-proven data.<br />
