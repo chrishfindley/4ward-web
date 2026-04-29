@@ -1,6 +1,6 @@
 'use client'
 
-import { FormEvent, useMemo, useState } from 'react'
+import { FormEvent, useEffect, useMemo, useState } from 'react'
 import { createClient } from '@supabase/supabase-js'
 import Logo from '@/components/Logo'
 
@@ -21,6 +21,12 @@ export default function LoginPage() {
   const supabase = useMemo(() => {
     if (!supabaseUrl || !supabaseAnonKey) return null
     return createClient(supabaseUrl, supabaseAnonKey)
+  }, [])
+
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('mode') === 'signup') {
+      setMode('signup')
+    }
   }, [])
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -89,12 +95,12 @@ export default function LoginPage() {
           <div>
             <div className="eyebrow" style={{ color: 'var(--maroon-bright)' }}>4Ward Access</div>
             <h1 className="display" style={{ marginBottom: 28 }}>
-              Train smarter.<br />
-              <span className="accent">Recover better.</span>
+              Readiness in.<br />
+              <span className="accent">Training decided.</span>
             </h1>
             <p className="body-lg">
-              Sign in or create your 4Ward account to access athlete readiness, recovery signals,
-              and training decisions built for modern performance programs.
+              Sign in or create your account to access readiness, recovery signals, and training
+              decisions built around how your body is responding.
             </p>
           </div>
 

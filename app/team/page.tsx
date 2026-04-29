@@ -25,14 +25,12 @@ export default function Team() {
             Athletic Performance Platform
           </div>
           <h1 className="display reveal delay-1" style={{marginBottom:32}}>
-            Research-proven data.<br />
-            <span className="accent">Actionable insights.</span><br />
-            One platform.
+            Recovery intelligence<br />
+            <span className="accent">for every athlete.</span>
           </h1>
           <p className="body-lg reveal delay-2" style={{margin:'0 auto 40px'}}>
-            4Ward gives coaches a daily readiness score for every athlete — built from HRV,
-            sleep, and resting heart rate — so you know who can absorb today&apos;s practice
-            before it starts.
+            4Ward turns HRV, sleep, resting heart rate, and training signals into clear daily
+            decisions for coaches managing an entire roster.
           </p>
           <div className="reveal delay-3" style={{display:'flex', gap:16, justifyContent:'center', flexWrap:'wrap'}}>
             <a href="#founding" className="btn btn-primary">Become a Founding Team →</a>
