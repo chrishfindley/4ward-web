@@ -160,7 +160,7 @@ export default function Home() {
           WebkitBackdropFilter: 'blur(18px)',
         }}
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 py-3.5 pl-12 pr-5 sm:pl-20 sm:pr-8">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 py-3.5 pl-20 pr-5 sm:pl-28 sm:pr-8 md:pl-36">
           <Link
             href="/"
             className="text-lg tracking-tight no-underline sm:text-xl"
@@ -218,7 +218,15 @@ export default function Home() {
           </h1>
 
           <p
-            className="mt-10 max-w-4xl whitespace-nowrap text-[clamp(0.95rem,2.8vw,1.375rem)] font-bold leading-snug sm:mt-12"
+            className="mt-16 max-w-sm px-2 text-lg font-bold leading-snug sm:hidden"
+            style={{ color: SOFT }}
+          >
+            4Ward tracks daily athlete readiness,
+            <br />
+            and gives you the platform to act on it.
+          </p>
+          <p
+            className="mt-16 hidden max-w-4xl whitespace-nowrap text-[clamp(1.05rem,2.8vw,1.375rem)] font-bold leading-snug sm:mt-20 sm:block"
             style={{ color: SOFT }}
           >
             4Ward tracks daily athlete readiness, and gives you the platform to act on it.
