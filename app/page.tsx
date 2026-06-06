@@ -263,21 +263,64 @@ export default function Home() {
 
         {/* What it is */}
         <section id="what-it-is" className="border-t px-5 py-20 sm:px-8 sm:py-28" style={{ borderColor: HAIRLINE }}>
-          <div className="mx-auto max-w-3xl">
-            <p
-              className="mb-4 text-xs uppercase tracking-[0.18em]"
-              style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
-            >
-              What it is
-            </p>
+          <div className="mx-auto max-w-6xl">
             <h2
-              className="mb-8 text-3xl tracking-tight sm:text-4xl"
+              className="mb-10 max-w-3xl text-3xl tracking-tight sm:mb-12 sm:text-4xl"
               style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}
             >
-              one number<span style={{ color: ACCENT }}>.</span> every morning<span style={{ color: ACCENT }}>.</span>
+              Built for Teams or Individual Athletes<span style={{ color: ACCENT }}>.</span>
             </h2>
-            <p className="text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
-              <Placeholder>{'{{WHATIS_COPY — coach-voice paragraph, to be written}}'}</Placeholder>
+
+            <div
+              className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 pb-2 sm:-mx-8 sm:gap-6 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-2 lg:overflow-visible lg:px-0"
+              style={{ WebkitOverflowScrolling: 'touch' }}
+            >
+              <article
+                className="flex min-h-[280px] w-[88vw] shrink-0 snap-center flex-col justify-between rounded-2xl border p-8 sm:min-h-[300px] sm:w-[72vw] sm:p-10 lg:w-auto"
+                style={{ borderColor: HAIRLINE, background: 'rgba(255,255,255,0.35)' }}
+              >
+                <div>
+                  <p
+                    className="mb-3 text-xs uppercase tracking-[0.18em]"
+                    style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
+                  >
+                    For teams
+                  </p>
+                  <p className="text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
+                    <Placeholder>{'{{TEAMS_TILE_COPY placeholder}}'}</Placeholder>
+                  </p>
+                </div>
+                <Link href="/team" className="mt-8 text-sm font-semibold no-underline" style={{ color: INK }}>
+                  Explore for teams →
+                </Link>
+              </article>
+
+              <article
+                className="flex min-h-[280px] w-[88vw] shrink-0 snap-center flex-col justify-between rounded-2xl border p-8 sm:min-h-[300px] sm:w-[72vw] sm:p-10 lg:w-auto"
+                style={{ borderColor: HAIRLINE, background: 'rgba(255,255,255,0.35)' }}
+              >
+                <div>
+                  <p
+                    className="mb-3 text-xs uppercase tracking-[0.18em]"
+                    style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
+                  >
+                    For individual athletes
+                  </p>
+                  <p className="text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
+                    <Placeholder>{'{{INDIVIDUALS_TILE_COPY placeholder}}'}</Placeholder>
+                  </p>
+                </div>
+                <Link href="/individual" className="mt-8 text-sm font-semibold no-underline" style={{ color: INK }}>
+                  Explore for athletes →
+                </Link>
+              </article>
+            </div>
+
+            <p
+              className="mt-4 text-center text-xs uppercase tracking-[0.16em] lg:hidden"
+              style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
+            >
+              Swipe →
             </p>
           </div>
         </section>
