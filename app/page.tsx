@@ -158,9 +158,11 @@ export default function Home() {
           background: 'rgba(245, 245, 242, 0.82)',
           backdropFilter: 'blur(18px)',
           WebkitBackdropFilter: 'blur(18px)',
+          paddingLeft: 'clamp(3.5rem, 12vw, 9rem)',
+          paddingRight: 'clamp(1.25rem, 5vw, 3rem)',
         }}
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 py-3.5 pl-20 pr-5 sm:pl-28 sm:pr-8 md:pl-36">
+        <div className="flex w-full items-center justify-between gap-4 py-3.5">
           <Link
             href="/"
             className="text-lg tracking-tight no-underline sm:text-xl"
@@ -218,16 +220,16 @@ export default function Home() {
           </h1>
 
           <p
-            className="mt-16 max-w-sm px-2 text-lg font-bold leading-snug sm:hidden"
-            style={{ color: SOFT }}
+            className="max-w-sm px-2 text-lg font-bold leading-snug sm:hidden"
+            style={{ color: SOFT, marginTop: 'clamp(3.5rem, 8vw, 5.5rem)' }}
           >
             4Ward tracks daily athlete readiness,
             <br />
             and gives you the platform to act on it.
           </p>
           <p
-            className="mt-16 hidden max-w-4xl whitespace-nowrap text-[clamp(1.05rem,2.8vw,1.375rem)] font-bold leading-snug sm:mt-20 sm:block"
-            style={{ color: SOFT }}
+            className="hidden max-w-4xl whitespace-nowrap text-[clamp(1.05rem,2.8vw,1.375rem)] font-bold leading-snug sm:block"
+            style={{ color: SOFT, marginTop: 'clamp(4rem, 9vw, 6.5rem)' }}
           >
             4Ward tracks daily athlete readiness, and gives you the platform to act on it.
           </p>
