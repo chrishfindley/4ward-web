@@ -153,15 +153,14 @@ export default function Home() {
 
       {/* Nav */}
       <header
-        className="sticky top-0 z-50 border-b"
+        className="sticky top-0 z-50"
         style={{
-          borderColor: 'rgba(222, 222, 218, 0.7)',
           background: 'rgba(245, 245, 242, 0.82)',
           backdropFilter: 'blur(18px)',
           WebkitBackdropFilter: 'blur(18px)',
         }}
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3.5 sm:px-8">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 py-3.5 pl-12 pr-5 sm:pl-20 sm:pr-8">
           <Link
             href="/"
             className="text-lg tracking-tight no-underline sm:text-xl"
@@ -213,13 +212,13 @@ export default function Home() {
               color: INK,
             }}
           >
-            train. recover.
+            Train. Recover.
             <br />
-            repeat<span style={{ color: ACCENT }}>.</span>
+            Repeat<span style={{ color: ACCENT }}>.</span>
           </h1>
 
           <p
-            className="mt-6 max-w-xl text-base leading-relaxed sm:mt-8 sm:text-lg sm:leading-relaxed"
+            className="mt-10 max-w-4xl whitespace-nowrap text-[clamp(0.95rem,2.8vw,1.375rem)] font-bold leading-snug sm:mt-12"
             style={{ color: SOFT }}
           >
             4Ward tracks daily athlete readiness, and gives you the platform to act on it.
