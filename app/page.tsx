@@ -42,247 +42,351 @@ const CITATIONS = [
 
 const GOLD = '#F5B820'
 const WARNING = '#FB923C'
+const CHARCOAL = '#141518'
 
-function MockFrame({ children, className = '' }: { children: ReactNode; className?: string }) {
+function PhoneShell({ children }: { children: ReactNode }) {
   return (
     <div
-      className={`overflow-hidden rounded-xl border ${className}`}
-      style={{ borderColor: HAIRLINE, background: 'rgba(255,255,255,0.7)' }}
+      className="mx-auto w-full max-w-[300px] rounded-[32px] border p-2"
+      style={{
+        borderColor: HAIRLINE,
+        background: '#FFFFFF',
+        boxShadow: '0 36px 72px rgba(26, 26, 28, 0.13), 0 0 0 1px rgba(26, 26, 28, 0.05)',
+      }}
     >
+      <div
+        className="overflow-hidden rounded-[26px] p-5"
+        style={{
+          background: 'linear-gradient(180deg, #FAFAF8 0%, #FFFFFF 52%, #EEEDEA 100%)',
+          minHeight: 360,
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  )
+}
+
+function BrowserShell({ children }: { children: ReactNode }) {
+  return (
+    <div
+      className="mx-auto w-full overflow-hidden rounded-xl border"
+      style={{
+        borderColor: HAIRLINE,
+        background: '#FFFFFF',
+        boxShadow: '0 36px 72px rgba(26, 26, 28, 0.13), 0 0 0 1px rgba(26, 26, 28, 0.05)',
+      }}
+    >
+      <div
+        className="flex items-center gap-1.5 border-b px-4 py-3"
+        style={{ borderColor: HAIRLINE, background: '#F8F8F6' }}
+      >
+        <span className="h-2.5 w-2.5 rounded-full" style={{ background: HAIRLINE }} />
+        <span className="h-2.5 w-2.5 rounded-full" style={{ background: HAIRLINE }} />
+        <span className="h-2.5 w-2.5 rounded-full" style={{ background: HAIRLINE }} />
+      </div>
+      <div style={{ minHeight: 360 }}>{children}</div>
+    </div>
+  )
+}
+
+function MockLabel({ children }: { children: ReactNode }) {
+  return (
+    <p className="text-[10px] uppercase tracking-[0.2em]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
       {children}
+    </p>
+  )
+}
+
+function MetricTile({ label, value, highlight = false }: { label: string; value: string; highlight?: boolean }) {
+  return (
+    <div className="rounded-2xl border p-4" style={{ borderColor: HAIRLINE, background: '#FFFFFF' }}>
+      <MockLabel>{label}</MockLabel>
+      <p
+        className="mt-2 text-3xl leading-none"
+        style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em', color: highlight ? ACCENT : INK }}
+      >
+        {value}
+      </p>
+    </div>
+  )
+}
+
+function PhoneHeader() {
+  return (
+    <div className="mb-5 flex items-center justify-between">
+      <div>
+        <MockLabel>Today</MockLabel>
+        <p className="mt-1 text-2xl leading-none" style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}>
+          Ready
+        </p>
+      </div>
+      <div
+        className="flex h-11 w-11 items-center justify-center rounded-[14px] text-sm font-bold"
+        style={{ background: INK, color: BG, fontFamily: 'var(--font-chivo)' }}
+      >
+        4W
+      </div>
     </div>
   )
 }
 
 function ReadinessMock() {
   return (
-    <MockFrame className="p-6">
-      <p className="mb-4 text-xs uppercase tracking-[0.16em]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
-        4WRI Readiness
-      </p>
-      <div className="flex items-center justify-center py-2">
-        <div
-          className="relative h-36 w-36 rounded-full"
-          style={{
-            background: `conic-gradient(${READY} 0deg, ${READY} ${78 * 3.6}deg, ${HAIRLINE} ${78 * 3.6}deg, ${HAIRLINE} 360deg)`,
-          }}
-        >
-          <div
-            className="absolute inset-2.5 flex flex-col items-center justify-center rounded-full"
-            style={{ background: '#FAFAF8' }}
-          >
-            <span className="text-4xl leading-none" style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}>
-              78
-            </span>
-            <span className="mt-0.5 text-[10px] uppercase tracking-[0.14em]" style={{ fontFamily: 'var(--font-mono)', color: SOFT }}>
-              Ready
-            </span>
+    <PhoneShell>
+      <PhoneHeader />
+      <div className="rounded-[22px] p-5" style={{ background: INK, color: BG }}>
+        <MockLabel>4W Readiness</MockLabel>
+        <div className="mt-2 flex items-end justify-between gap-4">
+          <p className="text-[5.5rem] leading-[0.84]" style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}>
+            78
+          </p>
+          <div className="pb-2 text-right">
+            <p className="text-xs font-bold uppercase tracking-[0.14em]" style={{ fontFamily: 'var(--font-mono)', color: READY }}>
+              Push
+            </p>
+            <p className="mt-1 text-xs" style={{ color: SILVER }}>Full session OK</p>
           </div>
         </div>
       </div>
-      <div className="mt-4 flex flex-wrap justify-center gap-1.5">
-        {['HRV 50%', 'Sleep 35%', 'RHR 15%'].map((chip) => (
-          <span
-            key={chip}
-            className="rounded-full border px-2 py-0.5 text-[10px]"
-            style={{ borderColor: HAIRLINE, color: SOFT, fontFamily: 'var(--font-mono)' }}
-          >
-            {chip}
-          </span>
-        ))}
+      <div className="mt-4 grid grid-cols-2 gap-3">
+        <MetricTile label="Sleep" value="8.2h" />
+        <MetricTile label="HRV" value="+6%" highlight />
       </div>
-    </MockFrame>
+    </PhoneShell>
   )
 }
 
 function SleepMock() {
   return (
-    <MockFrame className="p-6">
-      <p className="mb-1 text-xs uppercase tracking-[0.16em]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
-        Sleep score
-      </p>
-      <p className="mb-4 text-4xl leading-none" style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}>
-        8.2<span className="text-xl" style={{ color: SOFT }}>h</span>
-      </p>
-      <div className="space-y-2">
-        {[
-          { label: 'Deep', pct: 72 },
-          { label: 'REM', pct: 58 },
-          { label: 'Efficiency', pct: 91 },
-        ].map(({ label, pct }) => (
-          <div key={label}>
-            <div className="mb-1 flex justify-between text-xs" style={{ color: SOFT }}>
-              <span>{label}</span>
-              <span>{pct}%</span>
+    <PhoneShell>
+      <PhoneHeader />
+      <div className="rounded-[22px] border p-5" style={{ borderColor: HAIRLINE, background: '#FFFFFF' }}>
+        <MockLabel>Sleep score</MockLabel>
+        <p className="mt-2 text-5xl leading-none" style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}>
+          8.2<span className="text-2xl" style={{ color: SOFT }}>h</span>
+        </p>
+        <div className="mt-5 space-y-3">
+          {[
+            { label: 'Deep sleep', pct: 72 },
+            { label: 'REM', pct: 58 },
+            { label: 'Efficiency', pct: 91 },
+          ].map(({ label, pct }) => (
+            <div key={label}>
+              <div className="mb-1 flex justify-between text-xs" style={{ color: SOFT }}>
+                <span>{label}</span>
+                <span>{pct}%</span>
+              </div>
+              <div className="h-2 rounded-full" style={{ background: HAIRLINE }}>
+                <div className="h-full rounded-full" style={{ width: `${pct}%`, background: INK }} />
+              </div>
             </div>
-            <div className="h-1.5 rounded-full" style={{ background: HAIRLINE }}>
-              <div className="h-full rounded-full" style={{ width: `${pct}%`, background: INK }} />
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </MockFrame>
+      <p className="mt-4 text-center text-xs leading-relaxed" style={{ color: SOFT }}>
+        Above your 7-day baseline · recovery trending up
+      </p>
+    </PhoneShell>
   )
 }
 
 function WorkoutMock() {
   return (
-    <MockFrame className="p-6">
-      <p className="mb-4 text-xs uppercase tracking-[0.16em]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
-        Workout mode
-      </p>
-      <div className="space-y-2">
-        {[
-          { lift: 'Back Squat', sets: '4 × 5', load: '275 lb' },
-          { lift: 'RDL', sets: '3 × 8', load: '185 lb' },
-          { lift: 'Split Squat', sets: '3 × 10', load: 'DB 50s' },
-        ].map((row, i) => (
-          <div
-            key={row.lift}
-            className="flex items-center justify-between rounded-lg border px-3 py-2.5 text-sm"
-            style={{
-              borderColor: HAIRLINE,
-              background: i === 0 ? INK : 'transparent',
-              color: i === 0 ? BG : INK,
-            }}
-          >
-            <span className="font-semibold">{row.lift}</span>
-            <span style={{ color: i === 0 ? BG : SOFT, fontFamily: 'var(--font-mono)', fontSize: '11px' }}>
-              {row.sets} · {row.load}
-            </span>
-          </div>
-        ))}
+    <PhoneShell>
+      <PhoneHeader />
+      <div className="rounded-[22px] border p-4" style={{ borderColor: HAIRLINE, background: '#FFFFFF' }}>
+        <MockLabel>Workout mode</MockLabel>
+        <p className="mt-2 text-xl font-bold" style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}>
+          Lower body · Week 3
+        </p>
+        <div className="mt-4 space-y-2">
+          {[
+            { lift: 'Back Squat', sets: '4 × 5', load: '275 lb', active: true },
+            { lift: 'RDL', sets: '3 × 8', load: '185 lb', active: false },
+            { lift: 'Split Squat', sets: '3 × 10', load: 'DB 50s', active: false },
+          ].map((row) => (
+            <div
+              key={row.lift}
+              className="flex items-center justify-between rounded-xl px-3 py-3 text-sm"
+              style={{
+                background: row.active ? INK : 'rgba(26,26,28,0.04)',
+                color: row.active ? BG : INK,
+              }}
+            >
+              <span className="font-semibold">{row.lift}</span>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: row.active ? BG : SOFT }}>
+                {row.sets} · {row.load}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
-    </MockFrame>
+      <div
+        className="mt-4 flex items-center justify-between rounded-xl px-4 py-3 text-xs font-bold uppercase tracking-[0.12em]"
+        style={{ background: INK, color: BG, fontFamily: 'var(--font-mono)' }}
+      >
+        <span>Start set</span>
+        <span>→</span>
+      </div>
+    </PhoneShell>
   )
 }
 
 function DailyMessageMock() {
   return (
-    <MockFrame className="flex min-h-[220px] flex-col justify-center p-6 text-center">
-      <p className="mb-3 text-xs uppercase tracking-[0.16em]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
-        Today&apos;s call
-      </p>
-      <p className="text-xl font-bold leading-snug sm:text-2xl" style={{ color: INK }}>
-        Your sleep and readiness is high.
-      </p>
-      <p className="mt-2 text-base font-semibold" style={{ color: SOFT }}>
-        Let&apos;s crush it today!
-      </p>
-    </MockFrame>
+    <PhoneShell>
+      <PhoneHeader />
+      <div className="rounded-[22px] border p-5" style={{ borderColor: HAIRLINE, background: '#FFFFFF' }}>
+        <MockLabel>Today&apos;s call</MockLabel>
+        <p className="mt-3 text-2xl font-bold leading-snug" style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}>
+          Your sleep and readiness is high.
+        </p>
+        <p className="mt-2 text-base font-semibold" style={{ color: SOFT }}>
+          Let&apos;s crush it today!
+        </p>
+      </div>
+      <div className="mt-4 space-y-2">
+        {['Start Workout', 'Log Recovery', 'View Pattern'].map((item, i) => (
+          <div
+            key={item}
+            className="flex items-center justify-between rounded-xl px-4 py-3 text-xs font-bold uppercase tracking-[0.1em]"
+            style={{
+              background: i === 0 ? INK : 'rgba(26,26,28,0.05)',
+              color: i === 0 ? BG : INK,
+              fontFamily: 'var(--font-mono)',
+            }}
+          >
+            <span>{item}</span>
+            <span>→</span>
+          </div>
+        ))}
+      </div>
+    </PhoneShell>
   )
 }
 
 function TeamRosterMock() {
   const rows = [
-    { name: 'J. Harris', score: 91, status: 'Optimal', color: READY },
-    { name: 'M. Torres', score: 74, status: 'Moderate', color: GOLD },
-    { name: 'D. Walker', score: 51, status: 'Elevated', color: WARNING },
+    { name: 'J. Harris', score: 91, status: 'Optimal', color: READY, meta: 'HRV ↑ · Sleep 8.5h · RHR —' },
+    { name: 'M. Torres', score: 74, status: 'Moderate', color: GOLD, meta: 'HRV — · Sleep 6.9h · RHR ↑' },
+    { name: 'D. Walker', score: 51, status: 'Elevated', color: WARNING, meta: 'HRV ↓ · Sleep 5.2h · RHR ↑↑' },
   ]
   return (
-    <MockFrame className="p-4">
-      <div className="mb-3 flex items-center justify-between">
-        <p className="text-xs uppercase tracking-[0.16em]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
-          Coach dashboard
-        </p>
-        <span className="rounded-full border px-2 py-0.5 text-[10px]" style={{ borderColor: HAIRLINE, color: READY, fontFamily: 'var(--font-mono)' }}>
-          18 synced
-        </span>
-      </div>
-      <div className="space-y-2">
-        {rows.map((row) => (
-          <div
-            key={row.name}
-            className="flex items-center gap-3 rounded-lg border px-3 py-2"
-            style={{ borderColor: HAIRLINE, borderLeftWidth: 3, borderLeftColor: row.color }}
-          >
-            <span className="text-2xl leading-none" style={{ fontFamily: 'var(--font-chivo)', color: row.color }}>
-              {row.score}
-            </span>
-            <div className="flex-1">
-              <p className="text-sm font-semibold">{row.name}</p>
-              <p className="text-xs" style={{ color: SOFT }}>HRV · Sleep · RHR</p>
-            </div>
-            <span className="text-[10px] uppercase tracking-[0.12em]" style={{ fontFamily: 'var(--font-mono)', color: row.color }}>
-              {row.status}
-            </span>
+    <BrowserShell>
+      <div className="p-5" style={{ background: CHARCOAL }}>
+        <div className="mb-4 flex items-center justify-between">
+          <div>
+            <MockLabel>Coach dashboard</MockLabel>
+            <p className="mt-1 text-sm font-semibold" style={{ color: BG }}>Tuesday · Apr 15</p>
           </div>
-        ))}
+          <span
+            className="rounded border px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em]"
+            style={{ borderColor: 'rgba(46,204,138,0.35)', color: READY, fontFamily: 'var(--font-mono)' }}
+          >
+            18 synced
+          </span>
+        </div>
+        <div className="space-y-2">
+          {rows.map((row) => (
+            <div
+              key={row.name}
+              className="grid grid-cols-[48px_1fr_auto] items-center gap-3 rounded-sm px-3 py-3"
+              style={{ background: 'rgba(255,255,255,0.06)', borderLeft: `3px solid ${row.color}` }}
+            >
+              <span className="text-3xl leading-none" style={{ fontFamily: 'var(--font-chivo)', color: row.color }}>
+                {row.score}
+              </span>
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-wide" style={{ color: BG }}>{row.name}</p>
+                <p className="mt-0.5 text-xs" style={{ color: SILVER }}>{row.meta}</p>
+              </div>
+              <span className="text-[10px] font-bold uppercase tracking-[0.12em]" style={{ fontFamily: 'var(--font-mono)', color: row.color }}>
+                {row.status}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
-    </MockFrame>
+    </BrowserShell>
   )
 }
 
 function TeamAlertsMock() {
   return (
-    <MockFrame className="p-6">
-      <p className="mb-4 text-xs uppercase tracking-[0.16em]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
-        Needs attention
-      </p>
-      <div className="space-y-3">
-        {[
-          { name: 'D. Walker', note: 'Sleep 5.2h · HRV ↓22%', flag: 'Pull back volume' },
-          { name: 'K. Nguyen', note: 'RHR ↑8 bpm · 3-day trend', flag: 'Check in before lift' },
-        ].map((item) => (
-          <div key={item.name} className="rounded-lg border p-3" style={{ borderColor: HAIRLINE }}>
-            <p className="text-sm font-semibold">{item.name}</p>
-            <p className="mt-1 text-xs" style={{ color: SOFT }}>{item.note}</p>
-            <p className="mt-2 text-xs font-semibold" style={{ color: WARNING }}>{item.flag}</p>
-          </div>
-        ))}
+    <BrowserShell>
+      <div className="p-5" style={{ background: CHARCOAL }}>
+        <MockLabel>Needs attention</MockLabel>
+        <p className="mt-2 mb-4 text-sm" style={{ color: SILVER }}>2 athletes flagged before today&apos;s session</p>
+        <div className="space-y-3">
+          {[
+            { name: 'D. Walker', note: 'Sleep 5.2h · HRV ↓22%', flag: 'Pull back volume' },
+            { name: 'K. Nguyen', note: 'RHR ↑8 bpm · 3-day trend', flag: 'Check in before lift' },
+          ].map((item) => (
+            <div key={item.name} className="rounded-lg p-4" style={{ background: 'rgba(255,255,255,0.06)' }}>
+              <p className="text-sm font-semibold" style={{ color: BG }}>{item.name}</p>
+              <p className="mt-1 text-xs" style={{ color: SILVER }}>{item.note}</p>
+              <p className="mt-2 text-xs font-bold" style={{ color: WARNING }}>{item.flag}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    </MockFrame>
+    </BrowserShell>
   )
 }
 
 function TeamLiveWorkoutMock() {
   return (
-    <MockFrame className="p-6">
-      <p className="mb-4 text-xs uppercase tracking-[0.16em]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
-        Live workout
-      </p>
-      <div className="space-y-2">
-        {[
-          { athlete: 'J. Harris', lift: 'Squat 275', set: 'Set 3 of 4', status: 'On track' },
-          { athlete: 'M. Torres', lift: 'Squat 225', set: 'Set 2 of 4', status: 'Resting' },
-          { athlete: 'A. Reed', lift: 'Squat 185', set: 'Set 4 of 4', status: 'PR attempt' },
-        ].map((row) => (
-          <div key={row.athlete} className="rounded-lg border px-3 py-2.5" style={{ borderColor: HAIRLINE }}>
-            <div className="flex justify-between text-sm">
-              <span className="font-semibold">{row.athlete}</span>
-              <span className="text-xs" style={{ color: SOFT, fontFamily: 'var(--font-mono)' }}>{row.status}</span>
+    <BrowserShell>
+      <div className="p-5" style={{ background: CHARCOAL }}>
+        <MockLabel>Live workout</MockLabel>
+        <p className="mt-2 mb-4 text-sm font-semibold" style={{ color: BG }}>Squat day · Rack assignments</p>
+        <div className="space-y-2">
+          {[
+            { athlete: 'J. Harris', lift: '275 lb', set: 'Set 3 of 4', status: 'On track', color: READY },
+            { athlete: 'M. Torres', lift: '225 lb', set: 'Set 2 of 4', status: 'Resting', color: GOLD },
+            { athlete: 'A. Reed', lift: '185 lb', set: 'Set 4 of 4', status: 'PR attempt', color: READY },
+          ].map((row) => (
+            <div key={row.athlete} className="rounded-lg px-4 py-3" style={{ background: 'rgba(255,255,255,0.06)' }}>
+              <div className="flex justify-between">
+                <span className="text-sm font-semibold" style={{ color: BG }}>{row.athlete}</span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.12em]" style={{ fontFamily: 'var(--font-mono)', color: row.color }}>
+                  {row.status}
+                </span>
+              </div>
+              <p className="mt-1 text-xs" style={{ color: SILVER }}>{row.lift} · {row.set}</p>
             </div>
-            <p className="mt-1 text-xs" style={{ color: SOFT }}>{row.lift} · {row.set}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </MockFrame>
+    </BrowserShell>
   )
 }
 
 function TeamTrendsMock() {
   return (
-    <MockFrame className="p-6">
-      <p className="mb-4 text-xs uppercase tracking-[0.16em]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
-        Team trends
-      </p>
-      <div className="flex h-28 items-end justify-between gap-2">
-        {[62, 71, 68, 74, 79, 77, 82].map((val, i) => (
-          <div key={i} className="flex flex-1 flex-col items-center gap-1">
-            <div
-              className="w-full rounded-sm"
-              style={{ height: `${val * 0.9}px`, background: i === 6 ? INK : HAIRLINE }}
-            />
-            <span className="text-[9px]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
-              {['M', 'T', 'W', 'T', 'F', 'S', 'S'][i]}
-            </span>
-          </div>
-        ))}
+    <BrowserShell>
+      <div className="flex h-full flex-col p-5" style={{ background: CHARCOAL, minHeight: 360 }}>
+        <MockLabel>Team trends</MockLabel>
+        <p className="mt-2 mb-6 text-sm" style={{ color: SILVER }}>Roster avg readiness · last 7 days</p>
+        <div className="flex flex-1 items-end justify-between gap-2 pb-2">
+          {[62, 71, 68, 74, 79, 77, 82].map((val, i) => (
+            <div key={i} className="flex flex-1 flex-col items-center gap-2">
+              <div
+                className="w-full rounded-sm"
+                style={{ height: `${val * 1.1}px`, background: i === 6 ? READY : 'rgba(255,255,255,0.14)' }}
+              />
+              <span className="text-[9px]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
+                {['M', 'T', 'W', 'T', 'F', 'S', 'S'][i]}
+              </span>
+            </div>
+          ))}
+        </div>
+        <p className="mt-4 text-center text-xs font-semibold" style={{ color: READY }}>
+          ↑ 8% vs last week
+        </p>
       </div>
-      <p className="mt-4 text-center text-xs" style={{ color: SOFT }}>
-        Roster avg readiness · up 8% this week
-      </p>
-    </MockFrame>
+    </BrowserShell>
   )
 }
 
@@ -327,8 +431,8 @@ function SwipeDeck({
         style={{ WebkitOverflowScrolling: 'touch' }}
         aria-label={ariaLabel}
       >
-        {screens.map((screen, i) => (
-          <div key={screen.label} className="w-full shrink-0 snap-center px-0.5">
+        {screens.map((screen) => (
+          <div key={screen.label} className="w-full shrink-0 snap-center py-2">
             {screen.content}
           </div>
         ))}
@@ -389,17 +493,6 @@ function AudienceSwipeCard({
         {linkText}
       </Link>
     </article>
-  )
-}
-
-function Placeholder({ children }: { children: string }) {
-  return (
-    <span
-      className="rounded-sm border border-dashed px-1.5 py-0.5"
-      style={{ borderColor: HAIRLINE, color: SOFT, background: 'rgba(222, 222, 218, 0.35)' }}
-    >
-      {children}
-    </span>
   )
 }
 
@@ -651,7 +744,7 @@ export default function Home() {
 
         {/* 4WRI Score */}
         <section className="border-t px-5 py-20 sm:px-8 sm:py-28" style={{ borderColor: HAIRLINE }}>
-          <div className="mx-auto max-w-3xl">
+          <div className="mx-auto max-w-md">
             <p
               className="mb-4 text-xs uppercase tracking-[0.18em]"
               style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
@@ -669,7 +762,7 @@ export default function Home() {
             </p>
 
             <div
-              className="rounded-2xl border p-5 sm:p-6"
+              className="rounded-2xl border p-4 sm:p-5"
               style={{ borderColor: HAIRLINE, background: 'rgba(255,255,255,0.4)' }}
             >
               <SwipeDeck screens={PRODUCT_SCREENS} ariaLabel="4WRI product features" />
@@ -693,7 +786,7 @@ export default function Home() {
               same band<span style={{ color: ACCENT }}>.</span> your colors<span style={{ color: ACCENT }}>.</span>
             </h2>
             <p className="mb-12 max-w-2xl text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
-              <Placeholder>{'{{BANDS_COPY placeholder}}'}</Placeholder>
+              One band tracks HRV, sleep, and resting heart rate for every athlete. Pick a colorway that fits your program — same hardware, your look in the lockeroom.
             </p>
 
             <div className="grid gap-6 sm:grid-cols-2 sm:gap-8">
@@ -725,7 +818,7 @@ export default function Home() {
               built on published research<span style={{ color: ACCENT }}>.</span>
             </h2>
             <p className="mb-10 max-w-2xl text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
-              <Placeholder>{'{{VALIDATION_COPY placeholder}}'}</Placeholder>
+              The 4WRI score combines nocturnal HRV, sleep duration, and resting heart rate — markers validated in decades of peer-reviewed sports science. We&apos;re validating head-to-head against research-grade chest straps with our beta schools.
             </p>
 
             <div className="flex flex-wrap gap-2">
@@ -804,7 +897,7 @@ export default function Home() {
               4WARD<span style={{ color: ACCENT }}>&gt;</span>
             </p>
             <p className="mt-2 text-sm" style={{ color: SOFT }}>
-              <Placeholder>{'{{FOOTER_TAGLINE placeholder}}'}</Placeholder>
+              Daily readiness for every athlete on your roster.
             </p>
           </div>
           <p className="text-xs" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
