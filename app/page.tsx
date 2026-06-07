@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useCallback, type ReactNode } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Chivo, Archivo, Sometype_Mono } from 'next/font/google'
@@ -39,6 +39,358 @@ const CITATIONS = [
   'Foster 1996',
   'Gabbett 2016',
 ]
+
+const GOLD = '#F5B820'
+const WARNING = '#FB923C'
+
+function MockFrame({ children, className = '' }: { children: ReactNode; className?: string }) {
+  return (
+    <div
+      className={`overflow-hidden rounded-xl border ${className}`}
+      style={{ borderColor: HAIRLINE, background: 'rgba(255,255,255,0.7)' }}
+    >
+      {children}
+    </div>
+  )
+}
+
+function ReadinessMock() {
+  return (
+    <MockFrame className="p-6">
+      <p className="mb-4 text-xs uppercase tracking-[0.16em]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
+        4WRI Readiness
+      </p>
+      <div className="flex items-center justify-center py-2">
+        <div
+          className="relative h-36 w-36 rounded-full"
+          style={{
+            background: `conic-gradient(${READY} 0deg, ${READY} ${78 * 3.6}deg, ${HAIRLINE} ${78 * 3.6}deg, ${HAIRLINE} 360deg)`,
+          }}
+        >
+          <div
+            className="absolute inset-2.5 flex flex-col items-center justify-center rounded-full"
+            style={{ background: '#FAFAF8' }}
+          >
+            <span className="text-4xl leading-none" style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}>
+              78
+            </span>
+            <span className="mt-0.5 text-[10px] uppercase tracking-[0.14em]" style={{ fontFamily: 'var(--font-mono)', color: SOFT }}>
+              Ready
+            </span>
+          </div>
+        </div>
+      </div>
+      <div className="mt-4 flex flex-wrap justify-center gap-1.5">
+        {['HRV 50%', 'Sleep 35%', 'RHR 15%'].map((chip) => (
+          <span
+            key={chip}
+            className="rounded-full border px-2 py-0.5 text-[10px]"
+            style={{ borderColor: HAIRLINE, color: SOFT, fontFamily: 'var(--font-mono)' }}
+          >
+            {chip}
+          </span>
+        ))}
+      </div>
+    </MockFrame>
+  )
+}
+
+function SleepMock() {
+  return (
+    <MockFrame className="p-6">
+      <p className="mb-1 text-xs uppercase tracking-[0.16em]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
+        Sleep score
+      </p>
+      <p className="mb-4 text-4xl leading-none" style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}>
+        8.2<span className="text-xl" style={{ color: SOFT }}>h</span>
+      </p>
+      <div className="space-y-2">
+        {[
+          { label: 'Deep', pct: 72 },
+          { label: 'REM', pct: 58 },
+          { label: 'Efficiency', pct: 91 },
+        ].map(({ label, pct }) => (
+          <div key={label}>
+            <div className="mb-1 flex justify-between text-xs" style={{ color: SOFT }}>
+              <span>{label}</span>
+              <span>{pct}%</span>
+            </div>
+            <div className="h-1.5 rounded-full" style={{ background: HAIRLINE }}>
+              <div className="h-full rounded-full" style={{ width: `${pct}%`, background: INK }} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </MockFrame>
+  )
+}
+
+function WorkoutMock() {
+  return (
+    <MockFrame className="p-6">
+      <p className="mb-4 text-xs uppercase tracking-[0.16em]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
+        Workout mode
+      </p>
+      <div className="space-y-2">
+        {[
+          { lift: 'Back Squat', sets: '4 × 5', load: '275 lb' },
+          { lift: 'RDL', sets: '3 × 8', load: '185 lb' },
+          { lift: 'Split Squat', sets: '3 × 10', load: 'DB 50s' },
+        ].map((row, i) => (
+          <div
+            key={row.lift}
+            className="flex items-center justify-between rounded-lg border px-3 py-2.5 text-sm"
+            style={{
+              borderColor: HAIRLINE,
+              background: i === 0 ? INK : 'transparent',
+              color: i === 0 ? BG : INK,
+            }}
+          >
+            <span className="font-semibold">{row.lift}</span>
+            <span style={{ color: i === 0 ? BG : SOFT, fontFamily: 'var(--font-mono)', fontSize: '11px' }}>
+              {row.sets} · {row.load}
+            </span>
+          </div>
+        ))}
+      </div>
+    </MockFrame>
+  )
+}
+
+function DailyMessageMock() {
+  return (
+    <MockFrame className="flex min-h-[220px] flex-col justify-center p-6 text-center">
+      <p className="mb-3 text-xs uppercase tracking-[0.16em]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
+        Today&apos;s call
+      </p>
+      <p className="text-xl font-bold leading-snug sm:text-2xl" style={{ color: INK }}>
+        Your sleep and readiness is high.
+      </p>
+      <p className="mt-2 text-base font-semibold" style={{ color: SOFT }}>
+        Let&apos;s crush it today!
+      </p>
+    </MockFrame>
+  )
+}
+
+function TeamRosterMock() {
+  const rows = [
+    { name: 'J. Harris', score: 91, status: 'Optimal', color: READY },
+    { name: 'M. Torres', score: 74, status: 'Moderate', color: GOLD },
+    { name: 'D. Walker', score: 51, status: 'Elevated', color: WARNING },
+  ]
+  return (
+    <MockFrame className="p-4">
+      <div className="mb-3 flex items-center justify-between">
+        <p className="text-xs uppercase tracking-[0.16em]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
+          Coach dashboard
+        </p>
+        <span className="rounded-full border px-2 py-0.5 text-[10px]" style={{ borderColor: HAIRLINE, color: READY, fontFamily: 'var(--font-mono)' }}>
+          18 synced
+        </span>
+      </div>
+      <div className="space-y-2">
+        {rows.map((row) => (
+          <div
+            key={row.name}
+            className="flex items-center gap-3 rounded-lg border px-3 py-2"
+            style={{ borderColor: HAIRLINE, borderLeftWidth: 3, borderLeftColor: row.color }}
+          >
+            <span className="text-2xl leading-none" style={{ fontFamily: 'var(--font-chivo)', color: row.color }}>
+              {row.score}
+            </span>
+            <div className="flex-1">
+              <p className="text-sm font-semibold">{row.name}</p>
+              <p className="text-xs" style={{ color: SOFT }}>HRV · Sleep · RHR</p>
+            </div>
+            <span className="text-[10px] uppercase tracking-[0.12em]" style={{ fontFamily: 'var(--font-mono)', color: row.color }}>
+              {row.status}
+            </span>
+          </div>
+        ))}
+      </div>
+    </MockFrame>
+  )
+}
+
+function TeamAlertsMock() {
+  return (
+    <MockFrame className="p-6">
+      <p className="mb-4 text-xs uppercase tracking-[0.16em]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
+        Needs attention
+      </p>
+      <div className="space-y-3">
+        {[
+          { name: 'D. Walker', note: 'Sleep 5.2h · HRV ↓22%', flag: 'Pull back volume' },
+          { name: 'K. Nguyen', note: 'RHR ↑8 bpm · 3-day trend', flag: 'Check in before lift' },
+        ].map((item) => (
+          <div key={item.name} className="rounded-lg border p-3" style={{ borderColor: HAIRLINE }}>
+            <p className="text-sm font-semibold">{item.name}</p>
+            <p className="mt-1 text-xs" style={{ color: SOFT }}>{item.note}</p>
+            <p className="mt-2 text-xs font-semibold" style={{ color: WARNING }}>{item.flag}</p>
+          </div>
+        ))}
+      </div>
+    </MockFrame>
+  )
+}
+
+function TeamLiveWorkoutMock() {
+  return (
+    <MockFrame className="p-6">
+      <p className="mb-4 text-xs uppercase tracking-[0.16em]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
+        Live workout
+      </p>
+      <div className="space-y-2">
+        {[
+          { athlete: 'J. Harris', lift: 'Squat 275', set: 'Set 3 of 4', status: 'On track' },
+          { athlete: 'M. Torres', lift: 'Squat 225', set: 'Set 2 of 4', status: 'Resting' },
+          { athlete: 'A. Reed', lift: 'Squat 185', set: 'Set 4 of 4', status: 'PR attempt' },
+        ].map((row) => (
+          <div key={row.athlete} className="rounded-lg border px-3 py-2.5" style={{ borderColor: HAIRLINE }}>
+            <div className="flex justify-between text-sm">
+              <span className="font-semibold">{row.athlete}</span>
+              <span className="text-xs" style={{ color: SOFT, fontFamily: 'var(--font-mono)' }}>{row.status}</span>
+            </div>
+            <p className="mt-1 text-xs" style={{ color: SOFT }}>{row.lift} · {row.set}</p>
+          </div>
+        ))}
+      </div>
+    </MockFrame>
+  )
+}
+
+function TeamTrendsMock() {
+  return (
+    <MockFrame className="p-6">
+      <p className="mb-4 text-xs uppercase tracking-[0.16em]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
+        Team trends
+      </p>
+      <div className="flex h-28 items-end justify-between gap-2">
+        {[62, 71, 68, 74, 79, 77, 82].map((val, i) => (
+          <div key={i} className="flex flex-1 flex-col items-center gap-1">
+            <div
+              className="w-full rounded-sm"
+              style={{ height: `${val * 0.9}px`, background: i === 6 ? INK : HAIRLINE }}
+            />
+            <span className="text-[9px]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
+              {['M', 'T', 'W', 'T', 'F', 'S', 'S'][i]}
+            </span>
+          </div>
+        ))}
+      </div>
+      <p className="mt-4 text-center text-xs" style={{ color: SOFT }}>
+        Roster avg readiness · up 8% this week
+      </p>
+    </MockFrame>
+  )
+}
+
+const INDIVIDUAL_SCREENS = [
+  { label: 'Readiness', content: <ReadinessMock /> },
+  { label: 'Sleep', content: <SleepMock /> },
+  { label: 'Workout', content: <WorkoutMock /> },
+  { label: 'Daily call', content: <DailyMessageMock /> },
+]
+
+const TEAM_SCREENS = [
+  { label: 'Roster', content: <TeamRosterMock /> },
+  { label: 'Alerts', content: <TeamAlertsMock /> },
+  { label: 'Live workout', content: <TeamLiveWorkoutMock /> },
+  { label: 'Trends', content: <TeamTrendsMock /> },
+]
+
+const PRODUCT_SCREENS = INDIVIDUAL_SCREENS
+
+function SwipeDeck({
+  screens,
+  ariaLabel,
+}: {
+  screens: { label: string; content: ReactNode }[]
+  ariaLabel: string
+}) {
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const [active, setActive] = useState(0)
+
+  const handleScroll = useCallback(() => {
+    const el = scrollRef.current
+    if (!el || el.clientWidth === 0) return
+    setActive(Math.round(el.scrollLeft / el.clientWidth))
+  }, [])
+
+  return (
+    <div>
+      <div
+        ref={scrollRef}
+        onScroll={handleScroll}
+        className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth"
+        style={{ WebkitOverflowScrolling: 'touch' }}
+        aria-label={ariaLabel}
+      >
+        {screens.map((screen, i) => (
+          <div key={screen.label} className="w-full shrink-0 snap-center px-0.5">
+            {screen.content}
+          </div>
+        ))}
+      </div>
+      <div className="mt-4 flex items-center justify-center gap-3">
+        <div className="flex gap-1.5">
+          {screens.map((screen, i) => (
+            <button
+              key={screen.label}
+              type="button"
+              aria-label={`Show ${screen.label}`}
+              onClick={() => {
+                scrollRef.current?.scrollTo({ left: i * (scrollRef.current?.clientWidth ?? 0), behavior: 'smooth' })
+                setActive(i)
+              }}
+              className="h-1.5 rounded-full transition-all"
+              style={{
+                width: i === active ? 20 : 6,
+                background: i === active ? INK : HAIRLINE,
+              }}
+            />
+          ))}
+        </div>
+        <span className="text-[10px] uppercase tracking-[0.14em]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
+          {screens[active]?.label}
+        </span>
+      </div>
+    </div>
+  )
+}
+
+function AudienceSwipeCard({
+  eyebrow,
+  screens,
+  href,
+  linkText,
+  ariaLabel,
+}: {
+  eyebrow: string
+  screens: { label: string; content: ReactNode }[]
+  href: string
+  linkText: string
+  ariaLabel: string
+}) {
+  return (
+    <article
+      className="flex flex-col rounded-2xl border p-6 sm:p-8"
+      style={{ borderColor: HAIRLINE, background: 'rgba(255,255,255,0.35)' }}
+    >
+      <p
+        className="mb-5 text-xs uppercase tracking-[0.18em]"
+        style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
+      >
+        {eyebrow}
+      </p>
+      <SwipeDeck screens={screens} ariaLabel={ariaLabel} />
+      <Link href={href} className="mt-6 text-sm font-semibold no-underline" style={{ color: INK }}>
+        {linkText}
+      </Link>
+    </article>
+  )
+}
 
 function Placeholder({ children }: { children: string }) {
   return (
@@ -271,118 +623,56 @@ export default function Home() {
               Built for Teams or Individual Athletes<span style={{ color: ACCENT }}>.</span>
             </h2>
 
-            <div
-              className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-5 pb-2 sm:-mx-8 sm:gap-6 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-2 lg:overflow-visible lg:px-0"
-              style={{ WebkitOverflowScrolling: 'touch' }}
-            >
-              <article
-                className="flex min-h-[280px] w-[88vw] shrink-0 snap-center flex-col justify-between rounded-2xl border p-8 sm:min-h-[300px] sm:w-[72vw] sm:p-10 lg:w-auto"
-                style={{ borderColor: HAIRLINE, background: 'rgba(255,255,255,0.35)' }}
-              >
-                <div>
-                  <p
-                    className="mb-3 text-xs uppercase tracking-[0.18em]"
-                    style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
-                  >
-                    For teams
-                  </p>
-                  <p className="text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
-                    <Placeholder>{'{{TEAMS_TILE_COPY placeholder}}'}</Placeholder>
-                  </p>
-                </div>
-                <Link href="/team" className="mt-8 text-sm font-semibold no-underline" style={{ color: INK }}>
-                  Explore for teams →
-                </Link>
-              </article>
-
-              <article
-                className="flex min-h-[280px] w-[88vw] shrink-0 snap-center flex-col justify-between rounded-2xl border p-8 sm:min-h-[300px] sm:w-[72vw] sm:p-10 lg:w-auto"
-                style={{ borderColor: HAIRLINE, background: 'rgba(255,255,255,0.35)' }}
-              >
-                <div>
-                  <p
-                    className="mb-3 text-xs uppercase tracking-[0.18em]"
-                    style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
-                  >
-                    For individual athletes
-                  </p>
-                  <p className="text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
-                    <Placeholder>{'{{INDIVIDUALS_TILE_COPY placeholder}}'}</Placeholder>
-                  </p>
-                </div>
-                <Link href="/individual" className="mt-8 text-sm font-semibold no-underline" style={{ color: INK }}>
-                  Explore for athletes →
-                </Link>
-              </article>
+            <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
+              <AudienceSwipeCard
+                eyebrow="For teams"
+                screens={TEAM_SCREENS}
+                href="/team"
+                linkText="Explore for teams →"
+                ariaLabel="Team platform features"
+              />
+              <AudienceSwipeCard
+                eyebrow="For individual athletes"
+                screens={INDIVIDUAL_SCREENS}
+                href="/individual"
+                linkText="Explore for athletes →"
+                ariaLabel="Individual athlete platform features"
+              />
             </div>
 
             <p
-              className="mt-4 text-center text-xs uppercase tracking-[0.16em] lg:hidden"
+              className="mt-6 text-center text-xs uppercase tracking-[0.16em]"
               style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
             >
-              Swipe →
+              Swipe each card to explore →
             </p>
           </div>
         </section>
 
         {/* 4WRI Score */}
         <section className="border-t px-5 py-20 sm:px-8 sm:py-28" style={{ borderColor: HAIRLINE }}>
-          <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
-            <div>
-              <p
-                className="mb-4 text-xs uppercase tracking-[0.18em]"
-                style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
-              >
-                The 4WRI score
-              </p>
-              <h2
-                className="mb-8 text-3xl tracking-tight sm:text-4xl"
-                style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}
-              >
-                readiness you can act on<span style={{ color: ACCENT }}>.</span>
-              </h2>
-              <p className="text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
-                <Placeholder>{'{{SCORE_COPY placeholder}}'}</Placeholder>
-              </p>
-            </div>
+          <div className="mx-auto max-w-3xl">
+            <p
+              className="mb-4 text-xs uppercase tracking-[0.18em]"
+              style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
+            >
+              The 4WRI score
+            </p>
+            <h2
+              className="mb-6 text-3xl tracking-tight sm:mb-8 sm:text-4xl"
+              style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}
+            >
+              readiness you can act on<span style={{ color: ACCENT }}>.</span>
+            </h2>
+            <p className="mb-10 text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
+              4Ward tracks HRV, Sleep and RHR to determine your daily readiness and gives you a platform that adapts to your recovery and readiness level.
+            </p>
 
-            <div className="flex flex-col items-center gap-8">
-              <div
-                className="relative h-52 w-52 rounded-full sm:h-56 sm:w-56"
-                style={{
-                  background: `conic-gradient(${READY} 0deg, ${READY} ${78 * 3.6}deg, ${HAIRLINE} ${78 * 3.6}deg, ${HAIRLINE} 360deg)`,
-                }}
-              >
-                <div
-                  className="absolute inset-[14px] flex flex-col items-center justify-center rounded-full"
-                  style={{ background: BG }}
-                >
-                  <span
-                    className="text-5xl leading-none sm:text-6xl"
-                    style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}
-                  >
-                    78
-                  </span>
-                  <span
-                    className="mt-1 text-xs uppercase tracking-[0.16em]"
-                    style={{ fontFamily: 'var(--font-mono)', color: SOFT }}
-                  >
-                    Ready
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap justify-center gap-2">
-                {['HRV 50%', 'Sleep 35%', 'RHR 15%', '+ load adjusts it'].map((chip) => (
-                  <span
-                    key={chip}
-                    className="rounded-full border px-3 py-1.5 text-xs"
-                    style={{ borderColor: HAIRLINE, color: SOFT, fontFamily: 'var(--font-mono)' }}
-                  >
-                    {chip}
-                  </span>
-                ))}
-              </div>
+            <div
+              className="rounded-2xl border p-5 sm:p-6"
+              style={{ borderColor: HAIRLINE, background: 'rgba(255,255,255,0.4)' }}
+            >
+              <SwipeDeck screens={PRODUCT_SCREENS} ariaLabel="4WRI product features" />
             </div>
           </div>
         </section>
@@ -415,51 +705,6 @@ export default function Home() {
                 <BandImage src="/band-black.jpg" alt="Black colorway" label="Black · /public/band-black.jpg" />
                 <p className="mt-4 text-sm" style={{ color: SOFT }}>Black</p>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Coaches / Athletes */}
-        <section className="border-t px-5 py-20 sm:px-8 sm:py-28" style={{ borderColor: HAIRLINE }}>
-          <div className="mx-auto grid max-w-6xl gap-6 sm:gap-8 lg:grid-cols-2">
-            <div
-              className="flex flex-col justify-between rounded-2xl border p-8 sm:p-10"
-              style={{ borderColor: HAIRLINE, background: 'rgba(255,255,255,0.35)' }}
-            >
-              <div>
-                <p
-                  className="mb-3 text-xs uppercase tracking-[0.18em]"
-                  style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
-                >
-                  For coaches
-                </p>
-                <p className="mb-8 text-base leading-relaxed" style={{ color: SOFT }}>
-                  <Placeholder>{'{{COACHES_COPY placeholder}}'}</Placeholder>
-                </p>
-              </div>
-              <Link href="/team" className="text-sm font-semibold no-underline" style={{ color: INK }}>
-                Explore for teams →
-              </Link>
-            </div>
-
-            <div
-              className="flex flex-col justify-between rounded-2xl border p-8 sm:p-10"
-              style={{ borderColor: HAIRLINE, background: 'rgba(255,255,255,0.35)' }}
-            >
-              <div>
-                <p
-                  className="mb-3 text-xs uppercase tracking-[0.18em]"
-                  style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
-                >
-                  For athletes
-                </p>
-                <p className="mb-8 text-base leading-relaxed" style={{ color: SOFT }}>
-                  <Placeholder>{'{{ATHLETES_COPY placeholder}}'}</Placeholder>
-                </p>
-              </div>
-              <Link href="/individual" className="text-sm font-semibold no-underline" style={{ color: INK }}>
-                Explore for athletes →
-              </Link>
             </div>
           </div>
         </section>
