@@ -48,6 +48,52 @@ const GOLD = '#F5B820'
 const WARNING = '#FB923C'
 const CHARCOAL = '#141518'
 
+function Section({
+  children,
+  id,
+  wide = false,
+}: {
+  children: ReactNode
+  id?: string
+  wide?: boolean
+}) {
+  return (
+    <section
+      id={id}
+      className="w-full border-t px-5 py-20 sm:px-8 sm:py-28"
+      style={{ borderColor: HAIRLINE }}
+    >
+      <div
+        className={`mx-auto flex w-full flex-col items-center text-center ${wide ? 'max-w-5xl' : 'max-w-3xl'}`}
+      >
+        {children}
+      </div>
+    </section>
+  )
+}
+
+function Eyebrow({ children }: { children: ReactNode }) {
+  return (
+    <p
+      className="mb-4 text-xs tracking-[0.14em]"
+      style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
+    >
+      {children}
+    </p>
+  )
+}
+
+function Headline({ children }: { children: ReactNode }) {
+  return (
+    <h2
+      className="mb-6 text-3xl tracking-tight sm:mb-8 sm:text-4xl"
+      style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}
+    >
+      {children}
+    </h2>
+  )
+}
+
 function PhoneShell({ children }: { children: ReactNode }) {
   return (
     <div
@@ -398,13 +444,13 @@ const INDIVIDUAL_SCREENS = [
   { label: 'Readiness', content: <ReadinessMock /> },
   { label: 'Sleep', content: <SleepMock /> },
   { label: 'Workout', content: <WorkoutMock /> },
-  { label: 'Daily call', content: <DailyMessageMock /> },
+  { label: 'Daily Call', content: <DailyMessageMock /> },
 ]
 
 const TEAM_SCREENS = [
   { label: 'Roster', content: <TeamRosterMock /> },
   { label: 'Alerts', content: <TeamAlertsMock /> },
-  { label: 'Live workout', content: <TeamLiveWorkoutMock /> },
+  { label: 'Live Workout', content: <TeamLiveWorkoutMock /> },
   { label: 'Trends', content: <TeamTrendsMock /> },
 ]
 
@@ -460,7 +506,7 @@ function SwipeDeck({
             />
           ))}
         </div>
-        <span className="text-[10px] uppercase tracking-[0.14em]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
+        <span className="text-[10px] tracking-[0.14em]" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
           {screens[active]?.label}
         </span>
       </div>
@@ -483,16 +529,18 @@ function AudienceSwipeCard({
 }) {
   return (
     <article
-      className="flex flex-col rounded-2xl border p-6 sm:p-8"
+      className="flex w-full max-w-md flex-col items-center rounded-2xl border p-6 text-center sm:p-8"
       style={{ borderColor: HAIRLINE, background: 'rgba(255,255,255,0.35)' }}
     >
       <p
-        className="mb-5 text-xs uppercase tracking-[0.18em]"
+        className="mb-5 text-xs tracking-[0.14em]"
         style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
       >
         {eyebrow}
       </p>
-      <SwipeDeck screens={screens} ariaLabel={ariaLabel} />
+      <div className="w-full">
+        <SwipeDeck screens={screens} ariaLabel={ariaLabel} />
+      </div>
       <Link href={href} className="mt-6 text-sm font-semibold no-underline" style={{ color: INK }}>
         {linkText}
       </Link>
@@ -542,12 +590,12 @@ export default function Home() {
 
   return (
     <div
-      className={`${chivo.variable} ${archivo.variable} ${sometypeMono.variable} min-h-screen`}
+      className={`${chivo.variable} ${archivo.variable} ${sometypeMono.variable} flex min-h-screen w-full flex-col items-center`}
       style={{ background: BG, color: INK, fontFamily: 'var(--font-archivo), sans-serif' }}
     >
       {/* Nav */}
       <header
-        className="sticky top-0 z-50 px-5 sm:px-8"
+        className="sticky top-0 z-50 w-full px-5 sm:px-8"
         style={{
           background: 'rgba(245, 245, 242, 0.82)',
           backdropFilter: 'blur(18px)',
@@ -586,15 +634,15 @@ export default function Home() {
               className="rounded-full border px-4 py-2 text-sm no-underline transition-colors"
               style={{ borderColor: HAIRLINE, color: INK, background: 'rgba(255,255,255,0.45)' }}
             >
-              Sign in
+              Sign In
             </Link>
           </nav>
         </div>
       </header>
 
-      <main>
+      <main className="flex w-full flex-col items-center">
         {/* Hero */}
-        <section className="relative flex min-h-[calc(100svh-57px)] flex-col items-center justify-center overflow-hidden px-5 pb-16 pt-10 text-center sm:px-8 sm:pb-24 sm:pt-14">
+        <section className="relative flex w-full min-h-[calc(100svh-57px)] flex-col items-center justify-center overflow-hidden px-5 pb-16 pt-10 text-center sm:px-8 sm:pb-24 sm:pt-14">
           <Image
             src={HERO_ATHLETE}
             alt=""
@@ -643,89 +691,65 @@ export default function Home() {
         </section>
 
         {/* What it is */}
-        <section id="what-it-is" className="border-t px-5 py-20 text-center sm:px-8 sm:py-28" style={{ borderColor: HAIRLINE }}>
-          <div className="mx-auto max-w-6xl">
-            <h2
-              className="mx-auto mb-10 max-w-3xl text-3xl tracking-tight sm:mb-12 sm:text-4xl"
-              style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}
-            >
+        <Section id="what-it-is" wide>
+            <Headline>
               Built for Teams or Individual Athletes<span style={{ color: ACCENT }}>.</span>
-            </h2>
+            </Headline>
 
-            <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
+            <div className="grid w-full justify-items-center gap-8 lg:grid-cols-2 lg:gap-10">
               <AudienceSwipeCard
-                eyebrow="For teams"
+                eyebrow="For Teams"
                 screens={TEAM_SCREENS}
                 href="/team"
-                linkText="Explore for teams →"
+                linkText="Explore for Teams →"
                 ariaLabel="Team platform features"
               />
               <AudienceSwipeCard
-                eyebrow="For individual athletes"
+                eyebrow="For Individual Athletes"
                 screens={INDIVIDUAL_SCREENS}
                 href="/individual"
-                linkText="Explore for athletes →"
+                linkText="Explore for Athletes →"
                 ariaLabel="Individual athlete platform features"
               />
             </div>
 
             <p
-              className="mt-6 text-center text-xs uppercase tracking-[0.16em]"
+              className="mt-6 text-xs tracking-[0.14em]"
               style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
             >
               Swipe each card to explore →
             </p>
-          </div>
-        </section>
+        </Section>
 
         {/* 4WRI Score */}
-        <section className="border-t px-5 py-20 text-center sm:px-8 sm:py-28" style={{ borderColor: HAIRLINE }}>
-          <div className="mx-auto max-w-md">
-            <p
-              className="mb-4 text-xs uppercase tracking-[0.18em]"
-              style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
-            >
-              The 4WRI score
-            </p>
-            <h2
-              className="mb-6 text-3xl tracking-tight sm:mb-8 sm:text-4xl"
-              style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}
-            >
-              readiness you can act on<span style={{ color: ACCENT }}>.</span>
-            </h2>
-            <p className="mx-auto mb-10 max-w-xl text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
+        <Section>
+            <Eyebrow>The 4WRI Score</Eyebrow>
+            <Headline>
+              Readiness You Can Act On<span style={{ color: ACCENT }}>.</span>
+            </Headline>
+            <p className="mb-10 max-w-xl text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
               4Ward tracks HRV, Sleep and RHR to determine your daily readiness and gives you a platform that adapts to your recovery and readiness level.
             </p>
 
             <div
-              className="rounded-2xl border p-4 sm:p-5"
+              className="w-full max-w-sm rounded-2xl border p-4 sm:p-5"
               style={{ borderColor: HAIRLINE, background: 'rgba(255,255,255,0.4)' }}
             >
               <SwipeDeck screens={PRODUCT_SCREENS} ariaLabel="4WRI product features" />
             </div>
-          </div>
-        </section>
+        </Section>
 
         {/* The bands */}
-        <section className="border-t px-5 py-20 text-center sm:px-8 sm:py-28" style={{ borderColor: HAIRLINE }}>
-          <div className="mx-auto max-w-6xl">
-            <p
-              className="mb-4 text-xs uppercase tracking-[0.18em]"
-              style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
-            >
-              The bands
-            </p>
-            <h2
-              className="mx-auto mb-4 max-w-3xl text-3xl tracking-tight sm:text-4xl"
-              style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}
-            >
+        <Section wide>
+            <Eyebrow>The Bands</Eyebrow>
+            <Headline>
               Better Recovery Leads to Better Performance<span style={{ color: ACCENT }}>.</span>
-            </h2>
-            <p className="mx-auto mb-12 max-w-2xl text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
+            </Headline>
+            <p className="mb-12 max-w-2xl text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
               One band tracks HRV, sleep, and resting heart rate for every athlete. Pick a colorway that fits your program — same hardware, your look in the lockeroom.
             </p>
 
-            <div className="mx-auto grid max-w-lg gap-8 sm:grid-cols-2 sm:gap-6">
+            <div className="grid w-full max-w-lg grid-cols-2 gap-6 sm:gap-8">
               <AthletePhoto
                 src={BAND_ATHLETE_TRAINING}
                 alt="Athlete training with 4Ward band"
@@ -735,25 +759,15 @@ export default function Home() {
                 alt="4Ward band on wrist"
               />
             </div>
-          </div>
-        </section>
+        </Section>
 
         {/* Why trust the number */}
-        <section className="border-t px-5 py-20 text-center sm:px-8 sm:py-28" style={{ borderColor: HAIRLINE }}>
-          <div className="mx-auto max-w-6xl">
-            <p
-              className="mb-4 text-xs uppercase tracking-[0.18em]"
-              style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
-            >
-              Why trust the number
-            </p>
-            <h2
-              className="mx-auto mb-8 max-w-3xl text-3xl tracking-tight sm:text-4xl"
-              style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}
-            >
-              built on published research<span style={{ color: ACCENT }}>.</span>
-            </h2>
-            <p className="mx-auto mb-10 max-w-2xl text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
+        <Section wide>
+            <Eyebrow>Why Trust the Number</Eyebrow>
+            <Headline>
+              Built on Published Research<span style={{ color: ACCENT }}>.</span>
+            </Headline>
+            <p className="mb-10 max-w-2xl text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
               The 4WRI score combines nocturnal HRV, sleep duration, and resting heart rate — markers validated in decades of peer-reviewed sports science. We&apos;re validating head-to-head against research-grade chest straps with our beta schools.
             </p>
 
@@ -768,40 +782,33 @@ export default function Home() {
                 </span>
               ))}
             </div>
-          </div>
-        </section>
+        </Section>
 
         {/* Pricing */}
-        <section className="border-t px-5 py-20 text-center sm:px-8 sm:py-28" style={{ borderColor: HAIRLINE }}>
-          <div className="mx-auto max-w-xl">
-            <p
-              className="mb-4 text-xs uppercase tracking-[0.18em]"
-              style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
-            >
-              Pricing
-            </p>
+        <Section>
+            <Eyebrow>Pricing</Eyebrow>
             <div
-              className="rounded-2xl border p-8 text-center sm:p-10"
+              className="w-full rounded-2xl border p-8 sm:p-10"
               style={{ borderColor: HAIRLINE, background: 'rgba(255,255,255,0.4)' }}
             >
               <h2
                 className="mb-3 text-2xl tracking-tight sm:text-3xl"
                 style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}
               >
-                coming soon<span style={{ color: ACCENT }}>.</span>
+                Coming Soon<span style={{ color: ACCENT }}>.</span>
               </h2>
               <p className="mb-8 text-sm" style={{ color: SOFT }}>
                 Team pricing is in progress. Get notified when it launches.
               </p>
 
-              <form onSubmit={handleWaitlist} className="flex flex-col gap-3 sm:flex-row">
+              <form onSubmit={handleWaitlist} className="flex flex-col gap-3 sm:flex-row sm:justify-center">
                 <input
                   type="email"
                   required
                   placeholder="you@school.edu"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 rounded-full border px-5 py-3 text-sm outline-none"
+                  className="flex-1 rounded-full border px-5 py-3 text-sm outline-none sm:max-w-xs"
                   style={{ borderColor: HAIRLINE, color: INK, background: BG }}
                 />
                 <button
@@ -818,12 +825,11 @@ export default function Home() {
                 </p>
               )}
             </div>
-          </div>
-        </section>
+        </Section>
       </main>
 
       {/* Footer */}
-      <footer className="border-t px-5 py-12 text-center sm:px-8" style={{ borderColor: HAIRLINE }}>
+      <footer className="w-full border-t px-5 py-12 text-center sm:px-8" style={{ borderColor: HAIRLINE }}>
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-4">
           <div>
             <p
