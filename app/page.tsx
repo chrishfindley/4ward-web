@@ -58,14 +58,8 @@ function Section({
   wide?: boolean
 }) {
   return (
-    <section
-      id={id}
-      className="w-full border-t px-5 py-20 sm:px-8 sm:py-28"
-      style={{ borderColor: HAIRLINE }}
-    >
-      <div
-        className={`mx-auto flex w-full flex-col items-center text-center ${wide ? 'max-w-5xl' : 'max-w-3xl'}`}
-      >
+    <section id={id} className="home-section">
+      <div className={wide ? 'home-section-inner-wide' : 'home-section-inner'}>
         {children}
       </div>
     </section>
@@ -75,8 +69,14 @@ function Section({
 function Eyebrow({ children }: { children: ReactNode }) {
   return (
     <p
-      className="mb-4 text-xs tracking-[0.14em]"
-      style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
+      style={{
+        fontFamily: 'var(--font-mono)',
+        color: SILVER,
+        fontSize: 12,
+        letterSpacing: '0.14em',
+        marginBottom: 16,
+        textAlign: 'center',
+      }}
     >
       {children}
     </p>
@@ -86,8 +86,14 @@ function Eyebrow({ children }: { children: ReactNode }) {
 function Headline({ children }: { children: ReactNode }) {
   return (
     <h2
-      className="mb-6 text-3xl tracking-tight sm:mb-8 sm:text-4xl"
-      style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}
+      style={{
+        fontFamily: 'var(--font-chivo)',
+        letterSpacing: '-0.02em',
+        fontSize: 'clamp(1.875rem, 4vw, 2.5rem)',
+        marginBottom: 'clamp(1.5rem, 4vw, 2rem)',
+        textAlign: 'center',
+        width: '100%',
+      }}
     >
       {children}
     </h2>
@@ -97,9 +103,13 @@ function Headline({ children }: { children: ReactNode }) {
 function PhoneShell({ children }: { children: ReactNode }) {
   return (
     <div
-      className="mx-auto w-full max-w-[300px] rounded-[32px] border p-2"
       style={{
-        borderColor: HAIRLINE,
+        margin: '0 auto',
+        width: '100%',
+        maxWidth: 300,
+        borderRadius: 32,
+        border: `1px solid ${HAIRLINE}`,
+        padding: 8,
         background: '#FFFFFF',
         boxShadow: '0 36px 72px rgba(26, 26, 28, 0.13), 0 0 0 1px rgba(26, 26, 28, 0.05)',
       }}
@@ -120,9 +130,12 @@ function PhoneShell({ children }: { children: ReactNode }) {
 function BrowserShell({ children }: { children: ReactNode }) {
   return (
     <div
-      className="mx-auto w-full overflow-hidden rounded-xl border"
       style={{
-        borderColor: HAIRLINE,
+        margin: '0 auto',
+        width: '100%',
+        overflow: 'hidden',
+        borderRadius: 12,
+        border: `1px solid ${HAIRLINE}`,
         background: '#FFFFFF',
         boxShadow: '0 36px 72px rgba(26, 26, 28, 0.13), 0 0 0 1px rgba(26, 26, 28, 0.05)',
       }}
@@ -478,7 +491,7 @@ function SwipeDeck({
         ref={scrollRef}
         onScroll={handleScroll}
         className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth"
-        style={{ WebkitOverflowScrolling: 'touch' }}
+        style={{ WebkitOverflowScrolling: 'touch', width: '100%' }}
         aria-label={ariaLabel}
       >
         {screens.map((screen) => (
@@ -487,7 +500,7 @@ function SwipeDeck({
           </div>
         ))}
       </div>
-      <div className="mt-4 flex items-center justify-center gap-3">
+      <div style={{ marginTop: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
         <div className="flex gap-1.5">
           {screens.map((screen, i) => (
             <button
@@ -529,19 +542,25 @@ function AudienceSwipeCard({
 }) {
   return (
     <article
-      className="flex w-full max-w-md flex-col items-center rounded-2xl border p-6 text-center sm:p-8"
+      className="home-audience-card rounded-2xl border p-6 sm:p-8"
       style={{ borderColor: HAIRLINE, background: 'rgba(255,255,255,0.35)' }}
     >
       <p
-        className="mb-5 text-xs tracking-[0.14em]"
-        style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
+        style={{
+          fontFamily: 'var(--font-mono)',
+          color: SILVER,
+          fontSize: 12,
+          letterSpacing: '0.14em',
+          marginBottom: 20,
+          textAlign: 'center',
+        }}
       >
         {eyebrow}
       </p>
-      <div className="w-full">
+      <div style={{ width: '100%' }}>
         <SwipeDeck screens={screens} ariaLabel={ariaLabel} />
       </div>
-      <Link href={href} className="mt-6 text-sm font-semibold no-underline" style={{ color: INK }}>
+      <Link href={href} className="text-sm font-semibold no-underline" style={{ color: INK, marginTop: 24 }}>
         {linkText}
       </Link>
     </article>
@@ -550,7 +569,7 @@ function AudienceSwipeCard({
 
 function AthletePhoto({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="relative mx-auto aspect-[3/4] w-full max-w-[240px] overflow-hidden sm:max-w-[260px]">
+    <div style={{ position: 'relative', width: '100%', maxWidth: 240, aspectRatio: '3 / 4', margin: '0 auto' }}>
       <Image src={src} alt={alt} fill className="object-contain" sizes="260px" />
     </div>
   )
@@ -590,19 +609,19 @@ export default function Home() {
 
   return (
     <div
-      className={`${chivo.variable} ${archivo.variable} ${sometypeMono.variable} flex min-h-screen w-full flex-col items-center`}
+      className={`home-page ${chivo.variable} ${archivo.variable} ${sometypeMono.variable}`}
       style={{ background: BG, color: INK, fontFamily: 'var(--font-archivo), sans-serif' }}
     >
       {/* Nav */}
       <header
-        className="sticky top-0 z-50 w-full px-5 sm:px-8"
+        className="home-nav sticky top-0 z-50"
         style={{
           background: 'rgba(245, 245, 242, 0.82)',
           backdropFilter: 'blur(18px)',
           WebkitBackdropFilter: 'blur(18px)',
         }}
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 py-3.5">
+        <div className="home-nav-inner" style={{ paddingTop: 14, paddingBottom: 14 }}>
           <Link
             href="/"
             className="text-lg tracking-tight no-underline sm:text-xl"
@@ -640,9 +659,9 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="flex w-full flex-col items-center">
+      <main className="home-main">
         {/* Hero */}
-        <section className="relative flex w-full min-h-[calc(100svh-57px)] flex-col items-center justify-center overflow-hidden px-5 pb-16 pt-10 text-center sm:px-8 sm:pb-24 sm:pt-14">
+        <section className="home-hero">
           <Image
             src={HERO_ATHLETE}
             alt=""
@@ -658,14 +677,16 @@ export default function Home() {
                 'linear-gradient(180deg, rgba(245,245,242,0.88) 0%, rgba(245,245,242,0.68) 42%, rgba(245,245,242,0.82) 100%)',
             }}
           />
-          <div className="relative z-10 flex flex-col items-center">
+          <div className="home-hero-content">
           <h1
-            className="max-w-5xl leading-[0.92] tracking-tight"
             style={{
               fontFamily: 'var(--font-chivo)',
               fontSize: 'clamp(2.75rem, 11vw, 7.5rem)',
               letterSpacing: '-0.02em',
               color: INK,
+              lineHeight: 0.92,
+              textAlign: 'center',
+              maxWidth: 960,
             }}
           >
             Train. Recover.
@@ -674,16 +695,32 @@ export default function Home() {
           </h1>
 
           <p
-            className="max-w-sm px-2 text-lg font-bold leading-snug sm:hidden"
-            style={{ color: SOFT, marginTop: 'clamp(3.5rem, 8vw, 5.5rem)' }}
+            className="sm:hidden"
+            style={{
+              color: SOFT,
+              marginTop: 'clamp(3.5rem, 8vw, 5.5rem)',
+              fontSize: 18,
+              fontWeight: 700,
+              lineHeight: 1.35,
+              textAlign: 'center',
+              maxWidth: 360,
+            }}
           >
             4Ward tracks daily athlete readiness,
             <br />
             and gives you the platform to act on it.
           </p>
           <p
-            className="hidden max-w-4xl whitespace-nowrap text-[clamp(1.05rem,2.8vw,1.375rem)] font-bold leading-snug sm:block"
-            style={{ color: SOFT, marginTop: 'clamp(4rem, 9vw, 6.5rem)' }}
+            className="hidden sm:block"
+            style={{
+              color: SOFT,
+              marginTop: 'clamp(4rem, 9vw, 6.5rem)',
+              fontSize: 'clamp(1.05rem, 2.8vw, 1.375rem)',
+              fontWeight: 700,
+              lineHeight: 1.35,
+              textAlign: 'center',
+              maxWidth: 900,
+            }}
           >
             4Ward tracks daily athlete readiness, and gives you the platform to act on it.
           </p>
@@ -696,7 +733,7 @@ export default function Home() {
               Built for Teams or Individual Athletes<span style={{ color: ACCENT }}>.</span>
             </Headline>
 
-            <div className="grid w-full justify-items-center gap-8 lg:grid-cols-2 lg:gap-10">
+            <div className="home-cards-grid">
               <AudienceSwipeCard
                 eyebrow="For Teams"
                 screens={TEAM_SCREENS}
@@ -713,10 +750,7 @@ export default function Home() {
               />
             </div>
 
-            <p
-              className="mt-6 text-xs tracking-[0.14em]"
-              style={{ fontFamily: 'var(--font-mono)', color: SILVER }}
-            >
+            <p style={{ fontFamily: 'var(--font-mono)', color: SILVER, fontSize: 12, letterSpacing: '0.14em', marginTop: 24, textAlign: 'center' }}>
               Swipe each card to explore →
             </p>
         </Section>
@@ -727,13 +761,12 @@ export default function Home() {
             <Headline>
               Readiness You Can Act On<span style={{ color: ACCENT }}>.</span>
             </Headline>
-            <p className="mb-10 max-w-xl text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
+            <p style={{ marginBottom: 40, maxWidth: 560, textAlign: 'center', lineHeight: 1.6, fontSize: 'clamp(1rem, 2vw, 1.125rem)', color: SOFT }}>
               4Ward tracks HRV, Sleep and RHR to determine your daily readiness and gives you a platform that adapts to your recovery and readiness level.
             </p>
 
             <div
-              className="w-full max-w-sm rounded-2xl border p-4 sm:p-5"
-              style={{ borderColor: HAIRLINE, background: 'rgba(255,255,255,0.4)' }}
+              style={{ width: '100%', maxWidth: 360, borderRadius: 16, border: `1px solid ${HAIRLINE}`, background: 'rgba(255,255,255,0.4)', padding: '16px 20px' }}
             >
               <SwipeDeck screens={PRODUCT_SCREENS} ariaLabel="4WRI product features" />
             </div>
@@ -745,11 +778,11 @@ export default function Home() {
             <Headline>
               Better Recovery Leads to Better Performance<span style={{ color: ACCENT }}>.</span>
             </Headline>
-            <p className="mb-12 max-w-2xl text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
+            <p style={{ marginBottom: 48, maxWidth: 560, textAlign: 'center', lineHeight: 1.6, fontSize: 'clamp(1rem, 2vw, 1.125rem)', color: SOFT }}>
               One band tracks HRV, sleep, and resting heart rate for every athlete. Pick a colorway that fits your program — same hardware, your look in the lockeroom.
             </p>
 
-            <div className="grid w-full max-w-lg grid-cols-2 gap-6 sm:gap-8">
+            <div className="home-photos-grid">
               <AthletePhoto
                 src={BAND_ATHLETE_TRAINING}
                 alt="Athlete training with 4Ward band"
@@ -767,11 +800,11 @@ export default function Home() {
             <Headline>
               Built on Published Research<span style={{ color: ACCENT }}>.</span>
             </Headline>
-            <p className="mb-10 max-w-2xl text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
+            <p style={{ marginBottom: 40, maxWidth: 560, textAlign: 'center', lineHeight: 1.6, fontSize: 'clamp(1rem, 2vw, 1.125rem)', color: SOFT }}>
               The 4WRI score combines nocturnal HRV, sleep duration, and resting heart rate — markers validated in decades of peer-reviewed sports science. We&apos;re validating head-to-head against research-grade chest straps with our beta schools.
             </p>
 
-            <div className="flex flex-wrap justify-center gap-2">
+            <div className="home-chips">
               {CITATIONS.map((cite) => (
                 <span
                   key={cite}
@@ -788,39 +821,44 @@ export default function Home() {
         <Section>
             <Eyebrow>Pricing</Eyebrow>
             <div
-              className="w-full rounded-2xl border p-8 sm:p-10"
-              style={{ borderColor: HAIRLINE, background: 'rgba(255,255,255,0.4)' }}
+              style={{ width: '100%', borderRadius: 16, border: `1px solid ${HAIRLINE}`, background: 'rgba(255,255,255,0.4)', padding: '32px 40px', textAlign: 'center' }}
             >
               <h2
-                className="mb-3 text-2xl tracking-tight sm:text-3xl"
-                style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}
+                style={{
+                  fontFamily: 'var(--font-chivo)',
+                  letterSpacing: '-0.02em',
+                  fontSize: 'clamp(1.5rem, 3vw, 1.875rem)',
+                  marginBottom: 12,
+                  textAlign: 'center',
+                }}
               >
                 Coming Soon<span style={{ color: ACCENT }}>.</span>
               </h2>
-              <p className="mb-8 text-sm" style={{ color: SOFT }}>
+              <p style={{ marginBottom: 32, fontSize: 14, color: SOFT, textAlign: 'center' }}>
                 Team pricing is in progress. Get notified when it launches.
               </p>
 
-              <form onSubmit={handleWaitlist} className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+              <form
+                onSubmit={handleWaitlist}
+                style={{ display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center', justifyContent: 'center' }}
+              >
                 <input
                   type="email"
                   required
                   placeholder="you@school.edu"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 rounded-full border px-5 py-3 text-sm outline-none sm:max-w-xs"
-                  style={{ borderColor: HAIRLINE, color: INK, background: BG }}
+                  style={{ width: '100%', maxWidth: 320, borderRadius: 9999, border: `1px solid ${HAIRLINE}`, padding: '12px 20px', fontSize: 14, color: INK, background: BG, outline: 'none' }}
                 />
                 <button
                   type="submit"
-                  className="rounded-full px-6 py-3 text-sm font-semibold"
-                  style={{ background: INK, color: BG }}
+                  style={{ borderRadius: 9999, padding: '12px 24px', fontSize: 14, fontWeight: 600, background: INK, color: BG, border: 'none', cursor: 'pointer' }}
                 >
                   Get on the list
                 </button>
               </form>
               {waitlistMsg && (
-                <p className="mt-4 text-sm" style={{ color: SOFT }}>
+                <p style={{ marginTop: 16, fontSize: 14, color: SOFT, textAlign: 'center' }}>
                   {waitlistMsg}
                 </p>
               )}
@@ -829,20 +867,24 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="w-full border-t px-5 py-12 text-center sm:px-8" style={{ borderColor: HAIRLINE }}>
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-4">
-          <div>
+      <footer className="home-footer" style={{ borderTop: `1px solid ${HAIRLINE}`, padding: '48px 0' }}>
+        <div className="home-footer-inner">
+          <div style={{ textAlign: 'center' }}>
             <p
-              className="text-lg tracking-tight"
-              style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}
+              style={{
+                fontFamily: 'var(--font-chivo)',
+                letterSpacing: '-0.02em',
+                fontSize: 18,
+                textAlign: 'center',
+              }}
             >
               4WARD<span style={{ color: ACCENT }}>&gt;</span>
             </p>
-            <p className="mt-2 text-sm" style={{ color: SOFT }}>
+            <p style={{ marginTop: 8, fontSize: 14, color: SOFT, textAlign: 'center' }}>
               Daily readiness for every athlete on your roster.
             </p>
           </div>
-          <p className="text-xs" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
+          <p style={{ fontFamily: 'var(--font-mono)', color: SILVER, fontSize: 12, textAlign: 'center' }}>
             Wellness & performance tool · not a medical device
           </p>
         </div>
