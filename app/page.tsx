@@ -502,10 +502,7 @@ function AudienceSwipeCard({
 
 function AthletePhoto({ src, alt }: { src: string; alt: string }) {
   return (
-    <div
-      className="relative mx-auto aspect-[3/4] w-full max-w-[240px] overflow-hidden rounded-2xl sm:max-w-[260px]"
-      style={{ border: `1px solid ${HAIRLINE}`, background: '#EEEDEA' }}
-    >
+    <div className="relative mx-auto aspect-[3/4] w-full max-w-[240px] overflow-hidden sm:max-w-[260px]">
       <Image src={src} alt={alt} fill className="object-contain" sizes="260px" />
     </div>
   )
@@ -550,16 +547,14 @@ export default function Home() {
     >
       {/* Nav */}
       <header
-        className="sticky top-0 z-50"
+        className="sticky top-0 z-50 px-5 sm:px-8"
         style={{
           background: 'rgba(245, 245, 242, 0.82)',
           backdropFilter: 'blur(18px)',
           WebkitBackdropFilter: 'blur(18px)',
-          paddingLeft: 'clamp(3.5rem, 12vw, 9rem)',
-          paddingRight: 'clamp(1.25rem, 5vw, 3rem)',
         }}
       >
-        <div className="flex w-full items-center justify-between gap-4 py-3.5">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 py-3.5">
           <Link
             href="/"
             className="text-lg tracking-tight no-underline sm:text-xl"
@@ -648,10 +643,10 @@ export default function Home() {
         </section>
 
         {/* What it is */}
-        <section id="what-it-is" className="border-t px-5 py-20 sm:px-8 sm:py-28" style={{ borderColor: HAIRLINE }}>
+        <section id="what-it-is" className="border-t px-5 py-20 text-center sm:px-8 sm:py-28" style={{ borderColor: HAIRLINE }}>
           <div className="mx-auto max-w-6xl">
             <h2
-              className="mb-10 max-w-3xl text-3xl tracking-tight sm:mb-12 sm:text-4xl"
+              className="mx-auto mb-10 max-w-3xl text-3xl tracking-tight sm:mb-12 sm:text-4xl"
               style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}
             >
               Built for Teams or Individual Athletes<span style={{ color: ACCENT }}>.</span>
@@ -684,7 +679,7 @@ export default function Home() {
         </section>
 
         {/* 4WRI Score */}
-        <section className="border-t px-5 py-20 sm:px-8 sm:py-28" style={{ borderColor: HAIRLINE }}>
+        <section className="border-t px-5 py-20 text-center sm:px-8 sm:py-28" style={{ borderColor: HAIRLINE }}>
           <div className="mx-auto max-w-md">
             <p
               className="mb-4 text-xs uppercase tracking-[0.18em]"
@@ -698,7 +693,7 @@ export default function Home() {
             >
               readiness you can act on<span style={{ color: ACCENT }}>.</span>
             </h2>
-            <p className="mb-10 text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
+            <p className="mx-auto mb-10 max-w-xl text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
               4Ward tracks HRV, Sleep and RHR to determine your daily readiness and gives you a platform that adapts to your recovery and readiness level.
             </p>
 
@@ -712,7 +707,7 @@ export default function Home() {
         </section>
 
         {/* The bands */}
-        <section className="border-t px-5 py-20 sm:px-8 sm:py-28" style={{ borderColor: HAIRLINE }}>
+        <section className="border-t px-5 py-20 text-center sm:px-8 sm:py-28" style={{ borderColor: HAIRLINE }}>
           <div className="mx-auto max-w-6xl">
             <p
               className="mb-4 text-xs uppercase tracking-[0.18em]"
@@ -721,12 +716,12 @@ export default function Home() {
               The bands
             </p>
             <h2
-              className="mb-4 max-w-2xl text-3xl tracking-tight sm:text-4xl"
+              className="mx-auto mb-4 max-w-3xl text-3xl tracking-tight sm:text-4xl"
               style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}
             >
               Better Recovery Leads to Better Performance<span style={{ color: ACCENT }}>.</span>
             </h2>
-            <p className="mb-12 max-w-2xl text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
+            <p className="mx-auto mb-12 max-w-2xl text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
               One band tracks HRV, sleep, and resting heart rate for every athlete. Pick a colorway that fits your program — same hardware, your look in the lockeroom.
             </p>
 
@@ -744,7 +739,7 @@ export default function Home() {
         </section>
 
         {/* Why trust the number */}
-        <section className="border-t px-5 py-20 sm:px-8 sm:py-28" style={{ borderColor: HAIRLINE }}>
+        <section className="border-t px-5 py-20 text-center sm:px-8 sm:py-28" style={{ borderColor: HAIRLINE }}>
           <div className="mx-auto max-w-6xl">
             <p
               className="mb-4 text-xs uppercase tracking-[0.18em]"
@@ -753,16 +748,16 @@ export default function Home() {
               Why trust the number
             </p>
             <h2
-              className="mb-8 max-w-2xl text-3xl tracking-tight sm:text-4xl"
+              className="mx-auto mb-8 max-w-3xl text-3xl tracking-tight sm:text-4xl"
               style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}
             >
               built on published research<span style={{ color: ACCENT }}>.</span>
             </h2>
-            <p className="mb-10 max-w-2xl text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
+            <p className="mx-auto mb-10 max-w-2xl text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
               The 4WRI score combines nocturnal HRV, sleep duration, and resting heart rate — markers validated in decades of peer-reviewed sports science. We&apos;re validating head-to-head against research-grade chest straps with our beta schools.
             </p>
 
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap justify-center gap-2">
               {CITATIONS.map((cite) => (
                 <span
                   key={cite}
@@ -777,7 +772,7 @@ export default function Home() {
         </section>
 
         {/* Pricing */}
-        <section className="border-t px-5 py-20 sm:px-8 sm:py-28" style={{ borderColor: HAIRLINE }}>
+        <section className="border-t px-5 py-20 text-center sm:px-8 sm:py-28" style={{ borderColor: HAIRLINE }}>
           <div className="mx-auto max-w-xl">
             <p
               className="mb-4 text-xs uppercase tracking-[0.18em]"
@@ -828,8 +823,8 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t px-5 py-12 sm:px-8" style={{ borderColor: HAIRLINE }}>
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <footer className="border-t px-5 py-12 text-center sm:px-8" style={{ borderColor: HAIRLINE }}>
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-4">
           <div>
             <p
               className="text-lg tracking-tight"
