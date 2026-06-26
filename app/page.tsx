@@ -500,23 +500,13 @@ function AudienceSwipeCard({
   )
 }
 
-function AthletePhoto({
-  src,
-  alt,
-  className = '',
-  aspect = 'aspect-[4/5]',
-}: {
-  src: string
-  alt: string
-  className?: string
-  aspect?: string
-}) {
+function AthletePhoto({ src, alt }: { src: string; alt: string }) {
   return (
     <div
-      className={`relative overflow-hidden rounded-2xl ${aspect} ${className}`}
-      style={{ border: `1px solid ${HAIRLINE}` }}
+      className="relative mx-auto aspect-[3/4] w-full max-w-[240px] overflow-hidden rounded-2xl sm:max-w-[260px]"
+      style={{ border: `1px solid ${HAIRLINE}`, background: '#EEEDEA' }}
     >
-      <Image src={src} alt={alt} fill className="object-cover" sizes="(max-width: 768px) 100vw, 560px" />
+      <Image src={src} alt={alt} fill className="object-contain" sizes="260px" />
     </div>
   )
 }
@@ -622,7 +612,7 @@ export default function Home() {
             className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(180deg, rgba(245,245,242,0.94) 0%, rgba(245,245,242,0.78) 42%, rgba(245,245,242,0.9) 100%)',
+                'linear-gradient(180deg, rgba(245,245,242,0.88) 0%, rgba(245,245,242,0.68) 42%, rgba(245,245,242,0.82) 100%)',
             }}
           />
           <div className="relative z-10 flex flex-col items-center">
@@ -654,23 +644,6 @@ export default function Home() {
           >
             4Ward tracks daily athlete readiness, and gives you the platform to act on it.
           </p>
-
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3 sm:mt-12 sm:gap-4">
-            <a
-              href="#what-it-is"
-              className="rounded-full px-7 py-3.5 text-sm font-semibold no-underline transition-opacity hover:opacity-85"
-              style={{ background: INK, color: BG }}
-            >
-              See how it works
-            </a>
-            <Link
-              href="/team"
-              className="rounded-full border px-7 py-3.5 text-sm font-medium no-underline transition-colors"
-              style={{ borderColor: HAIRLINE, color: SOFT, background: 'rgba(255,255,255,0.5)' }}
-            >
-              For coaches
-            </Link>
-          </div>
           </div>
         </section>
 
@@ -751,28 +724,21 @@ export default function Home() {
               className="mb-4 max-w-2xl text-3xl tracking-tight sm:text-4xl"
               style={{ fontFamily: 'var(--font-chivo)', letterSpacing: '-0.02em' }}
             >
-              same band<span style={{ color: ACCENT }}>.</span> your colors<span style={{ color: ACCENT }}>.</span>
+              Better Recovery Leads to Better Performance<span style={{ color: ACCENT }}>.</span>
             </h2>
             <p className="mb-12 max-w-2xl text-base leading-relaxed sm:text-lg" style={{ color: SOFT }}>
               One band tracks HRV, sleep, and resting heart rate for every athlete. Pick a colorway that fits your program — same hardware, your look in the lockeroom.
             </p>
 
-            <div className="grid gap-6 sm:grid-cols-2 sm:gap-8">
-              <div>
-                <AthletePhoto
-                  src={BAND_ATHLETE_TRAINING}
-                  alt="Athlete training with 4Ward band"
-                />
-                <p className="mt-4 text-sm" style={{ color: SOFT }}>In training</p>
-              </div>
-              <div>
-                <AthletePhoto
-                  src={BAND_ATHLETE_CLOSEUP}
-                  alt="4Ward band on wrist"
-                  aspect="aspect-[4/5] sm:aspect-[3/4]"
-                />
-                <p className="mt-4 text-sm" style={{ color: SOFT }}>On your wrist</p>
-              </div>
+            <div className="mx-auto grid max-w-lg gap-8 sm:grid-cols-2 sm:gap-6">
+              <AthletePhoto
+                src={BAND_ATHLETE_TRAINING}
+                alt="Athlete training with 4Ward band"
+              />
+              <AthletePhoto
+                src={BAND_ATHLETE_CLOSEUP}
+                alt="4Ward band on wrist"
+              />
             </div>
           </div>
         </section>
