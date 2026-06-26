@@ -31,6 +31,10 @@ const BG = '#F5F5F2'
 const ACCENT = '#A8253A'
 const READY = '#2ECC8A'
 
+const HERO_ATHLETE = '/athletes/IMG_6034.png'
+const BAND_ATHLETE_TRAINING = '/athletes/IMG_6033.png'
+const BAND_ATHLETE_CLOSEUP = '/athletes/IMG_6035.png'
+
 const CITATIONS = [
   'Plews 2013',
   'Flatt & Nakamura',
@@ -496,52 +500,23 @@ function AudienceSwipeCard({
   )
 }
 
-function BandImage({
+function AthletePhoto({
   src,
   alt,
-  label,
   className = '',
-  hero = false,
+  aspect = 'aspect-[4/5]',
 }: {
   src: string
   alt: string
-  label: string
   className?: string
-  hero?: boolean
+  aspect?: string
 }) {
-  const [failed, setFailed] = useState(false)
-
-  const shellClass = hero
-    ? `relative h-full w-full ${className}`
-    : `relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-2xl border ${className}`
-
   return (
     <div
-      className={shellClass}
-      style={hero ? undefined : { borderColor: HAIRLINE, background: '#EEEEE9' }}
+      className={`relative overflow-hidden rounded-2xl ${aspect} ${className}`}
+      style={{ border: `1px solid ${HAIRLINE}` }}
     >
-      {failed ? (
-        <div className="flex h-full flex-col items-center justify-center gap-2 px-6 text-center">
-          <div
-            className="flex h-24 w-40 items-center justify-center rounded-xl border border-dashed"
-            style={{ borderColor: SILVER, color: SILVER }}
-          >
-            band image
-          </div>
-          <span className="text-xs" style={{ fontFamily: 'var(--font-mono)', color: SILVER }}>
-            {label}
-          </span>
-        </div>
-      ) : (
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          className="object-contain p-6"
-          sizes={hero ? '288px' : '(max-width: 768px) 100vw, 400px'}
-          onError={() => setFailed(true)}
-        />
-      )}
+      <Image src={src} alt={alt} fill className="object-cover" sizes="(max-width: 768px) 100vw, 560px" />
     </div>
   )
 }
@@ -583,19 +558,6 @@ export default function Home() {
       className={`${chivo.variable} ${archivo.variable} ${sometypeMono.variable} min-h-screen`}
       style={{ background: BG, color: INK, fontFamily: 'var(--font-archivo), sans-serif' }}
     >
-      <style>{`
-        @keyframes band-float {
-          0%, 100% { transform: translateY(0) rotate(0deg); }
-          50% { transform: translateY(-14px) rotate(1.2deg); }
-        }
-        .band-float {
-          animation: band-float 7s ease-in-out infinite;
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .band-float { animation: none; }
-        }
-      `}</style>
-
       {/* Nav */}
       <header
         className="sticky top-0 z-50"
@@ -647,9 +609,23 @@ export default function Home() {
 
       <main>
         {/* Hero */}
-        <section
-          className="flex min-h-[calc(100svh-57px)] flex-col items-center justify-center px-5 pb-16 pt-10 text-center sm:px-8 sm:pb-24 sm:pt-14"
-        >
+        <section className="relative flex min-h-[calc(100svh-57px)] flex-col items-center justify-center overflow-hidden px-5 pb-16 pt-10 text-center sm:px-8 sm:pb-24 sm:pt-14">
+          <Image
+            src={HERO_ATHLETE}
+            alt=""
+            fill
+            priority
+            className="object-cover object-[center_20%] sm:object-center"
+            sizes="100vw"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(180deg, rgba(245,245,242,0.94) 0%, rgba(245,245,242,0.78) 42%, rgba(245,245,242,0.9) 100%)',
+            }}
+          />
+          <div className="relative z-10 flex flex-col items-center">
           <h1
             className="max-w-5xl leading-[0.92] tracking-tight"
             style={{
@@ -679,15 +655,6 @@ export default function Home() {
             4Ward tracks daily athlete readiness, and gives you the platform to act on it.
           </p>
 
-          <div className="band-float relative mx-auto mt-10 h-44 w-56 sm:mt-14 sm:h-56 sm:w-72">
-            <BandImage
-              src="/band-grey.png"
-              alt="4Ward band"
-              label="/public/band-grey.png"
-              hero
-            />
-          </div>
-
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3 sm:mt-12 sm:gap-4">
             <a
               href="#what-it-is"
@@ -699,10 +666,11 @@ export default function Home() {
             <Link
               href="/team"
               className="rounded-full border px-7 py-3.5 text-sm font-medium no-underline transition-colors"
-              style={{ borderColor: HAIRLINE, color: SOFT }}
+              style={{ borderColor: HAIRLINE, color: SOFT, background: 'rgba(255,255,255,0.5)' }}
             >
               For coaches
             </Link>
+          </div>
           </div>
         </section>
 
@@ -791,12 +759,19 @@ export default function Home() {
 
             <div className="grid gap-6 sm:grid-cols-2 sm:gap-8">
               <div>
-                <BandImage src="/band-grey.png" alt="Grey colorway" label="Grey · /public/band-grey.png" />
-                <p className="mt-4 text-sm" style={{ color: SOFT }}>Grey</p>
+                <AthletePhoto
+                  src={BAND_ATHLETE_TRAINING}
+                  alt="Athlete training with 4Ward band"
+                />
+                <p className="mt-4 text-sm" style={{ color: SOFT }}>In training</p>
               </div>
               <div>
-                <BandImage src="/band-black.jpg" alt="Black colorway" label="Black · /public/band-black.jpg" />
-                <p className="mt-4 text-sm" style={{ color: SOFT }}>Black</p>
+                <AthletePhoto
+                  src={BAND_ATHLETE_CLOSEUP}
+                  alt="4Ward band on wrist"
+                  aspect="aspect-[4/5] sm:aspect-[3/4]"
+                />
+                <p className="mt-4 text-sm" style={{ color: SOFT }}>On your wrist</p>
               </div>
             </div>
           </div>
